@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://kevinrouxerpac.github.io/AnimMediaLaGuerche/sitemap.xml
+
+# Fichiers à ne pas indexer
+Disallow: /js/
+Disallow: /css/
+Disallow: /.github/
+Disallow: *.md
+Disallow: /GUIDE-ADMIN.md
+
+# Autoriser les images
+Allow: /images/
+
+# Délai entre les requêtes (en secondes)
+Crawl-delay: 1

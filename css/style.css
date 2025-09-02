@@ -9,10 +9,37 @@ body {
     font-family: 'Open Sans', sans-serif;
     line-height: 1.6;
     color: #333;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 html {
     scroll-behavior: smooth;
+}
+
+/* Performance et optimisations */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Accessibilité */
+*:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}
+
+/* Préférences utilisateur */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    html {
+        scroll-behavior: auto;
+    }
 }
 
 .container {
@@ -651,6 +678,153 @@ h2::after {
 .add-new h3 {
     color: #3498db;
     font-weight: 600;
+}
+
+/* Styles pour l'interface admin avancée */
+.gallery-admin-controls {
+    background: #f8f9fa;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    border: 2px dashed #3498db;
+}
+
+.gallery-admin-controls h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.gallery-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-admin {
+    background: #3498db;
+    color: white;
+    padding: 8px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.btn-admin:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+.gallery-item-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-item-controls {
+    opacity: 1;
+}
+
+.btn-delete-small {
+    background: rgba(231, 76, 60, 0.9);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-delete-small:hover {
+    background: #c0392b;
+    transform: scale(1.1);
+}
+
+/* Notifications */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 10001;
+    border-left: 4px solid #3498db;
+}
+
+.notification.notification-success {
+    border-left-color: #27ae60;
+}
+
+.notification.notification-error {
+    border-left-color: #e74c3c;
+}
+
+.notification.show {
+    transform: translateX(100%);
+}
+
+.notification i {
+    font-size: 18px;
+    color: #3498db;
+}
+
+.notification-success i {
+    color: #27ae60;
+}
+
+.notification-error i {
+    color: #e74c3c;
+}
+
+/* Mode édition avancé */
+.advanced-edit-mode {
+    outline: 2px dashed rgba(52, 152, 219, 0.3);
+}
+
+.admin-tooltip {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: #2c3e50;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    max-width: 250px;
+    z-index: 10001;
+    font-size: 14px;
+}
+
+.admin-tooltip h4 {
+    margin: 0 0 10px 0;
+    color: #3498db;
+}
+
+.admin-tooltip ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.admin-tooltip li {
+    margin-bottom: 5px;
 }
 
 /* Mode administration actif */
