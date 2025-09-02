@@ -1,575 +1,789 @@
-// Données des activités et événements - Configuration centralisée
-const siteData = {
-    activities: [
-        {
-            id: 1,
-            icon: "fas fa-desktop",
-            title: "Ateliers numériques",
-            items: [
-                "Initiation à l'informatique",
-                "Café informatique",
-                "Accompagnement aux usages digitaux",
-                "Dépannage et conseils"
-            ]
-        },
-        {
-            id: 2,
-            icon: "fas fa-paint-brush",
-            title: "Loisirs créatifs",
-            items: [
-                "Ateliers de dessin",
-                "Scrapbooking",
-                "Activités manuelles",
-                "Projets artistiques"
-            ]
-        },
-        {
-            id: 3,
-            icon: "fas fa-book-open",
-            title: "Animations culturelles",
-            items: [
-                "Expositions thématiques",
-                "Rencontres d'auteurs",
-                "Ateliers généalogie",
-                "Grainothèque participative"
-            ]
-        },
-        {
-            id: 4,
-            icon: "fas fa-gamepad",
-            title: "Temps conviviaux",
-            items: [
-                "Jeux de société",
-                "Forums associatifs",
-                "Moments d'échange",
-                "Animations intergénérationnelles"
-            ]
-        }
-    ],
-    events: [
-        {
-            id: 1,
-            day: "10",
-            month: "SEP",
-            title: "Café Informatique",
-            description: "Session d'aide et d'accompagnement pour vos questions numériques. Venez avec vos appareils !",
-            location: "Médiathèque Jean-Paul Roussillot",
-            time: "14h00 - 16h00"
-        },
-        {
-            id: 2,
-            day: "18",
-            month: "SEP",
-            title: "Atelier Scrapbooking",
-            description: "Créez votre album photo personnalisé. Matériel fourni, tous niveaux bienvenus.",
-            location: "Médiathèque Jean-Paul Roussillot",
-            time: "15h00 - 17h00"
-        },
-        {
-            id: 3,
-            day: "25",
-            month: "SEP",
-            title: "Rencontre d'auteur",
-            description: "Venez échanger avec un auteur local autour de son dernier ouvrage.",
-            location: "Médiathèque Jean-Paul Roussillot",
-            time: "18h30 - 20h00"
-        }
-    ]
+/**
+ * SCRIPT MODERNE ANIM'MÉDIA - VERSION 2025
+ * Fichier JavaScript principal pour le site public moderne
+ */
+
+// Configuration et constantes
+const CONFIG = {
+    animations: {
+        duration: 300,
+        easing: 'ease-out'
+    },
+    breakpoints: {
+        mobile: 768,
+        tablet: 1024
+    },
+    api: {
+        baseUrl: 'https://api.animmedia-laguerche.fr',
+        timeout: 5000
+    }
 };
 
-// Variables globales
-let isAdminMode = false;
-let adminPassword = "animmedia2025"; // À changer pour plus de sécurité
+// Utilitaires
+const Utils = {
+    // Debounce function pour optimiser les performances
+    debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    },
 
-// Fonction pour sauvegarder les données dans le localStorage
-function saveData() {
-    localStorage.setItem('animMediaData', JSON.stringify(siteData));
-}
-
-// Fonction pour charger les données depuis le localStorage
-function loadData() {
-    const savedData = localStorage.getItem('animMediaData');
-    if (savedData) {
-        const parsedData = JSON.parse(savedData);
-        siteData.activities = parsedData.activities || siteData.activities;
-        siteData.events = parsedData.events || siteData.events;
-    }
-}
-
-// Générer les activités dynamiquement
-function renderActivities() {
-    const activitiesGrid = document.querySelector('.activities-grid');
-    if (!activitiesGrid) return;
-
-    activitiesGrid.innerHTML = siteData.activities.map(activity => `
-        <div class="activity-card" data-id="${activity.id}">
-            <div class="activity-icon">
-                <i class="${activity.icon}"></i>
-            </div>
-            <div class="activity-content">
-                <h3>${activity.title}</h3>
-                <ul>
-                    ${activity.items.map(item => `<li>${item}</li>`).join('')}
-                </ul>
-                ${isAdminMode ? `
-                    <div class="admin-controls">
-                        <button onclick="editActivity(${activity.id})" class="btn-edit">
-                            <i class="fas fa-edit"></i> Modifier
-                        </button>
-                        <button onclick="deleteActivity(${activity.id})" class="btn-delete">
-                            <i class="fas fa-trash"></i> Supprimer
-                        </button>
-                    </div>
-                ` : ''}
-            </div>
-        </div>
-    `).join('');
-
-    if (isAdminMode) {
-        activitiesGrid.innerHTML += `
-            <div class="activity-card add-new" onclick="addActivity()">
-                <div class="activity-icon">
-                    <i class="fas fa-plus"></i>
-                </div>
-                <div class="activity-content">
-                    <h3>Ajouter une activité</h3>
-                </div>
-            </div>
-        `;
-    }
-}
-
-// Générer les événements dynamiquement
-function renderEvents() {
-    const eventsGrid = document.querySelector('.events-grid');
-    if (!eventsGrid) return;
-
-    eventsGrid.innerHTML = siteData.events.map(event => `
-        <div class="event-card" data-id="${event.id}">
-            <div class="event-date">
-                <span class="day">${event.day}</span>
-                <span class="month">${event.month}</span>
-            </div>
-            <div class="event-content">
-                <h3>${event.title}</h3>
-                <p>${event.description}</p>
-                <div class="event-location">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>${event.location}</span>
-                </div>
-                ${event.time ? `
-                    <div class="event-time">
-                        <i class="fas fa-clock"></i>
-                        <span>${event.time}</span>
-                    </div>
-                ` : ''}
-                ${isAdminMode ? `
-                    <div class="admin-controls">
-                        <button onclick="editEvent(${event.id})" class="btn-edit">
-                            <i class="fas fa-edit"></i> Modifier
-                        </button>
-                        <button onclick="deleteEvent(${event.id})" class="btn-delete">
-                            <i class="fas fa-trash"></i> Supprimer
-                        </button>
-                    </div>
-                ` : ''}
-            </div>
-        </div>
-    `).join('');
-
-    if (isAdminMode) {
-        eventsGrid.innerHTML += `
-            <div class="event-card add-new" onclick="addEvent()">
-                <div class="event-date">
-                    <span class="day">+</span>
-                    <span class="month">NEW</span>
-                </div>
-                <div class="event-content">
-                    <h3>Ajouter un événement</h3>
-                </div>
-            </div>
-        `;
-    }
-}
-
-// Mode administration
-function toggleAdminMode() {
-    if (!isAdminMode) {
-        const password = prompt("Mot de passe administrateur :");
-        if (password !== adminPassword) {
-            alert("Mot de passe incorrect !");
-            return;
-        }
-    }
-    
-    isAdminMode = !isAdminMode;
-    updateAdminUI();
-    renderActivities();
-    renderEvents();
-}
-
-function updateAdminUI() {
-    const adminPanel = document.getElementById('admin-panel');
-    const adminToggle = document.getElementById('admin-toggle');
-    
-    if (isAdminMode) {
-        if (adminPanel) adminPanel.style.display = 'block';
-        if (adminToggle) {
-            adminToggle.innerHTML = '<i class="fas fa-lock"></i> Quitter l\'admin';
-            adminToggle.classList.add('admin-active');
-        }
-        document.body.classList.add('admin-mode');
-    } else {
-        if (adminPanel) adminPanel.style.display = 'none';
-        if (adminToggle) {
-            adminToggle.innerHTML = '<i class="fas fa-unlock"></i> Mode admin';
-            adminToggle.classList.remove('admin-active');
-        }
-        document.body.classList.remove('admin-mode');
-    }
-}
-
-// Fonctions CRUD pour les activités
-function addActivity() {
-    const title = prompt("Titre de l'activité :");
-    if (!title) return;
-    
-    const icon = prompt("Classe d'icône Font Awesome (ex: fas fa-desktop) :");
-    if (!icon) return;
-    
-    const itemsStr = prompt("Éléments de l'activité (séparés par des virgules) :");
-    if (!itemsStr) return;
-    
-    const items = itemsStr.split(',').map(item => item.trim());
-    
-    const newActivity = {
-        id: Date.now(),
-        icon: icon,
-        title: title,
-        items: items
-    };
-    
-    siteData.activities.push(newActivity);
-    saveData();
-    renderActivities();
-}
-
-function editActivity(id) {
-    const activity = siteData.activities.find(a => a.id === id);
-    if (!activity) return;
-    
-    const newTitle = prompt("Titre de l'activité :", activity.title);
-    if (newTitle === null) return;
-    
-    const newIcon = prompt("Classe d'icône Font Awesome :", activity.icon);
-    if (newIcon === null) return;
-    
-    const newItemsStr = prompt("Éléments de l'activité (séparés par des virgules) :", activity.items.join(', '));
-    if (newItemsStr === null) return;
-    
-    activity.title = newTitle;
-    activity.icon = newIcon;
-    activity.items = newItemsStr.split(',').map(item => item.trim());
-    
-    saveData();
-    renderActivities();
-}
-
-function deleteActivity(id) {
-    if (!confirm("Êtes-vous sûr de vouloir supprimer cette activité ?")) return;
-    
-    siteData.activities = siteData.activities.filter(a => a.id !== id);
-    saveData();
-    renderActivities();
-}
-
-// Fonctions CRUD pour les événements
-function addEvent() {
-    const title = prompt("Titre de l'événement :");
-    if (!title) return;
-    
-    const day = prompt("Jour (ex: 15) :");
-    if (!day) return;
-    
-    const month = prompt("Mois (ex: SEP) :");
-    if (!month) return;
-    
-    const description = prompt("Description de l'événement :");
-    if (!description) return;
-    
-    const location = prompt("Lieu de l'événement :");
-    if (!location) return;
-    
-    const time = prompt("Horaire (optionnel, ex: 14h00 - 16h00) :");
-    
-    const newEvent = {
-        id: Date.now(),
-        day: day,
-        month: month.toUpperCase(),
-        title: title,
-        description: description,
-        location: location,
-        time: time || ""
-    };
-    
-    siteData.events.push(newEvent);
-    saveData();
-    renderEvents();
-}
-
-function editEvent(id) {
-    const event = siteData.events.find(e => e.id === id);
-    if (!event) return;
-    
-    const newTitle = prompt("Titre de l'événement :", event.title);
-    if (newTitle === null) return;
-    
-    const newDay = prompt("Jour :", event.day);
-    if (newDay === null) return;
-    
-    const newMonth = prompt("Mois :", event.month);
-    if (newMonth === null) return;
-    
-    const newDescription = prompt("Description :", event.description);
-    if (newDescription === null) return;
-    
-    const newLocation = prompt("Lieu :", event.location);
-    if (newLocation === null) return;
-    
-    const newTime = prompt("Horaire :", event.time);
-    if (newTime === null) return;
-    
-    event.title = newTitle;
-    event.day = newDay;
-    event.month = newMonth.toUpperCase();
-    event.description = newDescription;
-    event.location = newLocation;
-    event.time = newTime;
-    
-    saveData();
-    renderEvents();
-}
-
-function deleteEvent(id) {
-    if (!confirm("Êtes-vous sûr de vouloir supprimer cet événement ?")) return;
-    
-    siteData.events = siteData.events.filter(e => e.id !== id);
-    saveData();
-    renderEvents();
-}
-
-// Fonctions d'export/import
-function exportData() {
-    const dataStr = JSON.stringify(siteData, null, 2);
-    const dataBlob = new Blob([dataStr], {type: 'application/json'});
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'animmedia-data.json';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-}
-
-function importData() {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = '.json';
-    input.onchange = function(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-        
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            try {
-                const importedData = JSON.parse(e.target.result);
-                if (importedData.activities && importedData.events) {
-                    siteData.activities = importedData.activities;
-                    siteData.events = importedData.events;
-                    saveData();
-                    renderActivities();
-                    renderEvents();
-                    alert('Données importées avec succès !');
-                } else {
-                    alert('Format de fichier invalide !');
-                }
-            } catch (error) {
-                alert('Erreur lors de l\'importation : ' + error.message);
+    // Throttle function
+    throttle(func, limit) {
+        let inThrottle;
+        return function() {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
             }
         };
-        reader.readAsText(file);
-    };
-    input.click();
-}
+    },
 
-// Initialisation au chargement de la page
-document.addEventListener('DOMContentLoaded', function() {
-    loadData();
-    renderActivities();
-    renderEvents();
-    
-    // Le reste du code JavaScript existant...
-    initializeExistingFeatures();
-});
+    // Animation des compteurs
+    animateCounter(element, target, duration = 2000) {
+        const start = 0;
+        const increment = target / (duration / 16);
+        let current = start;
 
-function initializeExistingFeatures() {
-    // Navigation mobile
-    const mobileMenu = document.getElementById('mobile-menu');
-    const navMenu = document.querySelector('.nav-menu');
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(current);
+        }, 16);
+    },
 
-    if (mobileMenu && navMenu) {
-        mobileMenu.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            navMenu.classList.toggle('active');
+    // Intersection Observer helper
+    observeElements(selector, callback, options = {}) {
+        const defaultOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(callback, { ...defaultOptions, ...options });
+        
+        document.querySelectorAll(selector).forEach(el => {
+            observer.observe(el);
+        });
+        
+        return observer;
+    },
+
+    // Smooth scroll vers un élément
+    smoothScrollTo(target, offset = 80) {
+        const element = typeof target === 'string' ? document.querySelector(target) : target;
+        if (!element) return;
+
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+    },
+
+    // Format de date français
+    formatDate(date) {
+        return new Intl.DateTimeFormat('fr-FR', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        }).format(new Date(date));
+    },
+
+    // Validation d'email
+    isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+};
+
+// Gestionnaire de navigation
+class Navigation {
+    constructor() {
+        this.navbar = document.getElementById('navbar');
+        this.navToggle = document.getElementById('nav-toggle');
+        this.navMenu = document.getElementById('nav-menu');
+        this.navLinks = document.querySelectorAll('.nav-link');
+        
+        this.init();
+    }
+
+    init() {
+        this.setupScrollEffect();
+        this.setupMobileMenu();
+        this.setupSmoothScroll();
+        this.setupActiveLink();
+    }
+
+    setupScrollEffect() {
+        const handleScroll = Utils.throttle(() => {
+            if (window.scrollY > 100) {
+                this.navbar.classList.add('scrolled');
+            } else {
+                this.navbar.classList.remove('scrolled');
+            }
+        }, 16);
+
+        window.addEventListener('scroll', handleScroll);
+    }
+
+    setupMobileMenu() {
+        this.navToggle?.addEventListener('click', () => {
+            this.navMenu.classList.toggle('active');
+            this.navToggle.classList.toggle('active');
         });
 
-        // Fermer le menu mobile quand on clique sur un lien
-        document.querySelectorAll('.nav-link').forEach(link => {
+        // Fermer le menu en cliquant sur un lien
+        this.navLinks.forEach(link => {
             link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-                navMenu.classList.remove('active');
+                this.navMenu.classList.remove('active');
+                this.navToggle.classList.remove('active');
             });
         });
 
-        // Animation du hamburger menu
-        mobileMenu.addEventListener('click', () => {
-            const bars = mobileMenu.querySelectorAll('.bar');
-            bars.forEach((bar, index) => {
-                if (mobileMenu.classList.contains('active')) {
-                    if (index === 0) bar.style.transform = 'rotate(45deg) translate(5px, 5px)';
-                    if (index === 1) bar.style.opacity = '0';
-                    if (index === 2) bar.style.transform = 'rotate(-45deg) translate(7px, -6px)';
-                } else {
-                    bar.style.transform = 'none';
-                    bar.style.opacity = '1';
+        // Fermer le menu en cliquant à l'extérieur
+        document.addEventListener('click', (e) => {
+            if (!this.navbar.contains(e.target)) {
+                this.navMenu.classList.remove('active');
+                this.navToggle.classList.remove('active');
+            }
+        });
+    }
+
+    setupSmoothScroll() {
+        this.navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                Utils.smoothScrollTo(targetId);
+            });
+        });
+    }
+
+    setupActiveLink() {
+        const sections = document.querySelectorAll('section[id]');
+        
+        const observerCallback = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${entry.target.id}`) {
+                            link.classList.add('active');
+                        }
+                    });
                 }
             });
+        };
+
+        Utils.observeElements('section[id]', observerCallback, { threshold: 0.3 });
+    }
+}
+
+// Gestionnaire des animations
+class AnimationManager {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.setupScrollAnimations();
+        this.setupCounterAnimations();
+        this.setupHoverEffects();
+    }
+
+    setupScrollAnimations() {
+        // Animations au scroll
+        const animateOnScroll = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        };
+
+        // Ajouter les classes d'animation
+        const elementsToAnimate = [
+            '.section-header',
+            '.about-story',
+            '.value-card',
+            '.activity-card',
+            '.event-card',
+            '.gallery-item',
+            '.contact-card'
+        ];
+
+        elementsToAnimate.forEach(selector => {
+            Utils.observeElements(selector, animateOnScroll);
         });
     }
 
-    // Smooth scrolling pour la navigation
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const offsetTop = target.offsetTop - 70;
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
+    setupCounterAnimations() {
+        const counters = document.querySelectorAll('.stat-number[data-count]');
+        let animated = false;
 
-    // Animation des éléments au scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+        const animateCounters = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !animated) {
+                    animated = true;
+                    counters.forEach(counter => {
+                        const target = parseInt(counter.getAttribute('data-count'));
+                        Utils.animateCounter(counter, target);
+                    });
+                }
+            });
+        };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-
-    // Observer les éléments à animer
-    const animateElements = document.querySelectorAll('.point, .contact-item');
-    animateElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-
-    // Formulaire de contact
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const nom = formData.get('nom');
-            const email = formData.get('email');
-            const message = formData.get('message');
-            
-            if (!nom || !email || !message) {
-                alert('Veuillez remplir tous les champs');
-                return;
-            }
-            
-            if (!validateEmail(email)) {
-                alert('Veuillez entrer une adresse email valide');
-                return;
-            }
-            
-            alert('Merci pour votre message ! Nous vous recontacterons bientôt.');
-            this.reset();
-        });
+        if (counters.length > 0) {
+            Utils.observeElements('.hero-stats', animateCounters);
+        }
     }
 
-    // Validation email
-    function validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
-
-    // Galerie lightbox simple
-    document.querySelectorAll('.gallery-item').forEach(item => {
-        item.addEventListener('click', () => {
-            const img = item.querySelector('img');
-            if (!img) return;
+    setupHoverEffects() {
+        // Effets de parallaxe léger sur les cartes
+        const cards = document.querySelectorAll('.activity-card, .value-card, .contact-card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-8px) scale(1.02)';
+            });
             
-            const lightbox = document.createElement('div');
-            lightbox.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.9);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 10000;
-                cursor: pointer;
-            `;
-            
-            const lightboxImg = document.createElement('img');
-            lightboxImg.src = img.src;
-            lightboxImg.style.cssText = `
-                max-width: 90%;
-                max-height: 90%;
-                object-fit: contain;
-            `;
-            
-            lightbox.appendChild(lightboxImg);
-            document.body.appendChild(lightbox);
-            
-            lightbox.addEventListener('click', () => {
-                document.body.removeChild(lightbox);
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
             });
         });
-    });
+    }
+}
 
-    // Navbar transparente/opaque selon le scroll
-    window.addEventListener('scroll', () => {
-        const navbar = document.querySelector('.navbar');
-        if (navbar) {
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+// Gestionnaire du formulaire de contact
+class ContactForm {
+    constructor() {
+        this.form = document.getElementById('contactForm');
+        this.init();
+    }
+
+    init() {
+        if (!this.form) return;
+        
+        this.form.addEventListener('submit', this.handleSubmit.bind(this));
+        this.setupValidation();
+    }
+
+    setupValidation() {
+        const inputs = this.form.querySelectorAll('input, select, textarea');
+        
+        inputs.forEach(input => {
+            input.addEventListener('blur', () => this.validateField(input));
+            input.addEventListener('input', () => this.clearError(input));
+        });
+    }
+
+    validateField(field) {
+        const value = field.value.trim();
+        let isValid = true;
+        let errorMessage = '';
+
+        // Validation spécifique par type de champ
+        switch (field.type) {
+            case 'email':
+                if (!Utils.isValidEmail(value)) {
+                    isValid = false;
+                    errorMessage = 'Veuillez entrer une adresse email valide';
+                }
+                break;
+            case 'text':
+                if (value.length < 2) {
+                    isValid = false;
+                    errorMessage = 'Ce champ doit contenir au moins 2 caractères';
+                }
+                break;
+            default:
+                if (field.hasAttribute('required') && !value) {
+                    isValid = false;
+                    errorMessage = 'Ce champ est obligatoire';
+                }
+        }
+
+        this.showFieldError(field, isValid ? null : errorMessage);
+        return isValid;
+    }
+
+    showFieldError(field, message) {
+        // Supprimer l'ancien message d'erreur
+        this.clearError(field);
+        
+        if (message) {
+            field.classList.add('error');
+            const errorElement = document.createElement('div');
+            errorElement.className = 'field-error';
+            errorElement.textContent = message;
+            field.parentNode.appendChild(errorElement);
+        } else {
+            field.classList.remove('error');
+        }
+    }
+
+    clearError(field) {
+        field.classList.remove('error');
+        const errorElement = field.parentNode.querySelector('.field-error');
+        if (errorElement) {
+            errorElement.remove();
+        }
+    }
+
+    async handleSubmit(e) {
+        e.preventDefault();
+        
+        // Validation du formulaire
+        const inputs = this.form.querySelectorAll('input[required], select[required], textarea[required]');
+        let isFormValid = true;
+        
+        inputs.forEach(input => {
+            if (!this.validateField(input)) {
+                isFormValid = false;
+            }
+        });
+
+        if (!isFormValid) {
+            this.showMessage('Veuillez corriger les erreurs avant d\'envoyer le formulaire.', 'error');
+            return;
+        }
+
+        // Simulation d'envoi (remplacer par l'API réelle)
+        this.showLoading(true);
+        
+        try {
+            await this.simulateSubmission();
+            this.showMessage('Votre message a été envoyé avec succès ! Nous vous recontacterons bientôt.', 'success');
+            this.form.reset();
+        } catch (error) {
+            this.showMessage('Une erreur est survenue lors de l\'envoi. Veuillez réessayer.', 'error');
+        } finally {
+            this.showLoading(false);
+        }
+    }
+
+    simulateSubmission() {
+        return new Promise((resolve) => {
+            setTimeout(() => resolve(), 1500);
+        });
+    }
+
+    showLoading(show) {
+        const submitBtn = this.form.querySelector('button[type="submit"]');
+        if (show) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+        } else {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer le message';
+        }
+    }
+
+    showMessage(message, type) {
+        // Créer l'élément de notification
+        const notification = document.createElement('div');
+        notification.className = `form-notification ${type}`;
+        notification.innerHTML = `
+            <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+            <span>${message}</span>
+            <button type="button" class="close-notification">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+
+        // Ajouter la notification
+        this.form.appendChild(notification);
+
+        // Fermer la notification
+        notification.querySelector('.close-notification').addEventListener('click', () => {
+            notification.remove();
+        });
+
+        // Supprimer automatiquement après 5 secondes
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 5000);
+    }
+}
+
+// Gestionnaire du bouton "Retour en haut"
+class BackToTop {
+    constructor() {
+        this.button = document.getElementById('backToTop');
+        this.init();
+    }
+
+    init() {
+        if (!this.button) return;
+        
+        this.setupScrollListener();
+        this.setupClickHandler();
+    }
+
+    setupScrollListener() {
+        const handleScroll = Utils.throttle(() => {
+            if (window.pageYOffset > 300) {
+                this.button.classList.add('visible');
             } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                this.button.classList.remove('visible');
+            }
+        }, 100);
+
+        window.addEventListener('scroll', handleScroll);
+    }
+
+    setupClickHandler() {
+        this.button.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+}
+
+// Gestionnaire des données dynamiques
+class DataManager {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.loadActivities();
+        this.loadEvents();
+        this.loadGallery();
+    }
+
+    async loadActivities() {
+        // Simulation de chargement d'activités depuis une API
+        const activitiesContainer = document.getElementById('activitiesContent');
+        if (!activitiesContainer) return;
+
+        // Pour l'instant, le contenu est statique dans le HTML
+        // Ici on pourrait faire un appel API pour charger les activités dynamiquement
+    }
+
+    async loadEvents() {
+        // Simulation de chargement d'événements depuis une API
+        const eventsContainer = document.getElementById('eventsContent');
+        if (!eventsContainer) return;
+
+        // Pour l'instant, le contenu est statique dans le HTML
+        // Ici on pourrait faire un appel API pour charger les événements dynamiquement
+    }
+
+    async loadGallery() {
+        // Simulation de chargement de la galerie depuis une API
+        const galleryContainer = document.getElementById('galleryContent');
+        if (!galleryContainer) return;
+
+        // Pour l'instant, le contenu est statique dans le HTML
+        // Ici on pourrait faire un appel API pour charger les images dynamiquement
+    }
+}
+
+// Gestionnaire des performances
+class PerformanceManager {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.setupLazyLoading();
+        this.setupImageOptimization();
+        this.setupPreloading();
+    }
+
+    setupLazyLoading() {
+        // Lazy loading des images avec Intersection Observer
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src || img.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => imageObserver.observe(img));
+        } else {
+            // Fallback pour les navigateurs sans support
+            images.forEach(img => {
+                img.src = img.dataset.src || img.src;
+                img.classList.remove('lazy');
+            });
+        }
+    }
+
+    setupImageOptimization() {
+        // Optimisation des images selon la densité d'écran
+        const images = document.querySelectorAll('img');
+        
+        images.forEach(img => {
+            if (window.devicePixelRatio > 1.5) {
+                // Écran haute densité : utiliser des images de meilleure qualité si disponibles
+                const highDpiSrc = img.dataset.srcHighDpi;
+                if (highDpiSrc) {
+                    img.src = highDpiSrc;
+                }
+            }
+        });
+    }
+
+    setupPreloading() {
+        // Précharger les ressources critiques
+        const criticalResources = [
+            'css/style-new.css',
+            'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap'
+        ];
+
+        criticalResources.forEach(resource => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.href = resource;
+            link.as = resource.endsWith('.css') ? 'style' : 'font';
+            if (link.as === 'font') {
+                link.crossOrigin = 'anonymous';
+            }
+            document.head.appendChild(link);
+        });
+    }
+}
+
+// Gestionnaire des erreurs
+class ErrorManager {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.setupGlobalErrorHandler();
+        this.setupImageErrorHandler();
+    }
+
+    setupGlobalErrorHandler() {
+        window.addEventListener('error', (e) => {
+            console.error('Erreur JavaScript:', e.error);
+            // Ici on pourrait envoyer les erreurs à un service de monitoring
+        });
+
+        window.addEventListener('unhandledrejection', (e) => {
+            console.error('Promise rejetée:', e.reason);
+            // Ici on pourrait envoyer les erreurs à un service de monitoring
+        });
+    }
+
+    setupImageErrorHandler() {
+        // Gérer les erreurs de chargement d'images
+        document.addEventListener('error', (e) => {
+            if (e.target.tagName === 'IMG') {
+                // Remplacer par une image de fallback
+                e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIG5vbiBkaXNwb25pYmxlPC90ZXh0Pjwvc3ZnPg==';
+                e.target.alt = 'Image non disponible';
+            }
+        }, true);
+    }
+}
+
+// Gestionnaire PWA
+class PWAManager {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.setupServiceWorker();
+        this.setupInstallPrompt();
+    }
+
+    async setupServiceWorker() {
+        if ('serviceWorker' in navigator && location.protocol === 'https:') {
+            try {
+                await navigator.serviceWorker.register('/sw.js');
+                console.log('Service Worker enregistré avec succès');
+            } catch (error) {
+                console.log('Erreur lors de l\'enregistrement du Service Worker:', error);
             }
         }
-    });
+    }
 
-    console.log('Site Anim\'Média chargé avec succès !');
+    setupInstallPrompt() {
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Afficher un bouton d'installation personnalisé
+            this.showInstallButton(deferredPrompt);
+        });
+    }
+
+    showInstallButton(deferredPrompt) {
+        // Créer et afficher un bouton d'installation
+        const installButton = document.createElement('button');
+        installButton.className = 'install-app-btn';
+        installButton.innerHTML = '<i class="fas fa-download"></i> Installer l\'app';
+        installButton.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--primary-600);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        `;
+
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                
+                if (outcome === 'accepted') {
+                    installButton.remove();
+                }
+                
+                deferredPrompt = null;
+            }
+        });
+
+        document.body.appendChild(installButton);
+
+        // Masquer le bouton après 10 secondes
+        setTimeout(() => {
+            if (installButton.parentNode) {
+                installButton.remove();
+            }
+        }, 10000);
+    }
 }
+
+// Initialisation de l'application
+class App {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        // Attendre que le DOM soit chargé
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.initializeModules());
+        } else {
+            this.initializeModules();
+        }
+    }
+
+    initializeModules() {
+        try {
+            // Initialiser tous les modules
+            new Navigation();
+            new AnimationManager();
+            new ContactForm();
+            new BackToTop();
+            new DataManager();
+            new PerformanceManager();
+            new ErrorManager();
+            new PWAManager();
+
+            console.log('Application Anim\'Média initialisée avec succès');
+        } catch (error) {
+            console.error('Erreur lors de l\'initialisation:', error);
+        }
+    }
+}
+
+// Lancer l'application
+new App();
+
+// Styles CSS pour les éléments créés dynamiquement
+const dynamicStyles = `
+<style>
+.field-error {
+    color: var(--error);
+    font-size: var(--text-sm);
+    margin-top: var(--space-1);
+}
+
+.form-notification {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border-radius: var(--radius);
+    margin-top: var(--space-4);
+    font-weight: 500;
+}
+
+.form-notification.success {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.form-notification.error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+.close-notification {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    margin-left: auto;
+    padding: var(--space-1);
+}
+
+.animate-in {
+    animation: slideInUp 0.6s ease-out forwards;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+input.error,
+select.error,
+textarea.error {
+    border-color: var(--error) !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+}
+</style>
+`;
+
+// Injecter les styles dynamiques
+document.head.insertAdjacentHTML('beforeend', dynamicStyles);

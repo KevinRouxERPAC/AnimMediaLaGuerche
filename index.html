@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anim'Média - La Guerche-sur-l'Aubois</title>
+    <title>Anim'Média - Association Culturelle & Numérique | La Guerche-sur-l'Aubois</title>
     
     <!-- Métadonnées SEO -->
-    <meta name="description" content="Anim'Média est une association culturelle, numérique et d'éducation populaire à La Guerche-sur-l'Aubois. Ateliers numériques, loisirs créatifs, animations culturelles.">
-    <meta name="keywords" content="association, culture, numérique, La Guerche-sur-l'Aubois, ateliers, scrapbooking, informatique, loisirs créatifs">
+    <meta name="description" content="Anim'Média - Association culturelle, numérique et d'éducation populaire à La Guerche-sur-l'Aubois. Ateliers créatifs, formations numériques, événements culturels pour tous les âges.">
+    <meta name="keywords" content="association, culture, numérique, La Guerche-sur-l'Aubois, ateliers, scrapbooking, informatique, loisirs créatifs, éducation populaire">
     <meta name="author" content="Anim'Média La Guerche-sur-l'Aubois">
     <meta name="robots" content="index, follow">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kevinrouxerpac.github.io/AnimMediaLaGuerche/">
-    <meta property="og:title" content="Anim'Média - Association Culturelle La Guerche-sur-l'Aubois">
-    <meta property="og:description" content="Association culturelle, numérique et d'éducation populaire. Ateliers pour tous âges.">
+    <meta property="og:title" content="Anim'Média - Association Culturelle & Numérique | La Guerche-sur-l'Aubois">
+    <meta property="og:description" content="Découvrez nos ateliers créatifs, formations numériques et événements culturels pour tous les âges.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://kevinrouxerpac.github.io/AnimMediaLaGuerche/">
-    <meta property="twitter:title" content="Anim'Média - Association Culturelle La Guerche-sur-l'Aubois">
-    <meta property="twitter:description" content="Association culturelle, numérique et d'éducation populaire. Ateliers pour tous âges.">
+    <meta property="twitter:title" content="Anim'Média - Association Culturelle & Numérique">
+    <meta property="twitter:description" content="Ateliers créatifs, formations numériques et événements culturels à La Guerche-sur-l'Aubois">
     <meta property="twitter:image" content="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
     
     <!-- Favicon -->
@@ -37,13 +37,19 @@
     <meta name="theme-color" content="#3498db">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="AnimMédia">
+    <meta name="apple-mobile-web-app-title" content="Anim'Média">
     
     <!-- Preconnect pour les performances -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://images.unsplash.com">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
@@ -55,73 +61,149 @@
         "url": "https://kevinrouxerpac.github.io/AnimMediaLaGuerche/",
         "address": {
             "@type": "PostalAddress",
+            "streetAddress": "Médiathèque Jean-Paul Roussillot",
             "addressLocality": "La Guerche-sur-l'Aubois",
-            "addressCountry": "FR",
-            "postalCode": "18150"
+            "addressRegion": "Centre-Val de Loire",
+            "postalCode": "18150",
+            "addressCountry": "FR"
         },
         "contactPoint": {
             "@type": "ContactPoint",
             "contactType": "customer service",
-            "email": "contact@animmedia-laguerche.fr"
+            "email": "contact@animmedia-laguerche.fr",
+            "telephone": "+33699471525"
         },
         "foundingDate": "2020",
-        "areaServed": "La Guerche-sur-l'Aubois"
+        "areaServed": "La Guerche-sur-l'Aubois",
+        "sameAs": [
+            "https://github.com/KevinRouxERPAC/AnimMediaLaGuerche"
+        ]
     }
     </script>
     
+    <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
     <!-- Navigation -->
-    <header>
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="nav-logo">
-                    <h2>Anim'Média</h2>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-logo">
+                    <i class="fas fa-palette"></i>
                 </div>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="#accueil" class="nav-link">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#a-propos" class="nav-link">À propos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#activites" class="nav-link">Activités</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#evenements" class="nav-link">Événements</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#galerie" class="nav-link">Galerie</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#contact" class="nav-link">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <button id="admin-toggle" onclick="toggleAdminMode()" class="admin-btn">
-                            <i class="fas fa-unlock"></i> Mode admin
-                        </button>
-                    </li>
-                </ul>
-                <div class="nav-toggle" id="mobile-menu">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
+                <div class="brand-text">
+                    <h1>Anim'Média</h1>
+                    <span>La Guerche-sur-l'Aubois</span>
                 </div>
             </div>
-        </nav>
-    </header>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#accueil" class="nav-link">Accueil</a></li>
+                <li><a href="#a-propos" class="nav-link">À propos</a></li>
+                <li><a href="#activites" class="nav-link">Activités</a></li>
+                <li><a href="#evenements" class="nav-link">Événements</a></li>
+                <li><a href="#galerie" class="nav-link">Galerie</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li class="nav-cta">
+                    <a href="admin.html" class="btn-admin">
+                        <i class="fas fa-cog"></i>
+                        <span>Administration</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <button class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
 
-    <!-- Section Accueil -->
+    <!-- Hero Section -->
     <section id="accueil" class="hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+            <div class="hero-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </div>
+        
         <div class="hero-container">
             <div class="hero-content">
-                <h1>Bienvenue chez Anim'Média</h1>
-                <p>Association culturelle, numérique et d'éducation populaire<br>La Guerche-sur-l'Aubois</p>
-                <a href="#a-propos" class="btn-primary">Découvrir nos activités</a>
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i>
+                    <span>Association culturelle depuis 2020</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    Créons ensemble
+                    <span class="gradient-text">l'avenir culturel</span>
+                    de La Guerche
+                </h1>
+                
+                <p class="hero-description">
+                    Découvrez un monde d'activités créatives, d'ateliers numériques et d'événements culturels 
+                    pensés pour tous les âges et tous les niveaux.
+                </p>
+                
+                <div class="hero-actions">
+                    <a href="#activites" class="btn btn-primary">
+                        <i class="fas fa-play"></i>
+                        Découvrir nos activités
+                    </a>
+                    <a href="#evenements" class="btn btn-outline">
+                        <i class="fas fa-calendar-alt"></i>
+                        Voir les événements
+                    </a>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number" data-count="150">0</span>
+                        <span class="stat-label">Participants</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-count="12">0</span>
+                        <span class="stat-label">Ateliers</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-count="25">0</span>
+                        <span class="stat-label">Événements/an</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Atelier créatif Anim'Média" 
+                         loading="lazy">
+                </div>
+                <div class="floating-cards">
+                    <div class="card card-1">
+                        <i class="fas fa-laptop"></i>
+                        <span>Numérique</span>
+                    </div>
+                    <div class="card card-2">
+                        <i class="fas fa-palette"></i>
+                        <span>Créatif</span>
+                    </div>
+                    <div class="card card-3">
+                        <i class="fas fa-users"></i>
+                        <span>Social</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="scroll-arrow">
+                <i class="fas fa-chevron-down"></i>
             </div>
         </div>
     </section>
@@ -129,26 +211,91 @@
     <!-- Section À propos -->
     <section id="a-propos" class="about">
         <div class="container">
-            <h2>À propos de nous</h2>
+            <div class="section-header">
+                <span class="section-badge">À propos</span>
+                <h2 class="section-title">Qui sommes-nous ?</h2>
+                <p class="section-description">
+                    Une association passionnée au service de la culture et du numérique pour tous
+                </p>
+            </div>
+            
             <div class="about-content">
-                <div class="about-text">
-                    <p>Anim'Média – La Guerche-sur-l'Aubois est une association dynamique qui œuvre dans les domaines de la culture, du numérique, des loisirs créatifs et de l'éducation populaire.</p>
-                    <p>Notre mission est de faciliter l'accès à la culture et au numérique, développer la créativité de chacun et favoriser le lien social intergénérationnel au sein de notre commune.</p>
-                    <div class="mission-points">
-                        <div class="point">
-                            <i class="fas fa-laptop"></i>
-                            <h4>Numérique pour tous</h4>
-                            <p>Ateliers d'initiation, café informatique et accompagnement aux usages digitaux</p>
+                <div class="about-story">
+                    <div class="story-text">
+                        <h3>Notre histoire</h3>
+                        <p>
+                            Née en 2020 de la volonté de démocratiser l'accès à la culture et au numérique, 
+                            Anim'Média accompagne les habitants de La Guerche-sur-l'Aubois dans leurs découvertes créatives.
+                        </p>
+                        <p>
+                            Nous croyons que chacun possède un potentiel créatif unique. Notre mission est de 
+                            révéler ces talents à travers des activités ludiques et enrichissantes.
+                        </p>
+                        
+                        <div class="story-highlights">
+                            <div class="highlight">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <div class="highlight-content">
+                                    <h4>Passion</h4>
+                                    <p>L'amour de la transmission et du partage</p>
+                                </div>
+                            </div>
+                            <div class="highlight">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-hands-helping"></i>
+                                </div>
+                                <div class="highlight-content">
+                                    <h4>Bienveillance</h4>
+                                    <p>Un accompagnement respectueux de chacun</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="point">
-                            <i class="fas fa-palette"></i>
-                            <h4>Créativité & Arts</h4>
-                            <p>Dessin, scrapbooking, ateliers manuels et activités artistiques variées</p>
+                    </div>
+                    
+                    <div class="story-visual">
+                        <div class="visual-grid">
+                            <img src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                                 alt="Atelier scrapbooking" class="grid-img img-1">
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                                 alt="Formation informatique" class="grid-img img-2">
+                            <img src="https://images.unsplash.com/photo-1559163499-413811fb2344?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                                 alt="Activité groupe" class="grid-img img-3">
                         </div>
-                        <div class="point">
-                            <i class="fas fa-users"></i>
-                            <h4>Lien intergénérationnel</h4>
-                            <p>Animations pour tous âges : enfants, adolescents, adultes et seniors</p>
+                    </div>
+                </div>
+                
+                <div class="values-section">
+                    <h3>Nos valeurs</h3>
+                    <div class="values-grid">
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i class="fas fa-universal-access"></i>
+                            </div>
+                            <h4>Accessibilité</h4>
+                            <p>Des activités ouvertes à tous, sans distinction d'âge ou de niveau</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h4>Innovation</h4>
+                            <p>Des approches créatives et des outils modernes pour apprendre</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h4>Convivialité</h4>
+                            <p>Un esprit familial et chaleureux dans toutes nos activités</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <h4>Développement</h4>
+                            <p>L'épanouissement personnel au cœur de nos préoccupations</p>
                         </div>
                     </div>
                 </div>
@@ -159,14 +306,78 @@
     <!-- Section Activités -->
     <section id="activites" class="activities">
         <div class="container">
-            <h2>Nos activités</h2>
-            <div class="activities-grid">
-                <!-- Les activités seront générées dynamiquement par JavaScript -->
+            <div class="section-header">
+                <span class="section-badge">Nos activités</span>
+                <h2 class="section-title">Explorez nos univers</h2>
+                <p class="section-description">
+                    Des ateliers variés pour développer votre créativité et vos compétences numériques
+                </p>
             </div>
             
-            <div class="public-info">
-                <h3><i class="fas fa-heart"></i> Pour qui ?</h3>
-                <p>Nos activités s'adressent à <strong>tous les âges</strong> : enfants, adolescents, adultes et seniors. Nous privilégions les échanges intergénérationnels et l'entraide.</p>
+            <div class="activities-content" id="activitiesContent">
+                <!-- Les activités seront chargées dynamiquement -->
+                <div class="activity-card featured">
+                    <div class="activity-header">
+                        <div class="activity-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <div class="activity-badge">Populaire</div>
+                    </div>
+                    <div class="activity-content">
+                        <h3>Ateliers numériques</h3>
+                        <p>Maîtrisez les outils informatiques dans une ambiance détendue et bienveillante.</p>
+                        <ul class="activity-features">
+                            <li><i class="fas fa-check"></i> Initiation à l'informatique</li>
+                            <li><i class="fas fa-check"></i> Café informatique</li>
+                            <li><i class="fas fa-check"></i> Accompagnement personnalisé</li>
+                            <li><i class="fas fa-check"></i> Dépannage et conseils</li>
+                        </ul>
+                    </div>
+                    <div class="activity-footer">
+                        <div class="activity-schedule">
+                            <i class="fas fa-clock"></i>
+                            <span>Mardis 10h-12h</span>
+                        </div>
+                        <button class="btn-activity">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <div class="activity-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                    </div>
+                    <div class="activity-content">
+                        <h3>Loisirs créatifs</h3>
+                        <p>Exprimez votre créativité à travers des activités manuelles et artistiques.</p>
+                        <ul class="activity-features">
+                            <li><i class="fas fa-check"></i> Ateliers de dessin</li>
+                            <li><i class="fas fa-check"></i> Scrapbooking</li>
+                            <li><i class="fas fa-check"></i> Activités manuelles</li>
+                            <li><i class="fas fa-check"></i> Projets artistiques</li>
+                        </ul>
+                    </div>
+                    <div class="activity-footer">
+                        <div class="activity-schedule">
+                            <i class="fas fa-clock"></i>
+                            <span>Mercredis 14h-16h</span>
+                        </div>
+                        <button class="btn-activity">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="activities-cta">
+                <p>Envie de rejoindre nos ateliers ?</p>
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i>
+                    Nous rejoindre
+                </a>
             </div>
         </div>
     </section>
@@ -174,9 +385,78 @@
     <!-- Section Événements -->
     <section id="evenements" class="events">
         <div class="container">
-            <h2>Nos prochains événements</h2>
-            <div class="events-grid">
-                <!-- Les événements seront générés dynamiquement par JavaScript -->
+            <div class="section-header">
+                <span class="section-badge">Événements</span>
+                <h2 class="section-title">Prochains rendez-vous</h2>
+                <p class="section-description">
+                    Ne manquez aucun de nos événements et ateliers à venir
+                </p>
+            </div>
+            
+            <div class="events-content" id="eventsContent">
+                <!-- Les événements seront chargés dynamiquement -->
+                <div class="event-card upcoming">
+                    <div class="event-date">
+                        <span class="day">15</span>
+                        <span class="month">Sep</span>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-category">Loisir créatif</div>
+                        <h3>Atelier Scrapbooking</h3>
+                        <p>Venez créer vos albums photos personnalisés ! Matériel fourni, venez juste avec vos photos préférées.</p>
+                        <div class="event-meta">
+                            <div class="event-time">
+                                <i class="fas fa-clock"></i>
+                                <span>14h00 - 16h00</span>
+                            </div>
+                            <div class="event-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Médiathèque Jean-Paul Roussillot</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-action">
+                        <button class="btn btn-outline btn-sm">
+                            <i class="fas fa-info"></i>
+                            Détails
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-date">
+                        <span class="day">20</span>
+                        <span class="month">Sep</span>
+                    </div>
+                    <div class="event-content">
+                        <div class="event-category">Numérique</div>
+                        <h3>Initiation Informatique</h3>
+                        <p>Découvrez les bases de l'informatique dans une ambiance conviviale. Parfait pour les débutants !</p>
+                        <div class="event-meta">
+                            <div class="event-time">
+                                <i class="fas fa-clock"></i>
+                                <span>10h00 - 12h00</span>
+                            </div>
+                            <div class="event-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Médiathèque Jean-Paul Roussillot</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-action">
+                        <button class="btn btn-outline btn-sm">
+                            <i class="fas fa-info"></i>
+                            Détails
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="events-cta">
+                <a href="#" class="btn btn-outline">
+                    <i class="fas fa-calendar"></i>
+                    Voir tous les événements
+                </a>
             </div>
         </div>
     </section>
@@ -184,42 +464,57 @@
     <!-- Section Galerie -->
     <section id="galerie" class="gallery">
         <div class="container">
-            <h2>Galerie</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Atelier numérique">
+            <div class="section-header">
+                <span class="section-badge">Galerie</span>
+                <h2 class="section-title">Nos moments partagés</h2>
+                <p class="section-description">
+                    Découvrez l'ambiance chaleureuse de nos ateliers et événements
+                </p>
+            </div>
+            
+            <div class="gallery-grid" id="galleryContent">
+                <!-- Les images seront chargées dynamiquement -->
+                <div class="gallery-item large">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                         alt="Atelier numérique en cours" loading="lazy">
                     <div class="gallery-overlay">
-                        <h4>Atelier Numérique</h4>
+                        <div class="gallery-content">
+                            <h4>Atelier Numérique</h4>
+                            <p>Formation aux outils digitaux</p>
+                        </div>
                     </div>
                 </div>
+                
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Activité créative">
+                    <img src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                         alt="Activité créative" loading="lazy">
                     <div class="gallery-overlay">
-                        <h4>Atelier Créatif</h4>
+                        <div class="gallery-content">
+                            <h4>Atelier Créatif</h4>
+                            <p>Scrapbooking et loisirs</p>
+                        </div>
                     </div>
                 </div>
+                
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Exposition">
+                    <img src="https://images.unsplash.com/photo-1559163499-413811fb2344?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                         alt="Événement communautaire" loading="lazy">
                     <div class="gallery-overlay">
-                        <h4>Exposition</h4>
+                        <div class="gallery-content">
+                            <h4>Événement</h4>
+                            <p>Moments de partage</p>
+                        </div>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Animation culturelle">
+                
+                <div class="gallery-item tall">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                         alt="Formation personnalisée" loading="lazy">
                     <div class="gallery-overlay">
-                        <h4>Animation Culturelle</h4>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Jeux de société">
-                    <div class="gallery-overlay">
-                        <h4>Jeux de Société</h4>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Lecture">
-                    <div class="gallery-overlay">
-                        <h4>Coin Lecture</h4>
+                        <div class="gallery-content">
+                            <h4>Formation</h4>
+                            <p>Accompagnement personnalisé</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -229,92 +524,162 @@
     <!-- Section Contact -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2>Contactez-nous</h2>
+            <div class="section-header">
+                <span class="section-badge">Contact</span>
+                <h2 class="section-title">Rejoignez-nous</h2>
+                <p class="section-description">
+                    Prêt à découvrir nos activités ? Contactez-nous pour plus d'informations
+                </p>
+            </div>
+            
             <div class="contact-content">
                 <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>Lieu d'activité</h4>
-                            <p>Médiathèque municipale<br>Jean-Paul Roussillot<br>La Guerche-sur-l'Aubois</p>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Adresse</h4>
+                            <p>Médiathèque Jean-Paul Roussillot<br>La Guerche-sur-l'Aubois, 18150</p>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
                             <h4>Téléphone</h4>
-                            <p>06 99 47 15 25</p>
+                            <p><a href="tel:+33699471525">06 99 47 15 25</a></p>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
                             <h4>Email</h4>
-                            <p>contact@animmedia-laguerche.fr</p>
+                            <p><a href="mailto:contact@animmedia-laguerche.fr">contact@animmedia-laguerche.fr</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Horaires d'activités</h4>
+                            <p>Mardis : 10h-12h (Numérique)<br>Mercredis : 14h-16h (Créatif)</p>
                         </div>
                     </div>
                 </div>
                 
-                <form class="contact-form">
-                    <div class="form-group">
-                        <input type="text" name="nom" placeholder="Votre nom" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" name="email" placeholder="Votre email" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea name="message" rows="5" placeholder="Votre message" required></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary">Envoyer</button>
-                </form>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Nom complet</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Choisissez un sujet</option>
+                                <option value="inscription">Inscription aux activités</option>
+                                <option value="information">Demande d'information</option>
+                                <option value="partenariat">Proposition de partenariat</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Décrivez votre demande..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Envoyer le message
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
-
-    <!-- Panneau d'administration -->
-    <div id="admin-panel" class="admin-panel" style="display: none;">
-        <div class="admin-content">
-            <h3><i class="fas fa-cog"></i> Panneau d'administration</h3>
-            <div class="admin-actions">
-                <button onclick="exportData()" class="btn-admin">
-                    <i class="fas fa-download"></i> Exporter les données
-                </button>
-                <button onclick="importData()" class="btn-admin">
-                    <i class="fas fa-upload"></i> Importer les données
-                </button>
-            </div>
-            <p class="admin-help">
-                <i class="fas fa-info-circle"></i>
-                En mode administration, vous pouvez cliquer sur les boutons "Modifier" et "Supprimer" 
-                qui apparaissent sur les activités et événements, ou cliquer sur "Ajouter" pour en créer de nouveaux.
-            </p>
-        </div>
-    </div>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Anim'Média</h3>
-                    <p>Association culturelle, numérique et d'éducation populaire<br>La Guerche-sur-l'Aubois</p>
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <i class="fas fa-palette"></i>
+                        <span>Anim'Média</span>
+                    </div>
+                    <p>Association culturelle, numérique et d'éducation populaire à La Guerche-sur-l'Aubois</p>
+                    <div class="footer-social">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="mailto:contact@animmedia-laguerche.fr" title="Email"><i class="fas fa-envelope"></i></a>
+                    </div>
                 </div>
-                <div class="footer-section">
-                    <h4>Suivez-nous</h4>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Navigation</h4>
+                        <ul>
+                            <li><a href="#accueil">Accueil</a></li>
+                            <li><a href="#a-propos">À propos</a></li>
+                            <li><a href="#activites">Activités</a></li>
+                            <li><a href="#evenements">Événements</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Activités</h4>
+                        <ul>
+                            <li><a href="#activites">Ateliers numériques</a></li>
+                            <li><a href="#activites">Loisirs créatifs</a></li>
+                            <li><a href="#evenements">Événements</a></li>
+                            <li><a href="#galerie">Galerie</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="tel:+33699471525">06 99 47 15 25</a></li>
+                            <li><a href="mailto:contact@animmedia-laguerche.fr">contact@animmedia-laguerche.fr</a></li>
+                            <li>Médiathèque Jean-Paul Roussillot</li>
+                            <li>La Guerche-sur-l'Aubois</li>
+                        </ul>
                     </div>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2025 Anim'Média La Guerche-sur-l'Aubois. Tous droits réservés.</p>
+                <div class="footer-legal">
+                    <p>&copy; 2025 Anim'Média La Guerche-sur-l'Aubois. Tous droits réservés.</p>
+                    <div class="footer-legal-links">
+                        <a href="#" data-modal="mentions">Mentions légales</a>
+                        <a href="#" data-modal="privacy">Politique de confidentialité</a>
+                        <a href="admin.html">Administration</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
     <script src="js/script.js"></script>
-    <script src="js/advanced-features.js"></script>
 </body>
 </html>
