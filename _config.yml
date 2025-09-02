@@ -1,0 +1,30 @@
+# Configuration pour GitHub Pages
+# Ce fichier configure l'affichage de votre site sur GitHub Pages
+
+# URL de base du site (sera automatiquement définie par GitHub Pages)
+baseurl: "/AnimMediaLaGuerche"
+url: "https://kevinrouxerpac.github.io"
+
+# Informations du site
+title: "Anim'Média - La Guerche-sur-l'Aubois"
+description: "Association culturelle, numérique et d'éducation populaire"
+
+# Configuration Jekyll (utilisé par GitHub Pages)
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Fichiers et dossiers à exclure
+exclude:
+  - README.md
+  - package.json
+  - node_modules/
+  - .git/
+  - .github/
+  - .gitignore
+
+# Fichiers à inclure
+include:
+  - css/
+  - js/
+  - images/
