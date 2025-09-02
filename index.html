@@ -35,6 +35,11 @@
                     <li class="nav-item">
                         <a href="#contact" class="nav-link">Contact</a>
                     </li>
+                    <li class="nav-item">
+                        <button id="admin-toggle" onclick="toggleAdminMode()" class="admin-btn">
+                            <i class="fas fa-unlock"></i> Mode admin
+                        </button>
+                    </li>
                 </ul>
                 <div class="nav-toggle" id="mobile-menu">
                     <span class="bar"></span>
@@ -91,65 +96,7 @@
         <div class="container">
             <h2>Nos activités</h2>
             <div class="activities-grid">
-                <div class="activity-card">
-                    <div class="activity-icon">
-                        <i class="fas fa-desktop"></i>
-                    </div>
-                    <div class="activity-content">
-                        <h3>Ateliers numériques</h3>
-                        <ul>
-                            <li>Initiation à l'informatique</li>
-                            <li>Café informatique</li>
-                            <li>Accompagnement aux usages digitaux</li>
-                            <li>Dépannage et conseils</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="activity-card">
-                    <div class="activity-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <div class="activity-content">
-                        <h3>Loisirs créatifs</h3>
-                        <ul>
-                            <li>Ateliers de dessin</li>
-                            <li>Scrapbooking</li>
-                            <li>Activités manuelles</li>
-                            <li>Projets artistiques</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="activity-card">
-                    <div class="activity-icon">
-                        <i class="fas fa-book-open"></i>
-                    </div>
-                    <div class="activity-content">
-                        <h3>Animations culturelles</h3>
-                        <ul>
-                            <li>Expositions thématiques</li>
-                            <li>Rencontres d'auteurs</li>
-                            <li>Ateliers généalogie</li>
-                            <li>Grainothèque participative</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="activity-card">
-                    <div class="activity-icon">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
-                    <div class="activity-content">
-                        <h3>Temps conviviaux</h3>
-                        <ul>
-                            <li>Jeux de société</li>
-                            <li>Forums associatifs</li>
-                            <li>Moments d'échange</li>
-                            <li>Animations intergénérationnelles</li>
-                        </ul>
-                    </div>
-                </div>
+                <!-- Les activités seront générées dynamiquement par JavaScript -->
             </div>
             
             <div class="public-info">
@@ -164,50 +111,7 @@
         <div class="container">
             <h2>Nos prochains événements</h2>
             <div class="events-grid">
-                <div class="event-card">
-                    <div class="event-date">
-                        <span class="day">10</span>
-                        <span class="month">SEP</span>
-                    </div>
-                    <div class="event-content">
-                        <h3>Café Informatique</h3>
-                        <p>Session d'aide et d'accompagnement pour vos questions numériques. Venez avec vos appareils !</p>
-                        <div class="event-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Médiathèque Jean-Paul Roussillot</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="event-card">
-                    <div class="event-date">
-                        <span class="day">18</span>
-                        <span class="month">SEP</span>
-                    </div>
-                    <div class="event-content">
-                        <h3>Atelier Scrapbooking</h3>
-                        <p>Créez votre album photo personnalisé. Matériel fourni, tous niveaux bienvenus.</p>
-                        <div class="event-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Médiathèque Jean-Paul Roussillot</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="event-card">
-                    <div class="event-date">
-                        <span class="day">25</span>
-                        <span class="month">SEP</span>
-                    </div>
-                    <div class="event-content">
-                        <h3>Rencontre d'auteur</h3>
-                        <p>Venez échanger avec un auteur local autour de son dernier ouvrage.</p>
-                        <div class="event-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Médiathèque Jean-Paul Roussillot</span>
-                        </div>
-                    </div>
-                </div>
+                <!-- Les événements seront générés dynamiquement par JavaScript -->
             </div>
         </div>
     </section>
@@ -289,6 +193,26 @@
             </div>
         </div>
     </section>
+
+    <!-- Panneau d'administration -->
+    <div id="admin-panel" class="admin-panel" style="display: none;">
+        <div class="admin-content">
+            <h3><i class="fas fa-cog"></i> Panneau d'administration</h3>
+            <div class="admin-actions">
+                <button onclick="exportData()" class="btn-admin">
+                    <i class="fas fa-download"></i> Exporter les données
+                </button>
+                <button onclick="importData()" class="btn-admin">
+                    <i class="fas fa-upload"></i> Importer les données
+                </button>
+            </div>
+            <p class="admin-help">
+                <i class="fas fa-info-circle"></i>
+                En mode administration, vous pouvez cliquer sur les boutons "Modifier" et "Supprimer" 
+                qui apparaissent sur les activités et événements, ou cliquer sur "Ajouter" pour en créer de nouveaux.
+            </p>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">

@@ -506,6 +506,179 @@ h2::after {
 }
 
 /* Footer */
+.admin-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.admin-btn:hover {
+    background: #c0392b;
+    transform: translateY(-1px);
+}
+
+.admin-btn.admin-active {
+    background: #27ae60;
+}
+
+.admin-btn.admin-active:hover {
+    background: #219a52;
+}
+
+/* Panneau d'administration */
+.admin-panel {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    background: #2c3e50;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    max-width: 350px;
+}
+
+.admin-content h3 {
+    margin-bottom: 15px;
+    color: #ecf0f1;
+    border-bottom: 1px solid #34495e;
+    padding-bottom: 10px;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-admin {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.3s ease;
+    flex: 1;
+    min-width: 120px;
+}
+
+.btn-admin:hover {
+    background: #2980b9;
+}
+
+.admin-help {
+    font-size: 0.85rem;
+    color: #bdc3c7;
+    line-height: 1.4;
+    background: #34495e;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0;
+}
+
+/* Contrôles d'administration sur les cards */
+.admin-controls {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-edit, .btn-delete {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.btn-edit {
+    background: #f39c12;
+    color: white;
+}
+
+.btn-edit:hover {
+    background: #e67e22;
+}
+
+.btn-delete {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #c0392b;
+}
+
+/* Cartes d'ajout */
+.add-new {
+    border: 2px dashed #3498db !important;
+    background: #f8f9fa !important;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    transition: all 0.3s ease;
+}
+
+.add-new:hover {
+    border-color: #2980b9 !important;
+    background: #ecf0f1 !important;
+    transform: translateY(-3px);
+}
+
+.add-new .activity-icon,
+.add-new .event-date {
+    background: #3498db !important;
+    color: white;
+}
+
+.add-new h3 {
+    color: #3498db;
+    font-weight: 600;
+}
+
+/* Mode administration actif */
+.admin-mode .activity-card,
+.admin-mode .event-card {
+    position: relative;
+}
+
+.admin-mode .activity-card:not(.add-new):hover,
+.admin-mode .event-card:not(.add-new):hover {
+    border: 2px solid #f39c12;
+}
+
+/* Styles pour les horaires d'événements */
+.event-time {
+    display: flex;
+    align-items: center;
+    color: #888;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.event-time i {
+    margin-right: 5px;
+    color: #3498db;
+}
+
+/* Footer */
 .footer {
     background: #2c3e50;
     color: white;
@@ -607,6 +780,29 @@ h2::after {
 
     .activity-icon i {
         font-size: 1.8rem;
+    }
+
+    .admin-panel {
+        position: fixed;
+        top: 70px;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        max-width: 90%;
+        width: 320px;
+    }
+
+    .admin-actions {
+        flex-direction: column;
+    }
+
+    .btn-admin {
+        min-width: auto;
+    }
+
+    .admin-controls {
+        flex-direction: column;
+        gap: 8px;
     }
 
     .public-info {
