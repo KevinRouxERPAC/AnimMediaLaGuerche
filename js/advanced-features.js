@@ -91,9 +91,13 @@ function removeGalleryImage(button) {
 
 // Fonction pour réattacher les événements lightbox
 function attachLightboxEvents() {
-    document.querySelectorAll('.gallery-item').forEach(item => {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    if (!galleryItems.length) return;
+    
+    galleryItems.forEach(item => {
         // Supprimer les anciens événements
-        item.replaceWith(item.cloneNode(true));
+        const newItem = item.cloneNode(true);
+        item.parentNode.replaceChild(newItem, item);
     });
     
     // Réattacher les nouveaux événements
@@ -131,7 +135,9 @@ function attachLightboxEvents() {
             document.body.appendChild(lightbox);
             
             lightbox.addEventListener('click', () => {
-                document.body.removeChild(lightbox);
+                if (document.body.contains(lightbox)) {
+                    document.body.removeChild(lightbox);
+                }
             });
         });
     });
@@ -211,32 +217,47 @@ function enableAutoSave() {
 }
 
 // Étendre les fonctions existantes
-const originalToggleAdminMode = toggleAdminMode;
-function toggleAdminMode() {
-    originalToggleAdminMode();
-    
-    if (isAdminMode) {
-        initializeGalleryManagement();
-        enableAdvancedEditMode();
-        enableAutoSave();
-    } else {
-        if (autoSaveInterval) clearInterval(autoSaveInterval);
-        document.body.classList.remove('advanced-edit-mode');
-        const tooltip = document.getElementById('admin-tooltip');
-        if (tooltip) tooltip.remove();
+function extendToggleAdminMode() {
+    // Attendre que toggleAdminMode soit définie
+    if (typeof toggleAdminMode === 'function') {
+        const originalToggleAdminMode = toggleAdminMode;
+        window.toggleAdminMode = function() {
+            originalToggleAdminMode();
+            
+            if (isAdminMode) {
+                initializeGalleryManagement();
+                enableAdvancedEditMode();
+                enableAutoSave();
+            } else {
+                if (autoSaveInterval) clearInterval(autoSaveInterval);
+                document.body.classList.remove('advanced-edit-mode');
+                const tooltip = document.getElementById('admin-tooltip');
+                if (tooltip) tooltip.remove();
+            }
+        };
     }
 }
 
-// Remplacer la fonction saveData existante
-const originalSaveData = saveData;
-function saveData() {
-    saveDataWithTimestamp();
+// Étendre la fonction saveData existante
+function extendSaveData() {
+    if (typeof saveData === 'function') {
+        const originalSaveData = saveData;
+        window.saveData = function() {
+            saveDataWithTimestamp();
+        };
+    }
 }
 
 // Initialisation au chargement
 document.addEventListener('DOMContentLoaded', function() {
     console.log(`Site ${siteConfig.siteName} v${siteConfig.version} initialisé`);
     
-    // Attacher les événements lightbox initiaux
-    setTimeout(attachLightboxEvents, 1000);
+    // Attendre que les fonctions de base soient chargées
+    setTimeout(() => {
+        extendToggleAdminMode();
+        extendSaveData();
+        
+        // Attacher les événements lightbox initiaux
+        attachLightboxEvents();
+    }, 100);
 });
