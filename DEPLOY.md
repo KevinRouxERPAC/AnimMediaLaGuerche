@@ -4,21 +4,28 @@ Ce fichier explique comment déployer le site Anim'Média sur GitHub Pages.
 
 ## Étapes de déploiement
 
-### 1. Pousser le code sur GitHub
+### ✅ 1. Code poussé sur GitHub
 ```bash
 git add .
 git commit -m "Initial commit - Site Anim'Média"
 git push origin main
 ```
 
-### 2. Activer GitHub Pages
+### ✅ 2. Workflow GitHub Actions corrigé
+Le fichier `.github/workflows/deploy.yml` a été mis à jour avec les versions les plus récentes :
+- actions/checkout@v4
+- actions/configure-pages@v4  
+- actions/upload-pages-artifact@v3
+- actions/deploy-pages@v4
+
+### 3. Activer GitHub Pages
 1. Aller sur https://github.com/KevinRouxERPAC/AnimMediaLaGuerche
 2. Cliquer sur "Settings" (Paramètres)
 3. Descendre jusqu'à la section "Pages"
-4. Dans "Source", sélectionner "GitHub Actions"
+4. Dans "Source", sélectionner "**GitHub Actions**"
 5. Le site sera disponible à l'adresse : https://kevinrouxerpac.github.io/AnimMediaLaGuerche
 
-### 3. Configuration automatique
+### 4. Configuration automatique
 - Le fichier `.github/workflows/deploy.yml` configure le déploiement automatique
 - À chaque push sur la branche `main`, le site sera automatiquement mis à jour
 - Le déploiement prend généralement 2-5 minutes
