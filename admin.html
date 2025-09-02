@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - Anim'Média</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
+</head>
+<body>
+    <div class="admin-app" id="adminApp">
+        <!-- Écran de connexion -->
+        <div class="login-screen" id="loginScreen">
+            <div class="login-container">
+                <div class="login-header">
+                    <div class="logo">
+                        <i class="fas fa-palette"></i>
+                        <h1>Anim'Média</h1>
+                        <p>Interface d'Administration</p>
+                    </div>
+                </div>
+                
+                <form class="login-form" id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Nom d'utilisateur</label>
+                        <input type="text" id="username" name="username" required autocomplete="username">
+                        <i class="fas fa-user field-icon"></i>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" id="password" name="password" required autocomplete="current-password">
+                        <i class="fas fa-lock field-icon"></i>
+                        <button type="button" class="password-toggle" onclick="togglePassword()">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    
+                    <button type="submit" class="login-btn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Se connecter
+                    </button>
+                    
+                    <div class="login-help">
+                        <p><strong>Identifiants par défaut :</strong></p>
+                        <p>Utilisateur : <code>admin</code></p>
+                        <p>Mot de passe : <code>animmedia2025</code></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Interface principale -->
+        <div class="main-interface hidden" id="mainInterface">
+            <!-- Barre latérale -->
+            <nav class="sidebar" id="sidebar">
+                <div class="sidebar-header">
+                    <div class="logo">
+                        <i class="fas fa-palette"></i>
+                        <span>Anim'Média</span>
+                    </div>
+                    <button class="sidebar-toggle" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+                
+                <div class="sidebar-menu">
+                    <div class="menu-section">
+                        <h3>Contenu</h3>
+                        <ul>
+                            <li>
+                                <a href="#dashboard" class="menu-link active" data-section="dashboard">
+                                    <i class="fas fa-home"></i>
+                                    <span>Tableau de bord</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#events" class="menu-link" data-section="events">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>Événements</span>
+                                    <span class="badge" id="eventsBadge">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#activities" class="menu-link" data-section="activities">
+                                    <i class="fas fa-list-ul"></i>
+                                    <span>Activités</span>
+                                    <span class="badge" id="activitiesBadge">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#gallery" class="menu-link" data-section="gallery">
+                                    <i class="fas fa-images"></i>
+                                    <span>Galerie</span>
+                                    <span class="badge" id="galleryBadge">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <h3>Configuration</h3>
+                        <ul>
+                            <li>
+                                <a href="#settings" class="menu-link" data-section="settings">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Paramètres</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#backup" class="menu-link" data-section="backup">
+                                    <i class="fas fa-download"></i>
+                                    <span>Sauvegarde</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="sidebar-footer">
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="user-details">
+                            <span class="user-name" id="userName">Administrateur</span>
+                            <span class="user-role">Admin</span>
+                        </div>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Déconnexion</span>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Contenu principal -->
+            <main class="main-content">
+                <!-- Header -->
+                <header class="content-header">
+                    <div class="header-left">
+                        <button class="mobile-menu-btn" onclick="toggleSidebar()">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <h1 class="page-title" id="pageTitle">Tableau de bord</h1>
+                    </div>
+                    
+                    <div class="header-right">
+                        <div class="header-actions">
+                            <button class="btn btn-outline" onclick="previewSite()" title="Aperçu du site">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span>Aperçu</span>
+                            </button>
+                            <button class="btn btn-primary" id="addButton" onclick="showAddModal()">
+                                <i class="fas fa-plus"></i>
+                                <span>Ajouter</span>
+                            </button>
+                        </div>
+                        
+                        <div class="status-indicator">
+                            <div class="status-dot online"></div>
+                            <span>En ligne</span>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Zone de contenu dynamique -->
+                <div class="content-area">
+                    <main id="mainContent" class="main-content">
+                        <!-- Le contenu sera chargé dynamiquement ici -->
+                    </main>
+                </div>
+            </main>
+        </div>
+
+        <!-- Modales -->
+        <div class="modal-overlay" id="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Modal Title</h3>
+                    <button class="modal-close" onclick="closeModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="modalContent">
+                        <!-- Contenu dynamique -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notifications -->
+        <div class="notification-container" id="notificationContainer">
+            <!-- Les notifications apparaîtront ici -->
+        </div>
+    </div>
+
+    <script src="js/admin-core.js"></script>
+    <script src="js/admin-sections.js"></script>
+    <script src="js/admin-modals.js"></script>
+    <script src="js/admin-actions.js"></script>
+</body>
+</html>
