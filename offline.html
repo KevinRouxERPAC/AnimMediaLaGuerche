@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Métadonnées de base -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Titre et description -->
+    <title>Hors ligne - Anim'Média La Guerche</title>
+    <meta name="description" content="Vous êtes actuellement hors ligne. Cette page est disponible en mode déconnecté.">
+    
+    <!-- Thème et couleurs -->
+    <meta name="theme-color" content="#4ecdc4">
+    <meta name="msapplication-navbutton-color" content="#4ecdc4">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#4ecdc4">
+    
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/icons/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/icons/icon-16x16.png">
+    <link rel="apple-touch-icon" href="/assets/images/icons/icon-192x192.png">
+    
+    <!-- Styles intégrés pour garantir le fonctionnement hors ligne -->
+    <style>
+        /* Variables CSS */
+        :root {
+            --primary-color: #4ecdc4;
+            --secondary-color: #ff6b6b;
+            --accent-color: #45b7b8;
+            --text-color: #2d3748;
+            --text-light: #718096;
+            --bg-color: #ffffff;
+            --bg-light: #f8fafc;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        
+        /* Container principal */
+        .offline-container {
+            background: var(--bg-color);
+            border-radius: 1rem;
+            padding: 3rem 2rem;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: var(--shadow);
+            animation: slideIn 0.6s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Icône principale */
+        .offline-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* Titres et textes */
+        .offline-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        
+        .offline-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+        
+        .offline-description {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+        
+        /* Boutons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--bg-light);
+            border-color: var(--primary-color);
+        }
+        
+        /* Section informations */
+        .offline-info {
+            background: var(--bg-light);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .offline-info h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        
+        .offline-features {
+            list-style: none;
+            text-align: left;
+        }
+        
+        .offline-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            color: var(--text-light);
+        }
+        
+        .offline-features li::before {
+            content: "✓";
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        /* Status de connexion */
+        .connection-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255, 107, 107, 0.2);
+        }
+        
+        .connection-status.online {
+            background: rgba(78, 205, 196, 0.1);
+            border-color: rgba(78, 205, 196, 0.2);
+        }
+        
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            animation: blink 1.5s infinite;
+        }
+        
+        .status-indicator.online {
+            background: var(--primary-color);
+            animation: none;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .offline-container {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+            
+            .offline-icon {
+                font-size: 4rem;
+            }
+            
+            .offline-title {
+                font-size: 2rem;
+            }
+            
+            .offline-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+                margin: 0.5rem 0;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .offline-container {
+                padding: 1.5rem 1rem;
+            }
+            
+            .offline-icon {
+                font-size: 3rem;
+            }
+            
+            .offline-title {
+                font-size: 1.75rem;
+            }
+        }
+        
+        /* Animation de chargement */
+        .loading-dots {
+            display: inline-flex;
+            gap: 0.25rem;
+            margin-left: 0.5rem;
+        }
+        
+        .loading-dots span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+            animation: loadingDots 1.4s infinite ease-in-out;
+        }
+        
+        .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes loadingDots {
+            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Masquer pendant le chargement */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <!-- Icône et titre principal -->
+        <div class="offline-icon" aria-hidden="true">
+            📡
+        </div>
+        
+        <h1 class="offline-title">Mode Hors Ligne</h1>
+        <p class="offline-subtitle">Vous n'êtes pas connecté à Internet</p>
+        
+        <!-- Status de connexion -->
+        <div class="connection-status" id="connectionStatus">
+            <div class="status-indicator" id="statusIndicator"></div>
+            <span id="statusText">Connexion indisponible</span>
+        </div>
+        
+        <p class="offline-description">
+            Pas d'inquiétude ! Cette page a été mise en cache pour que vous puissiez continuer à naviguer même sans connexion Internet. Certaines fonctionnalités peuvent être limitées en mode hors ligne.
+        </p>
+        
+        <!-- Actions principales -->
+        <div class="offline-actions">
+            <button class="btn btn-primary" onclick="checkConnection()" id="retryBtn">
+                <span>🔄</span>
+                Vérifier la connexion
+                <div class="loading-dots hidden" id="loadingDots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            
+            <a href="/" class="btn btn-secondary">
+                <span>🏠</span>
+                Retour à l'accueil
+            </a>
+        </div>
+        
+        <!-- Informations sur les fonctionnalités disponibles hors ligne -->
+        <div class="offline-info">
+            <h3>📱 Fonctionnalités disponibles hors ligne</h3>
+            <ul class="offline-features">
+                <li>Navigation dans les pages déjà visitées</li>
+                <li>Consultation des informations de l'association</li>
+                <li>Visualisation des événements en cache</li>
+                <li>Accès aux coordonnées de contact</li>
+                <li>Lecture des activités disponibles</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- JavaScript pour la gestion de la connexion -->
+    <script>
+        // Variables globales
+        let isOnline = navigator.onLine;
+        let checkInterval;
+        
+        // Éléments DOM
+        const statusIndicator = document.getElementById('statusIndicator');
+        const statusText = document.getElementById('statusText');
+        const connectionStatus = document.getElementById('connectionStatus');
+        const retryBtn = document.getElementById('retryBtn');
+        const loadingDots = document.getElementById('loadingDots');
+        
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            updateConnectionStatus();
+            setupEventListeners();
+            
+            // Vérification périodique de la connexion
+            checkInterval = setInterval(checkConnectionStatus, 5000);
+        });
+        
+        // Configuration des événements
+        function setupEventListeners() {
+            // Événements de connexion natifs
+            window.addEventListener('online', handleOnline);
+            window.addEventListener('offline', handleOffline);
+            
+            // Nettoyage avant fermeture
+            window.addEventListener('beforeunload', function() {
+                if (checkInterval) {
+                    clearInterval(checkInterval);
+                }
+            });
+        }
+        
+        // Gestion connexion rétablie
+        function handleOnline() {
+            isOnline = true;
+            updateConnectionStatus();
+            
+            // Notification et redirection après 2 secondes
+            setTimeout(function() {
+                if (confirm('Connexion rétablie ! Souhaitez-vous recharger la page ?')) {
+                    window.location.reload();
+                }
+            }, 1000);
+        }
+        
+        // Gestion perte de connexion
+        function handleOffline() {
+            isOnline = false;
+            updateConnectionStatus();
+        }
+        
+        // Mise à jour du status visuel
+        function updateConnectionStatus() {
+            if (isOnline) {
+                statusIndicator.classList.add('online');
+                statusText.textContent = 'Connexion rétablie';
+                connectionStatus.classList.add('online');
+                retryBtn.innerHTML = '<span>✅</span> Connexion active';
+                retryBtn.disabled = true;
+                
+                // Animation de succès
+                retryBtn.style.background = 'linear-gradient(135deg, #4caf50, #45a049)';
+                
+            } else {
+                statusIndicator.classList.remove('online');
+                statusText.textContent = 'Connexion indisponible';
+                connectionStatus.classList.remove('online');
+                retryBtn.innerHTML = '<span>🔄</span> Vérifier la connexion';
+                retryBtn.disabled = false;
+                retryBtn.style.background = '';
+            }
+        }
+        
+        // Vérification manuelle de la connexion
+        function checkConnection() {
+            if (isOnline) return;
+            
+            // Animation de chargement
+            showLoading();
+            
+            // Test de connexion avec une requête vers une ressource légère
+            fetch('/?ping=' + Date.now(), { 
+                method: 'HEAD',
+                cache: 'no-cache',
+                mode: 'no-cors'
+            })
+            .then(function() {
+                isOnline = true;
+                updateConnectionStatus();
+                hideLoading();
+                
+                // Proposition de rechargement
+                setTimeout(function() {
+                    if (confirm('Connexion rétablie ! Voulez-vous recharger la page pour accéder à toutes les fonctionnalités ?')) {
+                        window.location.reload();
+                    }
+                }, 500);
+            })
+            .catch(function() {
+                isOnline = false;
+                updateConnectionStatus();
+                hideLoading();
+                
+                // Message d'information
+                setTimeout(function() {
+                    alert('La connexion n\'est toujours pas disponible. Réessayez dans quelques instants.');
+                }, 500);
+            });
+        }
+        
+        // Vérification automatique du status
+        function checkConnectionStatus() {
+            // Test simple avec navigator.onLine
+            const navigatorOnline = navigator.onLine;
+            
+            if (navigatorOnline !== isOnline) {
+                isOnline = navigatorOnline;
+                updateConnectionStatus();
+                
+                if (isOnline) {
+                    // Double vérification avec une requête réseau
+                    fetch('/?check=' + Date.now(), { 
+                        method: 'HEAD',
+                        cache: 'no-cache',
+                        mode: 'no-cors'
+                    })
+                    .catch(function() {
+                        isOnline = false;
+                        updateConnectionStatus();
+                    });
+                }
+            }
+        }
+        
+        // Affichage du chargement
+        function showLoading() {
+            retryBtn.disabled = true;
+            loadingDots.classList.remove('hidden');
+            retryBtn.style.opacity = '0.7';
+        }
+        
+        // Masquage du chargement
+        function hideLoading() {
+            retryBtn.disabled = false;
+            loadingDots.classList.add('hidden');
+            retryBtn.style.opacity = '1';
+        }
+        
+        // Gestion des erreurs globales
+        window.addEventListener('error', function(event) {
+            console.warn('Erreur dans la page offline:', event.error);
+        });
+        
+        // Information de debug
+        console.log('🔧 Page offline chargée - Status initial:', isOnline ? 'En ligne' : 'Hors ligne');
+    </script>
+</body>
+</html>
