@@ -707,12 +707,10 @@ class AnimMediaApp {
     }
     
     showAdminLogin() {
-        // Redirection vers l'interface d'admin
-        const password = prompt('Mot de passe administrateur :');
-        if (password === 'animmedia2025') {
+        // Redirection sécurisée vers l'interface d'admin
+        const userConfirm = confirm('Accéder à l\'interface d\'administration ?\n\nVous serez redirigé vers l\'écran de connexion sécurisé.');
+        if (userConfirm) {
             window.location.href = 'admin/index.html';
-        } else if (password) {
-            this.showNotification('Mot de passe incorrect', 'error');
         }
     }
     

@@ -8,19 +8,27 @@
 // ============================================================================
 
 const ADMIN_CONFIG = {
-  version: '2.0.0',
+  version: '2.1.0',
   author: 'Anim\'Média La Guerche',
   loginTimeout: 30 * 60 * 1000, // 30 minutes
   autoSaveInterval: 5000, // 5 secondes
   maxFileSize: 5 * 1024 * 1024, // 5MB
   allowedImageTypes: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
-  dateFormat: 'dd/MM/yyyy'
+  dateFormat: 'dd/MM/yyyy',
+  // Nouvelles configurations de sécurité
+  security: {
+    maxLoginAttempts: 5,
+    lockoutDuration: 15 * 60 * 1000, // 15 minutes
+    sessionCheckInterval: 60000, // 1 minute
+    requireStrongPasswords: true
+  }
 };
 
 let currentUser = null;
 let currentSection = 'dashboard';
 let autoSaveTimer = null;
 let sessionTimer = null;
+let secureAuth = null;
 
 // ============================================================================
 // SYSTÈME D'AUTHENTIFICATION
@@ -28,42 +36,65 @@ let sessionTimer = null;
 
 class AdminAuth {
   constructor() {
-    this.users = [
-      { id: 1, username: 'admin', password: 'animmedia2024', role: 'admin', name: 'Administrateur' },
-      { id: 2, username: 'benevole1', password: 'benevole123', role: 'editor', name: 'Bénévole 1' },
-      { id: 3, username: 'benevole2', password: 'benevole456', role: 'editor', name: 'Bénévole 2' }
-    ];
+    // Initialiser le système d'authentification sécurisé
+    this.secureAuth = new SecureAuth();
+    this.sessionCheckInterval = null;
     
     this.checkSession();
+    this.startSecurityMonitoring();
   }
   
-  login(username, password) {
-    const user = this.users.find(u => u.username === username && u.password === password);
-    
-    if (user) {
-      currentUser = { ...user };
-      delete currentUser.password;
+  async login(username, password) {
+    try {
+      // Validation des entrées
+      if (!username || !password) {
+        throw new Error('Nom d\'utilisateur et mot de passe requis');
+      }
+
+      if (!DataValidator.isValidUsername(username)) {
+        throw new Error('Nom d\'utilisateur invalide');
+      }
+
+      // Authentification sécurisée
+      const user = await this.secureAuth.login(username, password);
       
-      localStorage.setItem('admin_session', JSON.stringify({
-        user: currentUser,
-        timestamp: Date.now(),
-        expires: Date.now() + ADMIN_CONFIG.loginTimeout
-      }));
+      currentUser = user;
       
       this.showMainInterface();
       this.startSessionTimer();
       adminNotifications.show('Connexion réussie', 'success');
       
+      // Log de sécurité
+      console.log(`Connexion réussie: ${user.username} (${user.role})`);
+      
       return true;
+    } catch (error) {
+      console.error('Erreur de connexion:', error.message);
+      adminNotifications.show(error.message, 'error');
+      
+      // Ajouter une classe d'erreur au formulaire pour l'animation
+      const loginContainer = document.querySelector('.login-container');
+      if (loginContainer) {
+        loginContainer.classList.add('shake');
+        setTimeout(() => loginContainer.classList.remove('shake'), 500);
+      }
+      
+      return false;
     }
-    
-    return false;
   }
   
   logout() {
-    localStorage.removeItem('admin_session');
+    // Log de sécurité
+    if (currentUser) {
+      console.log(`Déconnexion: ${currentUser.username}`);
+    }
+    
+    // Nettoyer la session sécurisée
+    this.secureAuth.logout();
     currentUser = null;
+    
     this.clearSessionTimer();
+    this.stopSecurityMonitoring();
     this.showLoginScreen();
     adminNotifications.show('Déconnexion réussie', 'info');
   }
@@ -398,7 +429,8 @@ class AdminEvents {
     const form = e.target;
     const formData = new FormData(form);
     
-    const eventData = {
+    // Récupérer les données du formulaire
+    const rawEventData = {
       title: formData.get('eventTitle'),
       description: formData.get('eventDescription'),
       date: formData.get('eventDate'),
@@ -407,14 +439,26 @@ class AdminEvents {
       status: formData.get('eventStatus')
     };
     
+    // Validation et sanitisation sécurisées
+    const validation = DataValidator.validateEvent(rawEventData);
+    
+    if (!validation.isValid) {
+      adminNotifications.show('Erreurs de validation: ' + validation.errors.join(', '), 'error');
+      return;
+    }
+    
+    const eventData = validation.data;
     const eventId = formData.get('eventId');
     
     if (eventId) {
       // Modification d'un événement existant
       const index = this.events.findIndex(e => e.id == eventId);
       if (index !== -1) {
-        this.events[index] = { ...this.events[index], ...eventData };
+        this.events[index] = { ...this.events[index], ...eventData, updatedAt: Date.now() };
         adminNotifications.show('Événement modifié avec succès', 'success');
+        
+        // Log de sécurité
+        console.log(`Événement modifié: ${eventData.title} par ${currentUser.username}`);
       }
     } else {
       // Création d'un nouvel événement

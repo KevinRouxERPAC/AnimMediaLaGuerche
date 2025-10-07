@@ -1,0 +1,47 @@
+User-agent: *
+Allow: /
+
+# Interdictions pour la sécurité
+Disallow: /admin/
+Disallow: /assets/js/admin.js
+Disallow: /assets/js/security.js
+Disallow: /assets/css/admin.css
+Disallow: /*.json$
+Disallow: /index_old_corrupted.html
+
+# Fichiers sensibles
+Disallow: /.git/
+Disallow: /.vscode/
+Disallow: /node_modules/
+Disallow: /.env
+Disallow: /*.log
+
+# Plan du site
+Sitemap: https://kevinrouxerpac.github.io/AnimMediaLaGuerche/sitemap.xml
+
+# Crawler Settings
+Crawl-delay: 1
+
+# Google Spécifique
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+
+# Bing Spécifique  
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+
+# Archive.org
+User-agent: ia_archiver
+Disallow: /admin/
+
+# Interdire les scrapers abusifs
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /

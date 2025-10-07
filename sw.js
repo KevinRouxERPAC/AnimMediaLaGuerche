@@ -1,22 +1,41 @@
 /*!
- * ANIM'MÉDIA - SERVICE WORKER
- * Gestion du cache offline et des notifications push
+ * ANIM'MÉDIA - SERVICE WORKER SÉCURISÉ
+ * Gestion du cache offline avec sécurité renforcée
+ * Version: 2.1.0 - Sécurisé
  */
 
-const CACHE_NAME = 'animmedia-cache-v2.0.0';
+const CACHE_NAME = 'animmedia-cache-v2.1.0';
 const OFFLINE_URL = '/offline.html';
 
-// Fichiers critiques à mettre en cache
+// Configuration de sécurité
+const SECURITY_CONFIG = {
+  maxCacheSize: 50 * 1024 * 1024, // 50MB max
+  allowedOrigins: [
+    'https://kevinrouxerpac.github.io',
+    'https://fonts.googleapis.com',
+    'https://fonts.gstatic.com',
+    'https://cdnjs.cloudflare.com',
+    'https://images.unsplash.com'
+  ],
+  blockedPaths: [
+    '/admin/',
+    '/assets/js/admin.js',
+    '/assets/js/security.js',
+    '/assets/css/admin.css'
+  ]
+};
+
+// Fichiers critiques à mettre en cache (excluant les fichiers sensibles)
 const CRITICAL_CACHE_FILES = [
   '/',
   '/index.html',
   '/assets/css/main.css',
-  '/assets/css/admin.css', 
   '/assets/js/main.js',
-  '/assets/js/admin.js',
   '/assets/js/animations.js',
   '/manifest.json',
-  '/offline.html'
+  '/offline.html',
+  '/robots.txt',
+  '/sitemap.xml'
 ];
 
 // Fichiers statiques à mettre en cache
@@ -120,10 +139,26 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Interception des requêtes
+// Interception des requêtes avec vérifications de sécurité
 self.addEventListener('fetch', event => {
+  const url = new URL(event.request.url);
+  
   // Ignorer les requêtes non-HTTP
   if (!event.request.url.startsWith('http')) {
+    return;
+  }
+  
+  // Bloquer l'accès aux ressources d'administration
+  if (SECURITY_CONFIG.blockedPaths.some(path => url.pathname.startsWith(path))) {
+    console.warn('🚫 SW: Accès bloqué à une ressource sensible:', url.pathname);
+    event.respondWith(new Response('Accès non autorisé', { status: 403 }));
+    return;
+  }
+  
+  // Vérifier les origines autorisées pour les ressources externes
+  if (url.origin !== location.origin && 
+      !SECURITY_CONFIG.allowedOrigins.includes(url.origin)) {
+    console.warn('🚫 SW: Origine non autorisée:', url.origin);
     return;
   }
   
@@ -132,17 +167,22 @@ self.addEventListener('fetch', event => {
     return;
   }
   
-  event.respondWith(handleFetch(event.request));
+  event.respondWith(handleFetchSecure(event.request));
 });
 
 // ============================================================================
 // GESTION DES REQUÊTES
 // ============================================================================
 
-async function handleFetch(request) {
+async function handleFetchSecure(request) {
   const url = new URL(request.url);
   
   try {
+    // Vérification supplémentaire de sécurité
+    if (!isRequestAllowed(request)) {
+      console.warn('🚫 SW: Requête bloquée pour des raisons de sécurité');
+      return new Response('Requête non autorisée', { status: 403 });
+    }
     // Stratégie selon le type de ressource
     const destination = request.destination || getDestinationFromURL(url);
     const strategy = RESOURCE_STRATEGIES[destination] || CACHE_STRATEGIES.NETWORK_FIRST;
@@ -504,6 +544,114 @@ self.addEventListener('notificationclick', event => {
     );
   }
 });
+
+// ============================================================================
+// FONCTIONS DE SÉCURITÉ
+// ============================================================================
+
+/**
+ * Vérifie si une requête est autorisée
+ */
+function isRequestAllowed(request) {
+  const url = new URL(request.url);
+  
+  // Vérifier la taille du cache avant d'ajouter de nouvelles ressources
+  if (request.destination === 'image' || request.destination === 'font') {
+    return checkCacheSize();
+  }
+  
+  // Bloquer les requêtes suspectes
+  if (url.pathname.includes('..') || url.pathname.includes('%2e%2e')) {
+    console.warn('🚫 Tentative de directory traversal détectée:', url.pathname);
+    return false;
+  }
+  
+  // Vérifier les headers de sécurité
+  if (request.headers.get('X-Forwarded-For') || 
+      request.headers.get('X-Real-IP') ||
+      request.headers.get('Via')) {
+    console.warn('🚫 Headers de proxy détectés, possible tentative de spoofing');
+    return false;
+  }
+  
+  return true;
+}
+
+/**
+ * Vérifie la taille du cache
+ */
+async function checkCacheSize() {
+  try {
+    const cache = await caches.open(CACHE_NAME);
+    const requests = await cache.keys();
+    
+    let totalSize = 0;
+    for (const request of requests.slice(0, 10)) { // Échantillon pour éviter la surcharge
+      try {
+        const response = await cache.match(request);
+        if (response) {
+          const clone = response.clone();
+          const buffer = await clone.arrayBuffer();
+          totalSize += buffer.byteLength;
+        }
+      } catch (e) {
+        // Ignorer les erreurs individuelles
+      }
+    }
+    
+    // Estimation approximative
+    const estimatedTotalSize = (totalSize / Math.min(requests.length, 10)) * requests.length;
+    
+    if (estimatedTotalSize > SECURITY_CONFIG.maxCacheSize) {
+      console.warn('⚠️ Cache trop volumineux, nettoyage nécessaire');
+      cleanupCache();
+      return false;
+    }
+    
+    return true;
+  } catch (error) {
+    console.error('Erreur lors de la vérification de la taille du cache:', error);
+    return true; // Permettre en cas d'erreur
+  }
+}
+
+/**
+ * Nettoie le cache en supprimant les anciennes entrées
+ */
+async function cleanupCache() {
+  try {
+    const cache = await caches.open(CACHE_NAME);
+    const requests = await cache.keys();
+    
+    // Supprimer la moitié des entrées les plus anciennes (simplification)
+    const toDelete = requests.slice(0, Math.floor(requests.length / 2));
+    
+    for (const request of toDelete) {
+      await cache.delete(request);
+    }
+    
+    console.log(`🧹 Cache nettoyé: ${toDelete.length} entrées supprimées`);
+  } catch (error) {
+    console.error('Erreur lors du nettoyage du cache:', error);
+  }
+}
+
+/**
+ * Surveille les tentatives d'accès non autorisées
+ */
+function logSecurityEvent(type, details) {
+  const event = {
+    type,
+    details,
+    timestamp: new Date().toISOString(),
+    userAgent: self.navigator.userAgent
+  };
+  
+  console.warn('🔒 Événement de sécurité:', event);
+  
+  // En production, on pourrait envoyer ces logs à un service de monitoring
+  // sendSecurityLog(event);
+}
 
 // ============================================================================
 // GESTION DE LA SYNCHRONISATION EN ARRIÈRE-PLAN
