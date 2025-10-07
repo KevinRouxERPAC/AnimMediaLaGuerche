@@ -183,6 +183,9 @@ class AnimMediaApp {
     init() {
         console.log('🎨 Anim\'Média - Initialisation...');
         
+        // Masquer l'écran de chargement
+        this.hideLoadingScreen();
+        
         this.setupNavigation();
         this.setupScrollEffects();
         this.setupAnimations();
@@ -192,6 +195,23 @@ class AnimMediaApp {
         this.initCounterAnimations();
         
         console.log('✅ Application initialisée avec succès');
+    }
+    
+    // ========================================
+    // GESTION DE L'ÉCRAN DE CHARGEMENT
+    // ========================================
+    hideLoadingScreen() {
+        const loadingScreen = document.getElementById('loadingScreen');
+        if (loadingScreen) {
+            // Attendre un petit délai pour que l'utilisateur voie l'écran
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+                // Supprimer complètement après l'animation
+                setTimeout(() => {
+                    loadingScreen.remove();
+                }, 500);
+            }, 1000);
+        }
     }
     
     // ========================================

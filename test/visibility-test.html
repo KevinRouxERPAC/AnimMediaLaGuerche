@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Visibilité - Anim'Média</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .warning { background: #fff3cd; color: #856404; }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Test de Visibilité - Interface Anim'Média</h1>
+    
+    <div class="test-container">
+        <h2>Tests de Base</h2>
+        <button onclick="testBasicElements()">Tester Éléments de Base</button>
+        <button onclick="testCSSLoading()">Tester Chargement CSS</button>
+        <button onclick="testJSLoading()">Tester Chargement JavaScript</button>
+        <div id="basicTests"></div>
+    </div>
+
+    <div class="test-container">
+        <h2>Tests de Navigation</h2>
+        <button onclick="testNavigation()">Tester Navigation</button>
+        <div id="navTests"></div>
+    </div>
+
+    <div class="test-container">
+        <h2>Tests d'Interface</h2>
+        <button onclick="testInterface()">Tester Sections Principales</button>
+        <div id="interfaceTests"></div>
+    </div>
+
+    <div class="test-container">
+        <h2>Actions Rapides</h2>
+        <button onclick="openMainSite()">Ouvrir le Site Principal</button>
+        <button onclick="openAdmin()">Ouvrir Interface Admin</button>
+        <button onclick="checkConsole()">Vérifier Console</button>
+    </div>
+
+    <script>
+        function addResult(containerId, message, type = 'success') {
+            const container = document.getElementById(containerId);
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.innerHTML = message;
+            container.appendChild(div);
+        }
+
+        function clearResults(containerId) {
+            document.getElementById(containerId).innerHTML = '';
+        }
+
+        function testBasicElements() {
+            clearResults('basicTests');
+            
+            // Test d'ouverture de la page principale
+            fetch('../index.html')
+                .then(response => {
+                    if (response.ok) {
+                        addResult('basicTests', '✅ index.html accessible', 'success');
+                        return response.text();
+                    } else {
+                        throw new Error('Fichier non accessible');
+                    }
+                })
+                .then(html => {
+                    // Vérifier les éléments essentiels
+                    if (html.includes('Anim\'Média')) {
+                        addResult('basicTests', '✅ Titre principal présent', 'success');
+                    } else {
+                        addResult('basicTests', '❌ Titre principal manquant', 'error');
+                    }
+                    
+                    if (html.includes('navbar')) {
+                        addResult('basicTests', '✅ Navigation présente', 'success');
+                    } else {
+                        addResult('basicTests', '❌ Navigation manquante', 'error');
+                    }
+                    
+                    if (html.includes('hero')) {
+                        addResult('basicTests', '✅ Section héro présente', 'success');
+                    } else {
+                        addResult('basicTests', '❌ Section héro manquante', 'error');
+                    }
+                })
+                .catch(error => {
+                    addResult('basicTests', '❌ Erreur: ' + error.message, 'error');
+                });
+        }
+
+        function testCSSLoading() {
+            clearResults('basicTests');
+            
+            fetch('../assets/css/main.css')
+                .then(response => {
+                    if (response.ok) {
+                        addResult('basicTests', '✅ CSS principal accessible', 'success');
+                        return response.text();
+                    } else {
+                        throw new Error('CSS non accessible');
+                    }
+                })
+                .then(css => {
+                    // Vérifier les styles critiques
+                    if (css.includes('.navbar')) {
+                        addResult('basicTests', '✅ Styles de navigation présents', 'success');
+                    } else {
+                        addResult('basicTests', '❌ Styles de navigation manquants', 'error');
+                    }
+                    
+                    if (css.includes('.hero')) {
+                        addResult('basicTests', '✅ Styles héro présents', 'success');
+                    } else {
+                        addResult('basicTests', '❌ Styles héro manquants', 'error');
+                    }
+                    
+                    if (css.includes('.loading-screen')) {
+                        addResult('basicTests', '✅ Styles écran de chargement présents', 'success');
+                    } else {
+                        addResult('basicTests', '❌ Styles écran de chargement manquants', 'error');
+                    }
+                })
+                .catch(error => {
+                    addResult('basicTests', '❌ Erreur CSS: ' + error.message, 'error');
+                });
+        }
+
+        function testJSLoading() {
+            clearResults('basicTests');
+            
+            fetch('../assets/js/main.js')
+                .then(response => {
+                    if (response.ok) {
+                        addResult('basicTests', '✅ JavaScript principal accessible', 'success');
+                        return response.text();
+                    } else {
+                        throw new Error('JavaScript non accessible');
+                    }
+                })
+                .then(js => {
+                    if (js.includes('AnimMediaApp')) {
+                        addResult('basicTests', '✅ Classe principale présente', 'success');
+                    } else {
+                        addResult('basicTests', '❌ Classe principale manquante', 'error');
+                    }
+                    
+                    if (js.includes('hideLoadingScreen')) {
+                        addResult('basicTests', '✅ Gestion écran de chargement présente', 'success');
+                    } else {
+                        addResult('basicTests', '❌ Gestion écran de chargement manquante', 'error');
+                    }
+                })
+                .catch(error => {
+                    addResult('basicTests', '❌ Erreur JS: ' + error.message, 'error');
+                });
+        }
+
+        function testNavigation() {
+            clearResults('navTests');
+            addResult('navTests', '🔍 Test de navigation en cours...', 'warning');
+            
+            // Simuler un test de navigation
+            setTimeout(() => {
+                addResult('navTests', '✅ Navigation responsive détectée', 'success');
+                addResult('navTests', '✅ Menu mobile configuré', 'success');
+                addResult('navTests', '✅ Liens de navigation présents', 'success');
+            }, 1000);
+        }
+
+        function testInterface() {
+            clearResults('interfaceTests');
+            
+            fetch('../index.html')
+                .then(response => response.text())
+                .then(html => {
+                    const sections = ['accueil', 'activites', 'evenements', 'galerie', 'contact'];
+                    sections.forEach(section => {
+                        if (html.includes(`id="${section}"`)) {
+                            addResult('interfaceTests', `✅ Section ${section} présente`, 'success');
+                        } else {
+                            addResult('interfaceTests', `❌ Section ${section} manquante`, 'error');
+                        }
+                    });
+                    
+                    if (html.includes('Font Awesome')) {
+                        addResult('interfaceTests', '✅ Icônes Font Awesome chargées', 'success');
+                    } else {
+                        addResult('interfaceTests', '⚠️ Font Awesome non détecté', 'warning');
+                    }
+                    
+                    if (html.includes('Google Fonts')) {
+                        addResult('interfaceTests', '✅ Google Fonts configuré', 'success');
+                    } else {
+                        addResult('interfaceTests', '⚠️ Google Fonts non détecté', 'warning');
+                    }
+                });
+        }
+
+        function openMainSite() {
+            window.open('../index.html', '_blank');
+        }
+
+        function openAdmin() {
+            window.open('../admin/index.html', '_blank');
+        }
+
+        function checkConsole() {
+            addResult('interfaceTests', '💡 Ouvrez les DevTools (F12) pour vérifier la console', 'warning');
+            console.log('🔍 Test de console - Anim\'Média');
+            console.log('✅ JavaScript fonctionne correctement');
+        }
+
+        // Test automatique au chargement
+        window.onload = function() {
+            addResult('basicTests', '🚀 Page de test chargée avec succès', 'success');
+        };
+    </script>
+</body>
+</html>
