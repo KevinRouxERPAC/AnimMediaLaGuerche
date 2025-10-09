@@ -1,626 +1,2010 @@
-<!DOCTYPE html><!DOCTYPE html>
+<!DOCTYPE html><!DOCTYPE html><!DOCTYPE html>
 
-<html lang="fr"><html lang="fr">
+<html lang="fr">
 
-<head><head>
+<head><html lang="fr"><html lang="fr">
 
-    <meta charset="UTF-8">    <meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><head><head>
 
-    <title>Administration - Anim'Média</title>    <title>Administration - Anim'Média La Guerche</title>
+    <title>Administration - Anim'Média La Guerche</title>
 
-        
+        <meta charset="UTF-8">    <meta charset="UTF-8">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">    <!-- Sécurité et SEO -->
+    <meta name="robots" content="noindex, nofollow">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%234ecdc4'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='white'>⚙️</text></svg>">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <meta name="description" content="Interface d'administration pour la gestion du site Anim'Média">
+    
 
-    <style>    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">    <title>Administration - Anim'Média La Guerche</title>    <title>Administration - Anim'Média La Guerche</title>
 
-        :root {    <!-- Favicon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-            --primary: #ff6b6b;    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%234ecdc4'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='white'>⚙️</text></svg>">
+            
 
-            --secondary: #4ecdc4;    
+    <style>
 
-            --success: #27ae60;    <!-- Fonts -->
+        :root {    <!-- Sécurité et SEO -->    <!-- Sécurité et SEO -->
 
-            --warning: #f39c12;    <link rel="preconnect" href="https://fonts.googleapis.com">
+            --primary: #ff6b6b;
 
-            --error: #e74c3c;    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            --secondary: #4ecdc4;    <meta name="robots" content="noindex, nofollow">    <meta name="robots" content="noindex, nofollow">
 
-            --dark: #2c3e50;    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+            --success: #27ae60;
 
-            --gray: #7f8c8d;    
+            --warning: #f39c12;    <meta name="description" content="Interface d'administration pour la gestion du site Anim'Média">    <meta name="description" content="Interface d'administration pour la gestion du site Anim'Média">
 
-            --light: #ecf0f1;    <!-- Icons -->
+            --error: #e74c3c;
 
-            --white: #ffffff;    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+            --dark: #2c3e50;        
 
-            --shadow: 0 2px 20px rgba(0,0,0,0.08);    
+            --gray: #7f8c8d;
 
-            --radius: 0.75rem;    <!-- Styles -->
+            --light: #ecf0f1;    <!-- Favicon -->    <!-- Favicon -->
 
-        }    <link rel="stylesheet" href="../assets/css/admin.css">
+            --white: #ffffff;
 
-</head>
+            --shadow: 0 2px 20px rgba(0,0,0,0.08);    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%234ecdc4'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='white'>⚙️</text></svg>">    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%234ecdc4'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='white'>⚙️</text></svg>">
 
-        * {
+            --radius: 0.75rem;
 
-            margin: 0;<body class="admin-body">
+        }        
+
+
+
+        * {    <!-- Fonts -->    <!-- Fonts -->
+
+            margin: 0;
+
+            padding: 0;    <link rel="preconnect" href="https://fonts.googleapis.com">    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+            box-sizing: border-box;
+
+        }    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+
+        body {    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+            font-family: 'Inter', sans-serif;
+
+            background: var(--light);        
+
+            color: var(--dark);
+
+            line-height: 1.6;    <!-- Icons -->    <!-- Icons -->
+
+        }
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+        .login-screen {
+
+            min-height: 100vh;        
+
+            display: flex;
+
+            align-items: center;    <style>    <style>
+
+            justify-content: center;
+
+            padding: 2rem;        :root {        :root {
+
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+
+        }            --primary: #ff6b6b;            --primary: #ff6b6b;
+
+
+
+        .login-container {            --secondary: #4ecdc4;            --secondary: #4ecdc4;
+
+            background: var(--white);
+
+            border-radius: var(--radius);            --success: #27ae60;            --success: #27ae60;
+
+            box-shadow: var(--shadow);
+
+            padding: 3rem;            --warning: #f39c12;            --warning: #f39c12;
+
+            width: 100%;
+
+            max-width: 400px;            --error: #e74c3c;            --error: #e74c3c;
+
+            text-align: center;
+
+        }            --dark: #2c3e50;            --dark: #2c3e50;
+
+
+
+        .login-logo {            --gray: #7f8c8d;            --gray: #7f8c8d;
+
+            margin-bottom: 2rem;
+
+        }            --light: #ecf0f1;            --light: #ecf0f1;
+
+
+
+        .login-logo i {            --white: #ffffff;            --white: #ffffff;
+
+            font-size: 3rem;
+
+            color: var(--primary);            --shadow: 0 2px 20px rgba(0,0,0,0.08);            --shadow: 0 2px 20px rgba(0,0,0,0.08);
+
+            margin-bottom: 1rem;
+
+        }            --radius: 0.75rem;            --radius: 0.75rem;
+
+
+
+        .login-logo h1 {        }        }
+
+            color: var(--dark);
+
+            font-size: 1.8rem;</head>
+
+            margin-bottom: 0.5rem;
+
+        }        * {
+
+
+
+        .login-logo p {            margin: 0;        * {
+
+            color: var(--gray);
+
+            font-size: 1rem;            padding: 0;
+
+        }
+
+            box-sizing: border-box;            margin: 0;<body class="admin-body">
+
+        .login-form {
+
+            text-align: left;        }
+
+        }
 
             padding: 0;    <!-- Écran de connexion -->
 
-            box-sizing: border-box;    <div id="loginScreen" class="login-screen">
+        .login-form h2 {
 
-        }        <div class="login-container">
+            color: var(--dark);        body {
 
-            <div class="login-header">
+            margin-bottom: 0.5rem;
 
-        body {                <div class="login-logo">
+            text-align: center;            font-family: 'Inter', sans-serif;            box-sizing: border-box;    <div id="loginScreen" class="login-screen">
 
-            font-family: 'Inter', sans-serif;                    <i class="fas fa-palette"></i>
+        }
 
-            background: var(--light);                    <h1>Anim'Média</h1>
+            background: var(--light);
 
-            color: var(--dark);                    <p>Administration</p>
+        .login-subtitle {
 
-            line-height: 1.6;                </div>
+            color: var(--gray);            color: var(--dark);        }        <div class="login-container">
 
-        }            </div>
+            text-align: center;
 
-            
+            margin-bottom: 2rem;            line-height: 1.6;
 
-        /* Login Screen */            <form id="loginForm" class="login-form">
+            font-size: 0.9rem;
 
-        .login-container {                <h2>Connexion Sécurisée</h2>
+        }        }            <div class="login-header">
 
-            min-height: 100vh;                <p class="login-subtitle">Accès réservé aux membres autorisés</p>
 
-            display: flex;                
 
-            align-items: center;                <div class="form-group">
+        .form-group {
 
-            justify-content: center;                    <label for="username">Nom d'utilisateur</label>
+            margin-bottom: 1.5rem;
 
-            padding: 2rem;                    <div class="input-group">
+        }        /* ===== ÉCRAN DE CONNEXION ===== */        body {                <div class="login-logo">
 
-        }                        <i class="fas fa-user"></i>
 
-                        <input type="text" id="username" name="username" required autocomplete="username" placeholder="Votre identifiant">
 
-        .login-box {                    </div>
+        .form-group label {        .login-screen {
 
-            background: var(--white);                </div>
+            display: block;
 
-            border-radius: var(--radius);                
+            margin-bottom: 0.5rem;            min-height: 100vh;            font-family: 'Inter', sans-serif;                    <i class="fas fa-palette"></i>
 
-            box-shadow: var(--shadow);                <div class="form-group">
+            font-weight: 500;
 
-            padding: 3rem;                    <label for="password">Mot de passe</label>
+            color: var(--dark);            display: flex;
 
-            width: 100%;                    <div class="input-group">
+        }
+
+            align-items: center;            background: var(--light);                    <h1>Anim'Média</h1>
+
+        .input-group {
+
+            position: relative;            justify-content: center;
+
+        }
+
+            padding: 2rem;            color: var(--dark);                    <p>Administration</p>
+
+        .input-group i {
+
+            position: absolute;            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+
+            left: 1rem;
+
+            top: 50%;        }            line-height: 1.6;                </div>
+
+            transform: translateY(-50%);
+
+            color: var(--gray);
+
+        }
+
+        .login-container {        }            </div>
+
+        .input-group input {
+
+            width: 100%;            background: var(--white);
+
+            padding: 0.75rem 0.75rem 0.75rem 3rem;
+
+            border: 2px solid var(--light);            border-radius: var(--radius);            
+
+            border-radius: 0.5rem;
+
+            font-size: 1rem;            box-shadow: var(--shadow);
+
+            transition: border-color 0.3s ease;
+
+        }            padding: 3rem;        /* Login Screen */            <form id="loginForm" class="login-form">
+
+
+
+        .input-group input:focus {            width: 100%;
+
+            outline: none;
+
+            border-color: var(--primary);            max-width: 400px;        .login-container {                <h2>Connexion Sécurisée</h2>
+
+        }
+
+            text-align: center;
+
+        .btn {
+
+            display: inline-flex;        }            min-height: 100vh;                <p class="login-subtitle">Accès réservé aux membres autorisés</p>
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 0.5rem;
+
+            width: 100%;        .login-logo {            display: flex;                
+
+            padding: 1rem;
+
+            background: var(--primary);            margin-bottom: 2rem;
+
+            color: var(--white);
+
+            border: none;        }            align-items: center;                <div class="form-group">
+
+            border-radius: 0.5rem;
+
+            font-size: 1rem;
+
+            font-weight: 600;
+
+            cursor: pointer;        .login-logo i {            justify-content: center;                    <label for="username">Nom d'utilisateur</label>
+
+            transition: all 0.3s ease;
+
+        }            font-size: 3rem;
+
+
+
+        .btn:hover {            color: var(--primary);            padding: 2rem;                    <div class="input-group">
+
+            background: #e63946;
+
+            transform: translateY(-2px);            margin-bottom: 1rem;
+
+        }
+
+        }        }                        <i class="fas fa-user"></i>
+
+        .login-help {
+
+            text-align: center;
+
+            margin-top: 1.5rem;
+
+            color: var(--gray);        .login-logo h1 {                        <input type="text" id="username" name="username" required autocomplete="username" placeholder="Votre identifiant">
+
+            font-size: 0.9rem;
+
+        }            color: var(--dark);
+
+
+
+        .back-link {            font-size: 1.8rem;        .login-box {                    </div>
+
+            display: inline-flex;
+
+            align-items: center;            margin-bottom: 0.5rem;
+
+            gap: 0.5rem;
+
+            color: var(--gray);        }            background: var(--white);                </div>
+
+            text-decoration: none;
+
+            margin-top: 2rem;
+
+            font-size: 0.9rem;
+
+            transition: color 0.3s ease;        .login-logo p {            border-radius: var(--radius);                
+
+        }
+
+            color: var(--gray);
+
+        .back-link:hover {
+
+            color: var(--primary);            font-size: 1rem;            box-shadow: var(--shadow);                <div class="form-group">
+
+        }
+
+        }
+
+        .main-interface {
+
+            min-height: 100vh;            padding: 3rem;                    <label for="password">Mot de passe</label>
+
+            display: flex;
+
+            flex-direction: column;        .login-form {
+
+        }
+
+            text-align: left;            width: 100%;                    <div class="input-group">
+
+        .main-interface.hidden {
+
+            display: none;        }
+
+        }
 
             max-width: 400px;                        <i class="fas fa-lock"></i>
 
-            text-align: center;                        <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="Votre mot de passe">
+        .admin-navbar {
 
-        }                        <button type="button" class="password-toggle" id="passwordToggle">
+            background: var(--white);        .login-form h2 {
 
-                            <i class="fas fa-eye"></i>
+            box-shadow: var(--shadow);
 
-        .login-header {                        </button>
+            display: flex;            color: var(--dark);            text-align: center;                        <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="Votre mot de passe">
 
-            margin-bottom: 2rem;                    </div>
+            justify-content: space-between;
 
-        }                </div>
+            align-items: center;            margin-bottom: 0.5rem;
 
-                
+            padding: 1rem 2rem;
 
-        .login-header h1 {                <button type="submit" class="btn btn-primary btn-login">
+        }            text-align: center;        }                        <button type="button" class="password-toggle" id="passwordToggle">
 
-            color: var(--primary);                    <i class="fas fa-sign-in-alt"></i>
 
-            margin-bottom: 0.5rem;                    Se connecter
 
-        }                </button>
+        .admin-nav-brand {        }
 
-                
+            display: flex;
 
-        .login-form {                <div class="login-help">
+            align-items: center;                            <i class="fas fa-eye"></i>
 
-            text-align: left;                    <p>Mot de passe oublié ? <br><small>Contactez l'administrateur principal</small></p>
+            gap: 0.75rem;
 
-        }                </div>
+            color: var(--primary);        .login-subtitle {
 
-            </form>
+            font-size: 1.5rem;
 
-        .form-group {        </div>
-
-            margin-bottom: 1.5rem;    </div>
+            font-weight: 700;            color: var(--gray);        .login-header {                        </button>
 
         }
 
-    <!-- Interface principale -->
+            text-align: center;
 
-        .form-group label {    <div id="mainInterface" class="main-interface hidden">
+        .admin-nav-user {
 
-            display: block;        <!-- Navigation -->
+            display: flex;            margin-bottom: 2rem;            margin-bottom: 2rem;                    </div>
 
-            margin-bottom: 0.5rem;        <nav class="admin-navbar">
+            align-items: center;
 
-            font-weight: 500;            <div class="admin-nav-brand">
+            gap: 1rem;            font-size: 0.9rem;
 
-            color: var(--dark);                <i class="fas fa-palette"></i>
+        }
 
-        }                <span>Admin Anim'Média</span>
+        }        }                </div>
 
-            </div>
+        .user-info {
 
-        .form-control {            
+            text-align: right;
 
-            width: 100%;            <div class="admin-nav-menu">
+        }
 
-            padding: 0.75rem;                <button class="nav-item active" data-section="dashboard">
+        .form-group {                
+
+        .user-info span {
+
+            display: block;            margin-bottom: 1.5rem;
+
+            font-weight: 600;
+
+            color: var(--dark);        }        .login-header h1 {                <button type="submit" class="btn btn-primary btn-login">
+
+        }
+
+
+
+        .user-info small {
+
+            color: var(--gray);        .form-group label {            color: var(--primary);                    <i class="fas fa-sign-in-alt"></i>
+
+            font-size: 0.8rem;
+
+        }            display: block;
+
+
+
+        .btn-outline {            margin-bottom: 0.5rem;            margin-bottom: 0.5rem;                    Se connecter
+
+            background: transparent;
+
+            color: var(--gray);            font-weight: 500;
+
+            border: 1px solid var(--light);
+
+            width: auto;            color: var(--dark);        }                </button>
+
+        }
+
+        }
+
+        .btn-sm {
+
+            padding: 0.5rem 1rem;                
+
+            font-size: 0.9rem;
+
+        }        .input-group {
+
+
+
+        .admin-main {            position: relative;        .login-form {                <div class="login-help">
+
+            flex: 1;
+
+            padding: 2rem;        }
+
+            background: var(--light);
+
+        }            text-align: left;                    <p>Mot de passe oublié ? <br><small>Contactez l'administrateur principal</small></p>
+
+
+
+        .admin-content {        .input-group i {
+
+            max-width: 1200px;
+
+            margin: 0 auto;            position: absolute;        }                </div>
+
+        }
+
+            left: 1rem;
+
+        .alert {
+
+            padding: 1rem 1.5rem;            top: 50%;            </form>
+
+            border-radius: 0.5rem;
+
+            margin-bottom: 2rem;            transform: translateY(-50%);
+
+            border: 1px solid transparent;
+
+        }            color: var(--gray);        .form-group {        </div>
+
+
+
+        .alert-success {        }
+
+            background: #d4edda;
+
+            border-color: #c3e6cb;            margin-bottom: 1.5rem;    </div>
+
+            color: #155724;
+
+        }        .input-group input {
+
+
+
+        .alert-info {            width: 100%;        }
+
+            background: #d1ecf1;
+
+            border-color: #bee5eb;            padding: 0.75rem 0.75rem 0.75rem 3rem;
+
+            color: #0c5460;
+
+        }            border: 2px solid var(--light);    <!-- Interface principale -->
+
+
+
+        .stats-grid {            border-radius: 0.5rem;
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));            font-size: 1rem;        .form-group label {    <div id="mainInterface" class="main-interface hidden">
+
+            gap: 1.5rem;
+
+            margin-bottom: 2rem;            transition: border-color 0.3s ease;
+
+        }
+
+        }            display: block;        <!-- Navigation -->
+
+        .stat-card {
+
+            background: var(--white);
+
+            border-radius: var(--radius);
+
+            padding: 2rem;        .input-group input:focus {            margin-bottom: 0.5rem;        <nav class="admin-navbar">
+
+            text-align: center;
+
+            box-shadow: var(--shadow);            outline: none;
+
+        }
+
+            border-color: var(--primary);            font-weight: 500;            <div class="admin-nav-brand">
+
+        .stat-number {
+
+            font-size: 2.5rem;        }
+
+            font-weight: 700;
+
+            color: var(--primary);            color: var(--dark);                <i class="fas fa-palette"></i>
+
+            display: block;
+
+        }        .password-toggle {
+
+
+
+        .stat-label {            position: absolute;        }                <span>Admin Anim'Média</span>
+
+            color: var(--gray);
+
+            font-size: 0.9rem;            right: 1rem;
+
+            margin-top: 0.5rem;
+
+        }            top: 50%;            </div>
+
+
+
+        .dashboard-grid {            transform: translateY(-50%);
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));            background: none;        .form-control {            
+
+            gap: 2rem;
+
+            margin-top: 2rem;            border: none;
+
+        }
+
+            color: var(--gray);            width: 100%;            <div class="admin-nav-menu">
+
+        .dashboard-card {
+
+            background: var(--white);            cursor: pointer;
+
+            border-radius: var(--radius);
+
+            padding: 2rem;            padding: 0.25rem;            padding: 0.75rem;                <button class="nav-item active" data-section="dashboard">
+
+            box-shadow: var(--shadow);
+
+            transition: transform 0.3s ease;        }
+
+        }
 
             border: 2px solid var(--light);                    <i class="fas fa-chart-line"></i>
 
-            border-radius: 0.5rem;                    <span>Tableau de bord</span>
+        .dashboard-card:hover {
 
-            font-size: 1rem;                </button>
+            transform: translateY(-5px);        .btn {
 
-            transition: border-color 0.3s ease;                <button class="nav-item" data-section="events">
+        }
 
-        }                    <i class="fas fa-calendar-alt"></i>
+            display: inline-flex;            border-radius: 0.5rem;                    <span>Tableau de bord</span>
 
-                    <span>Événements</span>
+        .dashboard-card h3 {
 
-        .form-control:focus {                </button>
+            color: var(--primary);            align-items: center;
 
-            outline: none;                <button class="nav-item" data-section="activities">
+            margin-bottom: 1rem;
 
-            border-color: var(--primary);                    <i class="fas fa-users"></i>
+            display: flex;            justify-content: center;            font-size: 1rem;                </button>
 
-        }                    <span>Activités</span>
+            align-items: center;
 
-                </button>
+            gap: 0.5rem;            gap: 0.5rem;
 
-        .btn {                <button class="nav-item" data-section="gallery">
+        }
 
-            display: inline-flex;                    <i class="fas fa-images"></i>
+            width: 100%;            transition: border-color 0.3s ease;                <button class="nav-item" data-section="events">
 
-            align-items: center;                    <span>Galerie</span>
+        @media (max-width: 768px) {
 
-            justify-content: center;                </button>
+            .admin-navbar {            padding: 1rem;
 
-            gap: 0.5rem;                <button class="nav-item" data-section="settings">
+                flex-direction: column;
 
-            width: 100%;                    <i class="fas fa-cog"></i>
+                gap: 1rem;            background: var(--primary);        }                    <i class="fas fa-calendar-alt"></i>
 
-            padding: 1rem;                    <span>Paramètres</span>
+            }
 
-            background: var(--primary);                </button>
+            color: var(--white);
 
-            color: var(--white);            </div>
+            .admin-main {
 
-            border: none;            
+                padding: 1rem;            border: none;                    <span>Événements</span>
 
-            border-radius: 0.5rem;            <div class="admin-nav-user">
+            }
 
-            font-size: 1rem;                <div class="user-info">
+            border-radius: 0.5rem;
 
-            font-weight: 600;                    <span id="currentUser">Utilisateur</span>
+            .login-container {
 
-            cursor: pointer;                    <small id="loginTime">Connecté</small>
+                padding: 2rem;            font-size: 1rem;        .form-control:focus {                </button>
 
-            transition: all 0.3s ease;                </div>
+            }
 
-        }                <button id="logoutBtn" class="btn btn-outline btn-sm">
+            font-weight: 600;
+
+            .stats-grid {
+
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));            cursor: pointer;            outline: none;                <button class="nav-item" data-section="activities">
+
+            }
+
+        }            transition: all 0.3s ease;
+
+    </style>
+
+</head>        }            border-color: var(--primary);                    <i class="fas fa-users"></i>
+
+
+
+<body>
+
+    <div id="loginScreen" class="login-screen">
+
+        <div class="login-container">        .btn:hover {        }                    <span>Activités</span>
+
+            <div class="login-logo">
+
+                <i class="fas fa-palette"></i>            background: var(--primary-dark);
+
+                <h1>Anim'Média</h1>
+
+                <p>Administration</p>            transform: translateY(-2px);                </button>
+
+            </div>
+
+                    }
+
+            <form id="loginForm" class="login-form">
+
+                <h2>Connexion Sécurisée</h2>        .btn {                <button class="nav-item" data-section="gallery">
+
+                <p class="login-subtitle">Accès réservé aux membres autorisés</p>
+
+                        .btn-primary {
+
+                <div class="form-group">
+
+                    <label for="username">Nom d'utilisateur</label>            background: var(--primary);            display: inline-flex;                    <i class="fas fa-images"></i>
+
+                    <div class="input-group">
+
+                        <i class="fas fa-user"></i>        }
+
+                        <input type="text" id="username" name="username" required placeholder="Votre identifiant">
+
+                    </div>            align-items: center;                    <span>Galerie</span>
+
+                </div>
+
+                        .btn-outline {
+
+                <div class="form-group">
+
+                    <label for="password">Mot de passe</label>            background: transparent;            justify-content: center;                </button>
+
+                    <div class="input-group">
+
+                        <i class="fas fa-lock"></i>            color: var(--gray);
+
+                        <input type="password" id="password" name="password" required placeholder="Votre mot de passe">
+
+                    </div>            border: 1px solid var(--light);            gap: 0.5rem;                <button class="nav-item" data-section="settings">
+
+                </div>
+
+                        }
+
+                <button type="submit" class="btn">
+
+                    <i class="fas fa-sign-in-alt"></i>            width: 100%;                    <i class="fas fa-cog"></i>
+
+                    Se connecter
+
+                </button>        .btn-sm {
+
+                
+
+                <div class="login-help">            padding: 0.5rem 1rem;            padding: 1rem;                    <span>Paramètres</span>
+
+                    <p>Identifiants de test : <strong>admin</strong> / <strong>animmedia2024</strong></p>
+
+                </div>            font-size: 0.9rem;
+
+            </form>
+
+                    }            background: var(--primary);                </button>
+
+            <a href="../" class="back-link">
+
+                <i class="fas fa-arrow-left"></i>
+
+                Retour au site
+
+            </a>        .login-help {            color: var(--white);            </div>
+
+        </div>
+
+    </div>            text-align: center;
+
+
+
+    <div id="mainInterface" class="main-interface hidden">            margin-top: 1.5rem;            border: none;            
+
+        <nav class="admin-navbar">
+
+            <div class="admin-nav-brand">            color: var(--gray);
+
+                <i class="fas fa-palette"></i>
+
+                <span>Admin Anim'Média</span>            font-size: 0.9rem;            border-radius: 0.5rem;            <div class="admin-nav-user">
+
+            </div>
+
+                    }
+
+            <div class="admin-nav-user">
+
+                <div class="user-info">            font-size: 1rem;                <div class="user-info">
+
+                    <span id="currentUser">Administrateur</span>
+
+                    <small id="loginTime">Connecté aujourd'hui</small>        .back-link {
+
+                </div>
+
+                <button id="logoutBtn" class="btn btn-outline btn-sm">            display: inline-flex;            font-weight: 600;                    <span id="currentUser">Utilisateur</span>
 
                     <i class="fas fa-sign-out-alt"></i>
 
-        .btn:hover {                    Déconnexion
+                    Déconnexion            align-items: center;
 
-            background: var(--primary);                </button>
+                </button>
 
-            transform: translateY(-2px);            </div>
+            </div>            gap: 0.5rem;            cursor: pointer;                    <small id="loginTime">Connecté</small>
 
-        }        </nav>
+        </nav>
+
+            color: var(--gray);
+
+        <main class="admin-main">
+
+            <div class="admin-content">            text-decoration: none;            transition: all 0.3s ease;                </div>
+
+                <div class="alert alert-success">
+
+                    <strong>✅ Connexion réussie !</strong> Bienvenue dans l'interface d'administration d'Anim'Média.            margin-top: 2rem;
+
+                </div>
+
+            font-size: 0.9rem;        }                <button id="logoutBtn" class="btn btn-outline btn-sm">
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">            transition: color 0.3s ease;
+
+                        <span class="stat-number">150</span>
+
+                        <div class="stat-label">Adhérents Actifs</div>        }                    <i class="fas fa-sign-out-alt"></i>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <span class="stat-number">12</span>
+
+                        <div class="stat-label">Activités Proposées</div>        .back-link:hover {        .btn:hover {                    Déconnexion
+
+                    </div>
+
+                    <div class="stat-card">            color: var(--primary);
+
+                        <span class="stat-number">8</span>
+
+                        <div class="stat-label">Événements ce Mois</div>        }            background: var(--primary);                </button>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <span class="stat-number">95%</span>
+
+                        <div class="stat-label">Taux de Satisfaction</div>        /* ===== INTERFACE PRINCIPALE ===== */            transform: translateY(-2px);            </div>
+
+                    </div>
+
+                </div>        .main-interface {
 
 
 
-        .back-link {        <!-- Contenu principal -->
+                <div class="dashboard-grid">            min-height: 100vh;        }        </nav>
 
-            display: inline-flex;        <main class="admin-main">
+                    <div class="dashboard-card">
 
-            align-items: center;            <div class="admin-content" id="adminContent">
+                        <h3><i class="fas fa-users"></i> Gestion des Adhérents</h3>            display: flex;
 
-            gap: 0.5rem;                <!-- Le contenu sera chargé dynamiquement -->
+                        <p>Gérez les inscriptions, adhésions et informations des membres de l'association.</p>
 
-            color: var(--gray);            </div>
+                        <button class="btn" style="margin-top: 1rem; background: var(--secondary);">            flex-direction: column;
 
-            text-decoration: none;        </main>
+                            <i class="fas fa-user-plus"></i>
 
-            margin-top: 2rem;    </div>
+                            Gérer les Adhérents        }
 
-            font-size: 0.9rem;
+                        </button>
 
-            transition: color 0.3s ease;    <!-- Modales -->
-
-        }    <div id="modalOverlay" class="modal-overlay hidden">
-
-        <div class="modal-content" id="modalContent">
-
-        .back-link:hover {            <!-- Contenu des modales -->
-
-            color: var(--primary);        </div>
-
-        }    </div>
+                    </div>        .back-link {        <!-- Contenu principal -->
 
 
 
-        /* Admin Dashboard */    <!-- Zone de notifications -->
+                    <div class="dashboard-card">        .main-interface.hidden {
 
-        .admin-container {    <div id="notificationContainer" class="notification-container"></div>
+                        <h3><i class="fas fa-calendar"></i> Planification des Activités</h3>
 
-            display: none;
+                        <p>Organisez les ateliers, formations et événements. Gérez les créneaux et inscriptions.</p>            display: none;            display: inline-flex;        <main class="admin-main">
 
-            min-height: 100vh;    <!-- Scripts -->
+                        <button class="btn" style="margin-top: 1rem; background: var(--warning);">
 
-        }    <script src="../assets/js/security.js"></script>
+                            <i class="fas fa-plus"></i>        }
 
-    <script src="../assets/js/admin.js"></script>
+                            Nouvel Événement
 
-        .admin-header {</body>
+                        </button>            align-items: center;            <div class="admin-content" id="adminContent">
 
-            background: var(--white);</html>
-            box-shadow: var(--shadow);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+                    </div>
+
+        .admin-navbar {
+
+                    <div class="dashboard-card">
+
+                        <h3><i class="fas fa-chart-bar"></i> Statistiques</h3>            background: var(--white);            gap: 0.5rem;                <!-- Le contenu sera chargé dynamiquement -->
+
+                        <p>Consultez les rapports de fréquentation, les finances et l'évolution de l'association.</p>
+
+                        <button class="btn" style="margin-top: 1rem; background: var(--success);">            box-shadow: var(--shadow);
+
+                            <i class="fas fa-chart-line"></i>
+
+                            Voir les Rapports            display: flex;            color: var(--gray);            </div>
+
+                        </button>
+
+                    </div>            justify-content: space-between;
+
+
+
+                    <div class="dashboard-card">            align-items: center;            text-decoration: none;        </main>
+
+                        <h3><i class="fas fa-images"></i> Galerie Photos</h3>
+
+                        <p>Ajoutez, organisez et gérez les photos des événements et activités de l'association.</p>            padding: 1rem 2rem;
+
+                        <button class="btn" style="margin-top: 1rem; background: var(--secondary);">
+
+                            <i class="fas fa-upload"></i>        }            margin-top: 2rem;    </div>
+
+                            Ajouter des Photos
+
+                        </button>
+
+                    </div>
+
+        .admin-nav-brand {            font-size: 0.9rem;
+
+                    <div class="dashboard-card">
+
+                        <h3><i class="fas fa-envelope"></i> Communication</h3>            display: flex;
+
+                        <p>Envoyez des newsletters, notifications et gérez la communication avec les adhérents.</p>
+
+                        <button class="btn" style="margin-top: 1rem; background: var(--primary);">            align-items: center;            transition: color 0.3s ease;    <!-- Modales -->
+
+                            <i class="fas fa-paper-plane"></i>
+
+                            Envoyer un Message            gap: 0.75rem;
+
+                        </button>
+
+                    </div>            color: var(--primary);        }    <div id="modalOverlay" class="modal-overlay hidden">
+
+
+
+                    <div class="dashboard-card">            font-size: 1.5rem;
+
+                        <h3><i class="fas fa-cog"></i> Configuration</h3>
+
+                        <p>Paramètres du site web, informations de l'association et gestion des accès.</p>            font-weight: 700;        <div class="modal-content" id="modalContent">
+
+                        <button class="btn" style="margin-top: 1rem; background: var(--gray);">
+
+                            <i class="fas fa-wrench"></i>        }
+
+                            Paramètres Généraux
+
+                        </button>        .back-link:hover {            <!-- Contenu des modales -->
+
+                    </div>
+
+                </div>        .admin-nav-menu {
+
+
+
+                <div class="alert alert-info" style="margin-top: 2rem;">            display: flex;            color: var(--primary);        </div>
+
+                    <strong>ℹ️ Information :</strong> Cette interface d'administration est une démonstration fonctionnelle. 
+
+                    Elle inclut une authentification basique et une interface moderne adaptée aux besoins d'une association.            gap: 0.5rem;
+
+                </div>
+
+            </div>        }        }    </div>
+
+        </main>
+
+    </div>
+
+
+
+    <script>        .nav-item {
+
+        const ADMIN_USERS = {
+
+            'admin': { password: 'animmedia2024', role: 'administrateur' },            display: flex;
+
+            'benevole1': { password: 'benevole123', role: 'éditeur' },
+
+            'benevole2': { password: 'benevole456', role: 'éditeur' }            align-items: center;        /* Admin Dashboard */    <!-- Zone de notifications -->
+
+        };
+
+            gap: 0.5rem;
+
+        let currentUser = null;
+
+            padding: 0.75rem 1rem;        .admin-container {    <div id="notificationContainer" class="notification-container"></div>
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+
+            e.preventDefault();            background: transparent;
+
+            
+
+            const username = document.getElementById('username').value.trim();            color: var(--gray);            display: none;
+
+            const password = document.getElementById('password').value;
+
+                        border: none;
+
+            if (ADMIN_USERS[username] && ADMIN_USERS[username].password === password) {
+
+                currentUser = { username, role: ADMIN_USERS[username].role };            border-radius: 0.5rem;            min-height: 100vh;    <!-- Scripts -->
+
+                
+
+                document.getElementById('currentUser').textContent = username;            cursor: pointer;
+
+                document.getElementById('loginTime').textContent = `Connecté le ${new Date().toLocaleDateString()}`;
+
+                            transition: all 0.3s ease;        }    <script src="../assets/js/security.js"></script>
+
+                document.getElementById('loginScreen').style.display = 'none';
+
+                document.getElementById('mainInterface').classList.remove('hidden');            font-size: 0.9rem;
+
+                
+
+                sessionStorage.setItem('adminSession', JSON.stringify(currentUser));        }    <script src="../assets/js/admin.js"></script>
+
+                console.log('✅ Connexion réussie pour:', username);
+
+            } else {
+
+                alert('Identifiants incorrects. Utilisez admin/animmedia2024');
+
+                document.getElementById('password').value = '';        .nav-item:hover,        .admin-header {</body>
+
+            }
+
+        });        .nav-item.active {
+
+
+
+        document.getElementById('logoutBtn').addEventListener('click', function() {            background: var(--light);            background: var(--white);</html>
+
+            logout();
+
+        });            color: var(--primary);            box-shadow: var(--shadow);
+
+
+
+        function logout() {        }            padding: 1rem 2rem;
+
+            currentUser = null;
+
+            sessionStorage.removeItem('adminSession');            display: flex;
+
+            
+
+            document.getElementById('loginScreen').style.display = 'flex';        .admin-nav-user {            justify-content: space-between;
+
+            document.getElementById('mainInterface').classList.add('hidden');
+
+                        display: flex;            align-items: center;
+
+            document.getElementById('loginForm').reset();
+
+            console.log('✅ Déconnexion réussie');            align-items: center;        }
+
         }
 
-        .admin-title {
-            color: var(--primary);
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
+            gap: 1rem;
 
-        .logout-btn {
-            background: var(--error);
-            color: var(--white);
-            border: none;
-            padding: 0.5rem 1rem;
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const savedSession = sessionStorage.getItem('adminSession');        }        .admin-title {
+
+            
+
+            if (savedSession) {            color: var(--primary);
+
+                try {
+
+                    currentUser = JSON.parse(savedSession);        .user-info {            font-size: 1.5rem;
+
+                    document.getElementById('currentUser').textContent = currentUser.username;
+
+                    document.getElementById('loginTime').textContent = 'Session restaurée';            text-align: right;            font-weight: 700;
+
+                    
+
+                    document.getElementById('loginScreen').style.display = 'none';        }        }
+
+                    document.getElementById('mainInterface').classList.remove('hidden');
+
+                } catch (e) {
+
+                    sessionStorage.removeItem('adminSession');
+
+                }        .user-info span {        .logout-btn {
+
+            }
+
+                        display: block;            background: var(--error);
+
+            console.log('🔐 Interface d\'administration chargée');
+
+        });            font-weight: 600;            color: var(--white);
+
+    </script>
+
+</body>            color: var(--dark);            border: none;
+
+</html>
+        }            padding: 0.5rem 1rem;
+
             border-radius: 0.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
+
+        .user-info small {            cursor: pointer;
+
+            color: var(--gray);            transition: all 0.3s ease;
+
+            font-size: 0.8rem;        }
+
         }
 
         .logout-btn:hover {
-            background: #c0392b;
-        }
 
-        .admin-content {
-            padding: 2rem;
-            max-width: 1200px;
+        /* ===== CONTENU PRINCIPAL ===== */            background: #c0392b;
+
+        .admin-main {        }
+
+            flex: 1;
+
+            padding: 2rem;        .admin-content {
+
+            background: var(--light);            padding: 2rem;
+
+        }            max-width: 1200px;
+
             margin: 0 auto;
-        }
 
-        .dashboard-grid {
-            display: grid;
+        .admin-content {        }
+
+            max-width: 1200px;
+
+            margin: 0 auto;        .dashboard-grid {
+
+        }            display: grid;
+
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+        .dashboard-grid {            gap: 2rem;
+
+            display: grid;            margin-bottom: 3rem;
+
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));        }
+
             gap: 2rem;
-            margin-bottom: 3rem;
-        }
 
-        .dashboard-card {
-            background: var(--white);
+            margin-top: 2rem;        .dashboard-card {
+
+        }            background: var(--white);
+
             border-radius: var(--radius);
+
+        .dashboard-card {            padding: 2rem;
+
+            background: var(--white);            box-shadow: var(--shadow);
+
+            border-radius: var(--radius);        }
+
             padding: 2rem;
-            box-shadow: var(--shadow);
-        }
 
-        .dashboard-card h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
+            box-shadow: var(--shadow);        .dashboard-card h3 {
+
+            transition: transform 0.3s ease;            color: var(--primary);
+
+        }            margin-bottom: 1rem;
+
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
+        .dashboard-card:hover {            align-items: center;
+
+            transform: translateY(-5px);            gap: 0.5rem;
+
+        }        }
+
+
+
+        .dashboard-card h3 {        .stats-grid {
+
+            color: var(--primary);            display: grid;
+
+            margin-bottom: 1rem;            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+
+            display: flex;            gap: 1rem;
+
+            align-items: center;            margin-bottom: 2rem;
+
+            gap: 0.5rem;        }
+
         }
 
         .stat-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            text-align: center;
+
+        .stats-grid {            background: var(--white);
+
+            display: grid;            border-radius: var(--radius);
+
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));            padding: 1.5rem;
+
+            gap: 1.5rem;            text-align: center;
+
+            margin-bottom: 2rem;            box-shadow: var(--shadow);
+
+        }        }
+
+
+
+        .stat-card {        .stat-number {
+
+            background: var(--white);            font-size: 2rem;
+
+            border-radius: var(--radius);            font-weight: 700;
+
+            padding: 2rem;            color: var(--primary);
+
+            text-align: center;        }
+
             box-shadow: var(--shadow);
-        }
 
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
+        }        .stat-label {
 
-        .stat-label {
             color: var(--gray);
-            font-size: 0.9rem;
-        }
 
-        .alert {
-            padding: 1rem;
-            border-radius: 0.5rem;
+        .stat-number {            font-size: 0.9rem;
+
+            font-size: 2.5rem;        }
+
+            font-weight: 700;
+
+            color: var(--primary);        .alert {
+
+            display: block;            padding: 1rem;
+
+        }            border-radius: 0.5rem;
+
             margin-bottom: 1rem;
-        }
 
-        .alert-info {
-            background: #d1ecf1;
-            border: 1px solid #bee5eb;
+        .stat-label {        }
+
+            color: var(--gray);
+
+            font-size: 0.9rem;        .alert-info {
+
+            margin-top: 0.5rem;            background: #d1ecf1;
+
+        }            border: 1px solid #bee5eb;
+
             color: #0c5460;
+
+        .alert {        }
+
+            padding: 1rem 1.5rem;
+
+            border-radius: 0.5rem;        .alert-success {
+
+            margin-bottom: 2rem;            background: #d4edda;
+
+            border: 1px solid transparent;            border: 1px solid #c3e6cb;
+
+        }            color: #155724;
+
         }
 
         .alert-success {
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-        }
 
-        .btn-secondary {
-            background: var(--gray);
+            background: #d4edda;        .btn-secondary {
+
+            border-color: #c3e6cb;            background: var(--gray);
+
+            color: #155724;        }
+
         }
 
         .btn-secondary:hover {
-            background: #6c757d;
+
+        .alert-info {            background: #6c757d;
+
+            background: #d1ecf1;        }
+
+            border-color: #bee5eb;
+
+            color: #0c5460;        .btn-success {
+
+        }            background: var(--success);
+
         }
 
-        .btn-success {
-            background: var(--success);
-        }
+        .alert-warning {
 
-        .btn-success:hover {
-            background: #219a52;
+            background: #fff3cd;        .btn-success:hover {
+
+            border-color: #ffeaa7;            background: #219a52;
+
+            color: #856404;        }
+
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .admin-header {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
+
+        .alert-error {        @media (max-width: 768px) {
+
+            background: #f8d7da;            .admin-header {
+
+            border-color: #f5c6cb;                flex-direction: column;
+
+            color: #721c24;                gap: 1rem;
+
+        }                text-align: center;
+
             }
 
-            .admin-content {
-                padding: 1rem;
-            }
+        /* ===== MODALES ===== */
 
-            .login-box {
-                padding: 2rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Login Screen -->
+        .modal-overlay {            .admin-content {
+
+            position: fixed;                padding: 1rem;
+
+            top: 0;            }
+
+            left: 0;
+
+            right: 0;            .login-box {
+
+            bottom: 0;                padding: 2rem;
+
+            background: rgba(0, 0, 0, 0.5);            }
+
+            display: flex;        }
+
+            align-items: center;    </style>
+
+            justify-content: center;</head>
+
+            z-index: 1000;<body>
+
+        }    <!-- Login Screen -->
+
     <div id="loginScreen" class="login-container">
-        <div class="login-box">
-            <div class="login-header">
-                <i class="fas fa-shield-alt" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+
+        .modal-overlay.hidden {        <div class="login-box">
+
+            display: none;            <div class="login-header">
+
+        }                <i class="fas fa-shield-alt" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+
                 <h1>Administration</h1>
-                <p style="color: var(--gray);">Accès réservé aux administrateurs</p>
-            </div>
-            
-            <form class="login-form" onsubmit="return login(event)">
+
+        .modal-content {                <p style="color: var(--gray);">Accès réservé aux administrateurs</p>
+
+            background: var(--white);            </div>
+
+            border-radius: var(--radius);            
+
+            max-width: 600px;            <form class="login-form" onsubmit="return login(event)">
+
+            width: 90%;                <div class="form-group">
+
+            max-height: 80vh;                    <label for="username">Nom d'utilisateur :</label>
+
+            overflow-y: auto;                    <input type="text" id="username" class="form-control" required autocomplete="username">
+
+            padding: 2rem;                </div>
+
+        }                
+
                 <div class="form-group">
-                    <label for="username">Nom d'utilisateur :</label>
-                    <input type="text" id="username" class="form-control" required autocomplete="username">
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Mot de passe :</label>
-                    <input type="password" id="password" class="form-control" required autocomplete="current-password">
-                </div>
-                
-                <button type="submit" class="btn">
-                    <i class="fas fa-sign-in-alt"></i>
-                    Se Connecter
+
+        /* ===== NOTIFICATIONS ===== */                    <label for="password">Mot de passe :</label>
+
+        .notification-container {                    <input type="password" id="password" class="form-control" required autocomplete="current-password">
+
+            position: fixed;                </div>
+
+            top: 1rem;                
+
+            right: 1rem;                <button type="submit" class="btn">
+
+            z-index: 1100;                    <i class="fas fa-sign-in-alt"></i>
+
+        }                    Se Connecter
+
                 </button>
-            </form>
-            
-            <a href="../" class="back-link">
-                <i class="fas fa-arrow-left"></i>
-                Retour au site
-            </a>
-            
-            <div id="loginError" class="alert alert-info" style="display: none; margin-top: 1rem;">
-                <strong>Info :</strong> Utilisez "admin" / "admin123" pour la démonstration
-            </div>
-        </div>
-    </div>
 
-    <!-- Admin Dashboard -->
-    <div id="adminDashboard" class="admin-container">
-        <header class="admin-header">
+        .notification {            </form>
+
+            background: var(--white);            
+
+            border-radius: 0.5rem;            <a href="../" class="back-link">
+
+            padding: 1rem 1.5rem;                <i class="fas fa-arrow-left"></i>
+
+            margin-bottom: 0.5rem;                Retour au site
+
+            box-shadow: var(--shadow);            </a>
+
+            border-left: 4px solid var(--success);            
+
+            min-width: 300px;            <div id="loginError" class="alert alert-info" style="display: none; margin-top: 1rem;">
+
+        }                <strong>Info :</strong> Utilisez "admin" / "admin123" pour la démonstration
+
+            </div>
+
+        /* ===== RESPONSIVE ===== */        </div>
+
+        @media (max-width: 768px) {    </div>
+
+            .admin-navbar {
+
+                flex-direction: column;    <!-- Admin Dashboard -->
+
+                gap: 1rem;    <div id="adminDashboard" class="admin-container">
+
+            }        <header class="admin-header">
+
             <h1 class="admin-title">
-                <i class="fas fa-tachometer-alt"></i>
-                Tableau de Bord - Anim'Média
-            </h1>
-            <button class="logout-btn" onclick="logout()">
+
+            .admin-nav-menu {                <i class="fas fa-tachometer-alt"></i>
+
+                flex-wrap: wrap;                Tableau de Bord - Anim'Média
+
+                justify-content: center;            </h1>
+
+            }            <button class="logout-btn" onclick="logout()">
+
                 <i class="fas fa-sign-out-alt"></i>
-                Déconnexion
-            </button>
-        </header>
 
-        <main class="admin-content">
-            <div class="alert alert-success">
-                <strong>Connexion réussie !</strong> Bienvenue dans l'interface d'administration.
+            .nav-item span {                Déconnexion
+
+                display: none;            </button>
+
+            }        </header>
+
+
+
+            .admin-main {        <main class="admin-content">
+
+                padding: 1rem;            <div class="alert alert-success">
+
+            }                <strong>Connexion réussie !</strong> Bienvenue dans l'interface d'administration.
+
             </div>
 
-            <!-- Statistiques -->
-            <div class="stats-grid">
+            .login-container {
+
+                padding: 2rem;            <!-- Statistiques -->
+
+            }            <div class="stats-grid">
+
                 <div class="stat-card">
-                    <div class="stat-number">150</div>
-                    <div class="stat-label">Adhérents Actifs</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">12</div>
-                    <div class="stat-label">Activités</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">8</div>
-                    <div class="stat-label">Événements ce mois</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">95%</div>
-                    <div class="stat-label">Satisfaction</div>
-                </div>
-            </div>
 
-            <!-- Dashboard Cards -->
-            <div class="dashboard-grid">
-                <div class="dashboard-card">
-                    <h3><i class="fas fa-users"></i> Gestion des Adhérents</h3>
-                    <p>Gérez les inscriptions, adhésions et informations des membres de l'association.</p>
-                    <button class="btn btn-secondary" style="margin-top: 1rem; width: auto;">
-                        <i class="fas fa-user-plus"></i>
-                        Gérer les Adhérents
-                    </button>
+            .stats-grid {                    <div class="stat-number">150</div>
+
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));                    <div class="stat-label">Adhérents Actifs</div>
+
+            }                </div>
+
+        }                <div class="stat-card">
+
+    </style>                    <div class="stat-number">12</div>
+
+</head>                    <div class="stat-label">Activités</div>
+
                 </div>
 
-                <div class="dashboard-card">
-                    <h3><i class="fas fa-calendar"></i> Planification des Activités</h3>
-                    <p>Organisez les ateliers, formations et événements. Gérez les créneaux et inscriptions.</p>
-                    <button class="btn btn-secondary" style="margin-top: 1rem; width: auto;">
-                        <i class="fas fa-plus"></i>
-                        Nouvel Événement
-                    </button>
+<body>                <div class="stat-card">
+
+    <!-- Écran de connexion -->                    <div class="stat-number">8</div>
+
+    <div id="loginScreen" class="login-screen">                    <div class="stat-label">Événements ce mois</div>
+
+        <div class="login-container">                </div>
+
+            <div class="login-logo">                <div class="stat-card">
+
+                <i class="fas fa-palette"></i>                    <div class="stat-number">95%</div>
+
+                <h1>Anim'Média</h1>                    <div class="stat-label">Satisfaction</div>
+
+                <p>Administration</p>                </div>
+
+            </div>            </div>
+
+            
+
+            <form id="loginForm" class="login-form">            <!-- Dashboard Cards -->
+
+                <h2>Connexion Sécurisée</h2>            <div class="dashboard-grid">
+
+                <p class="login-subtitle">Accès réservé aux membres autorisés</p>                <div class="dashboard-card">
+
+                                    <h3><i class="fas fa-users"></i> Gestion des Adhérents</h3>
+
+                <div class="form-group">                    <p>Gérez les inscriptions, adhésions et informations des membres de l'association.</p>
+
+                    <label for="username">Nom d'utilisateur</label>                    <button class="btn btn-secondary" style="margin-top: 1rem; width: auto;">
+
+                    <div class="input-group">                        <i class="fas fa-user-plus"></i>
+
+                        <i class="fas fa-user"></i>                        Gérer les Adhérents
+
+                        <input type="text" id="username" name="username" required autocomplete="username" placeholder="Votre identifiant">                    </button>
+
+                    </div>                </div>
+
                 </div>
 
-                <div class="dashboard-card">
-                    <h3><i class="fas fa-chart-bar"></i> Statistiques</h3>
-                    <p>Consultez les rapports de fréquentation, les finances et l'évolution de l'association.</p>
-                    <button class="btn btn-secondary" style="margin-top: 1rem; width: auto;">
-                        <i class="fas fa-chart-line"></i>
-                        Voir les Rapports
-                    </button>
-                </div>
+                                <div class="dashboard-card">
 
-                <div class="dashboard-card">
-                    <h3><i class="fas fa-envelope"></i> Communication</h3>
-                    <p>Envoyez des newsletters, notifications et gérez la communication avec les adhérents.</p>
-                    <button class="btn btn-secondary" style="margin-top: 1rem; width: auto;">
-                        <i class="fas fa-paper-plane"></i>
-                        Envoyer un Message
-                    </button>
-                </div>
+                <div class="form-group">                    <h3><i class="fas fa-calendar"></i> Planification des Activités</h3>
 
-                <div class="dashboard-card">
+                    <label for="password">Mot de passe</label>                    <p>Organisez les ateliers, formations et événements. Gérez les créneaux et inscriptions.</p>
+
+                    <div class="input-group">                    <button class="btn btn-secondary" style="margin-top: 1rem; width: auto;">
+
+                        <i class="fas fa-lock"></i>                        <i class="fas fa-plus"></i>
+
+                        <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="Votre mot de passe">                        Nouvel Événement
+
+                        <button type="button" class="password-toggle" id="passwordToggle">                    </button>
+
+                            <i class="fas fa-eye"></i>                </div>
+
+                        </button>
+
+                    </div>                <div class="dashboard-card">
+
+                </div>                    <h3><i class="fas fa-chart-bar"></i> Statistiques</h3>
+
+                                    <p>Consultez les rapports de fréquentation, les finances et l'évolution de l'association.</p>
+
+                <button type="submit" class="btn btn-primary">                    <button class="btn btn-secondary" style="margin-top: 1rem; width: auto;">
+
+                    <i class="fas fa-sign-in-alt"></i>                        <i class="fas fa-chart-line"></i>
+
+                    Se connecter                        Voir les Rapports
+
+                </button>                    </button>
+
+                                </div>
+
+                <div class="login-help">
+
+                    <p>Mot de passe oublié ? <br><small>Contactez l'administrateur principal</small></p>                <div class="dashboard-card">
+
+                </div>                    <h3><i class="fas fa-envelope"></i> Communication</h3>
+
+            </form>                    <p>Envoyez des newsletters, notifications et gérez la communication avec les adhérents.</p>
+
+                                <button class="btn btn-secondary" style="margin-top: 1rem; width: auto;">
+
+            <a href="../" class="back-link">                        <i class="fas fa-paper-plane"></i>
+
+                <i class="fas fa-arrow-left"></i>                        Envoyer un Message
+
+                Retour au site                    </button>
+
+            </a>                </div>
+
+        </div>
+
+    </div>                <div class="dashboard-card">
+
                     <h3><i class="fas fa-cog"></i> Configuration</h3>
-                    <p>Paramètres du site web, informations de l'association et gestion des accès.</p>
-                    <button class="btn btn-secondary" style="margin-top: 1rem; width: auto;">
-                        <i class="fas fa-wrench"></i>
-                        Paramètres
-                    </button>
+
+    <!-- Interface principale -->                    <p>Paramètres du site web, informations de l'association et gestion des accès.</p>
+
+    <div id="mainInterface" class="main-interface hidden">                    <button class="btn btn-secondary" style="margin-top: 1rem; width: auto;">
+
+        <!-- Navigation -->                        <i class="fas fa-wrench"></i>
+
+        <nav class="admin-navbar">                        Paramètres
+
+            <div class="admin-nav-brand">                    </button>
+
+                <i class="fas fa-palette"></i>                </div>
+
+                <span>Admin Anim'Média</span>
+
+            </div>                <div class="dashboard-card">
+
+                                <h3><i class="fas fa-backup"></i> Sauvegarde</h3>
+
+            <div class="admin-nav-menu">                    <p>Effectuez des sauvegardes des données et gérez la sécurité du système.</p>
+
+                <button class="nav-item active" data-section="dashboard">                    <button class="btn btn-success" style="margin-top: 1rem; width: auto;">
+
+                    <i class="fas fa-chart-line"></i>                        <i class="fas fa-download"></i>
+
+                    <span>Tableau de bord</span>                        Sauvegarder
+
+                </button>                    </button>
+
+                <button class="nav-item" data-section="events">                </div>
+
+                    <i class="fas fa-calendar-alt"></i>            </div>
+
+                    <span>Événements</span>
+
+                </button>            <div class="alert alert-info">
+
+                <button class="nav-item" data-section="activities">                <strong>Note :</strong> Cette interface d'administration est une démonstration. 
+
+                    <i class="fas fa-users"></i>                Dans un vrai projet, elle serait connectée à une base de données et inclurait 
+
+                    <span>Activités</span>                des fonctionnalités complètes de gestion.
+
+                </button>            </div>
+
+                <button class="nav-item" data-section="gallery">        </main>
+
+                    <i class="fas fa-images"></i>    </div>
+
+                    <span>Galerie</span>
+
+                </button>    <script>
+
+                <button class="nav-item" data-section="settings">        // Configuration simple
+
+                    <i class="fas fa-cog"></i>        const ADMIN_CREDENTIALS = {
+
+                    <span>Paramètres</span>            username: 'admin',
+
+                </button>            password: 'admin123'
+
+            </div>        };
+
+            
+
+            <div class="admin-nav-user">        // Fonction de connexion
+
+                <div class="user-info">        function login(event) {
+
+                    <span id="currentUser">Administrateur</span>            event.preventDefault();
+
+                    <small id="loginTime">Connecté aujourd'hui</small>            
+
+                </div>            const username = document.getElementById('username').value;
+
+                <button id="logoutBtn" class="btn btn-outline btn-sm">            const password = document.getElementById('password').value;
+
+                    <i class="fas fa-sign-out-alt"></i>            const errorDiv = document.getElementById('loginError');
+
+                    Déconnexion
+
+                </button>            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+
+            </div>                // Connexion réussie
+
+        </nav>                document.getElementById('loginScreen').style.display = 'none';
+
+                document.getElementById('adminDashboard').style.display = 'block';
+
+        <!-- Contenu principal -->                
+
+        <main class="admin-main">                // Sauvegarder la session (simple)
+
+            <div class="admin-content" id="adminContent">                sessionStorage.setItem('adminLoggedIn', 'true');
+
+                <div class="alert alert-success">                
+
+                    <strong>✅ Connexion réussie !</strong> Bienvenue dans l'interface d'administration d'Anim'Média.                console.log('✅ Connexion administrateur réussie');
+
+                </div>            } else {
+
+                // Erreur de connexion
+
+                <!-- Statistiques -->                errorDiv.style.display = 'block';
+
+                <div class="stats-grid">                errorDiv.className = 'alert alert-error';
+
+                    <div class="stat-card">                errorDiv.style.background = '#f8d7da';
+
+                        <span class="stat-number">150</span>                errorDiv.style.borderColor = '#f5c6cb';
+
+                        <div class="stat-label">Adhérents Actifs</div>                errorDiv.style.color = '#721c24';
+
+                    </div>                errorDiv.innerHTML = '<strong>Erreur :</strong> Identifiants incorrects';
+
+                    <div class="stat-card">                
+
+                        <span class="stat-number">12</span>                // Effacer les champs
+
+                        <div class="stat-label">Activités Proposées</div>                document.getElementById('password').value = '';
+
+                    </div>                document.getElementById('password').focus();
+
+                    <div class="stat-card">            }
+
+                        <span class="stat-number">8</span>        }
+
+                        <div class="stat-label">Événements ce Mois</div>
+
+                    </div>        // Fonction de déconnexion
+
+                    <div class="stat-card">        function logout() {
+
+                        <span class="stat-number">95%</span>            sessionStorage.removeItem('adminLoggedIn');
+
+                        <div class="stat-label">Taux de Satisfaction</div>            document.getElementById('loginScreen').style.display = 'flex';
+
+                    </div>            document.getElementById('adminDashboard').style.display = 'none';
+
+                </div>            
+
+            // Effacer le formulaire
+
+                <!-- Tableau de bord -->            document.getElementById('username').value = '';
+
+                <div class="dashboard-grid">            document.getElementById('password').value = '';
+
+                    <div class="dashboard-card">            document.getElementById('loginError').style.display = 'none';
+
+                        <h3><i class="fas fa-users"></i> Gestion des Adhérents</h3>            
+
+                        <p>Gérez les inscriptions, adhésions et informations des membres de l'association.</p>            console.log('✅ Déconnexion réussie');
+
+                        <button class="btn" style="margin-top: 1rem; background: var(--secondary);">        }
+
+                            <i class="fas fa-user-plus"></i>
+
+                            Gérer les Adhérents        // Vérifier si déjà connecté au chargement
+
+                        </button>        document.addEventListener('DOMContentLoaded', function() {
+
+                    </div>            if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+
+                document.getElementById('loginScreen').style.display = 'none';
+
+                    <div class="dashboard-card">                document.getElementById('adminDashboard').style.display = 'block';
+
+                        <h3><i class="fas fa-calendar"></i> Planification des Activités</h3>            }
+
+                        <p>Organisez les ateliers, formations et événements. Gérez les créneaux et inscriptions.</p>            
+
+                        <button class="btn" style="margin-top: 1rem; background: var(--warning);">            console.log('🔐 Interface d\'administration chargée');
+
+                            <i class="fas fa-plus"></i>        });
+
+                            Nouvel Événement
+
+                        </button>        // Sécurité : déconnexion automatique après inactivité
+
+                    </div>        let inactivityTimer;
+
+        function resetInactivityTimer() {
+
+                    <div class="dashboard-card">            clearTimeout(inactivityTimer);
+
+                        <h3><i class="fas fa-chart-bar"></i> Statistiques</h3>            inactivityTimer = setTimeout(() => {
+
+                        <p>Consultez les rapports de fréquentation, les finances et l'évolution de l'association.</p>                if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+
+                        <button class="btn" style="margin-top: 1rem; background: var(--success);">                    alert('Session expirée par inactivité');
+
+                            <i class="fas fa-chart-line"></i>                    logout();
+
+                            Voir les Rapports                }
+
+                        </button>            }, 30 * 60 * 1000); // 30 minutes
+
+                    </div>        }
+
+
+
+                    <div class="dashboard-card">        document.addEventListener('click', resetInactivityTimer);
+
+                        <h3><i class="fas fa-envelope"></i> Communication</h3>        document.addEventListener('keypress', resetInactivityTimer);
+
+                        <p>Envoyez des newsletters, notifications et gérez la communication avec les adhérents.</p>        resetInactivityTimer();
+
+                        <button class="btn" style="margin-top: 1rem; background: var(--primary);">    </script>
+
+                            <i class="fas fa-paper-plane"></i></body>
+
+                            Envoyer un Message</html>
+                        </button>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-images"></i> Galerie Photos</h3>
+                        <p>Ajoutez, organisez et gérez les photos des événements et activités de l'association.</p>
+                        <button class="btn" style="margin-top: 1rem; background: var(--secondary);">
+                            <i class="fas fa-upload"></i>
+                            Ajouter des Photos
+                        </button>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-cog"></i> Configuration</h3>
+                        <p>Paramètres du site web, informations de l'association et gestion des accès.</p>
+                        <button class="btn" style="margin-top: 1rem; background: var(--gray);">
+                            <i class="fas fa-wrench"></i>
+                            Paramètres Généraux
+                        </button>
+                    </div>
                 </div>
 
-                <div class="dashboard-card">
-                    <h3><i class="fas fa-backup"></i> Sauvegarde</h3>
-                    <p>Effectuez des sauvegardes des données et gérez la sécurité du système.</p>
-                    <button class="btn btn-success" style="margin-top: 1rem; width: auto;">
-                        <i class="fas fa-download"></i>
-                        Sauvegarder
-                    </button>
+                <div class="alert alert-info" style="margin-top: 2rem;">
+                    <strong>ℹ️ Information :</strong> Cette interface d'administration est une démonstration. 
+                    Dans un environnement de production, elle serait connectée à une base de données 
+                    et inclurait des fonctionnalités complètes de gestion avec authentification sécurisée.
                 </div>
-            </div>
-
-            <div class="alert alert-info">
-                <strong>Note :</strong> Cette interface d'administration est une démonstration. 
-                Dans un vrai projet, elle serait connectée à une base de données et inclurait 
-                des fonctionnalités complètes de gestion.
             </div>
         </main>
     </div>
 
+    <!-- Modales -->
+    <div id="modalOverlay" class="modal-overlay hidden">
+        <div class="modal-content" id="modalContent">
+            <!-- Contenu des modales chargé dynamiquement -->
+        </div>
+    </div>
+
+    <!-- Zone de notifications -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <!-- Scripts -->
     <script>
-        // Configuration simple
-        const ADMIN_CREDENTIALS = {
-            username: 'admin',
-            password: 'admin123'
+        // Configuration des identifiants (démo)
+        const ADMIN_USERS = {
+            'admin': { password: 'animmedia2024', role: 'administrateur' },
+            'benevole1': { password: 'benevole123', role: 'éditeur' },
+            'benevole2': { password: 'benevole456', role: 'éditeur' }
         };
 
-        // Fonction de connexion
-        function login(event) {
-            event.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const errorDiv = document.getElementById('loginError');
+        // État de l'application
+        let currentUser = null;
+        let currentSection = 'dashboard';
 
-            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+        // ===== GESTION DE LA CONNEXION =====
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            
+            if (ADMIN_USERS[username] && ADMIN_USERS[username].password === password) {
                 // Connexion réussie
+                currentUser = { username, role: ADMIN_USERS[username].role };
+                
+                // Mise à jour de l'interface
+                document.getElementById('currentUser').textContent = username;
+                document.getElementById('loginTime').textContent = `Connecté le ${new Date().toLocaleDateString()}`;
+                
+                // Masquer login et afficher interface
                 document.getElementById('loginScreen').style.display = 'none';
-                document.getElementById('adminDashboard').style.display = 'block';
+                document.getElementById('mainInterface').classList.remove('hidden');
                 
-                // Sauvegarder la session (simple)
-                sessionStorage.setItem('adminLoggedIn', 'true');
+                // Sauvegarder la session
+                sessionStorage.setItem('adminSession', JSON.stringify(currentUser));
                 
-                console.log('✅ Connexion administrateur réussie');
+                showNotification('Connexion réussie !', 'success');
+                console.log('✅ Connexion réussie pour:', username);
             } else {
                 // Erreur de connexion
-                errorDiv.style.display = 'block';
-                errorDiv.className = 'alert alert-error';
-                errorDiv.style.background = '#f8d7da';
-                errorDiv.style.borderColor = '#f5c6cb';
-                errorDiv.style.color = '#721c24';
-                errorDiv.innerHTML = '<strong>Erreur :</strong> Identifiants incorrects';
-                
-                // Effacer les champs
+                showNotification('Identifiants incorrects', 'error');
                 document.getElementById('password').value = '';
                 document.getElementById('password').focus();
             }
-        }
+        });
 
-        // Fonction de déconnexion
+        // ===== GESTION DE LA DÉCONNEXION =====
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            logout();
+        });
+
         function logout() {
-            sessionStorage.removeItem('adminLoggedIn');
+            currentUser = null;
+            sessionStorage.removeItem('adminSession');
+            
             document.getElementById('loginScreen').style.display = 'flex';
-            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('mainInterface').classList.add('hidden');
             
-            // Effacer le formulaire
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
-            document.getElementById('loginError').style.display = 'none';
+            // Réinitialiser le formulaire
+            document.getElementById('loginForm').reset();
             
+            showNotification('Déconnexion réussie', 'info');
             console.log('✅ Déconnexion réussie');
         }
 
-        // Vérifier si déjà connecté au chargement
+        // ===== GESTION DE LA NAVIGATION =====
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // Retirer la classe active de tous les éléments
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                
+                // Ajouter la classe active à l'élément cliqué
+                this.classList.add('active');
+                
+                const section = this.dataset.section;
+                loadSection(section);
+            });
+        });
+
+        function loadSection(section) {
+            currentSection = section;
+            
+            // Ici, vous pourriez charger du contenu différent selon la section
+            console.log(`📄 Chargement de la section: ${section}`);
+            
+            // Pour la démo, on garde le même contenu
+            // Dans un vrai projet, vous changeriez le contenu du #adminContent
+        }
+
+        // ===== SYSTÈME DE NOTIFICATIONS =====
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.style.borderLeftColor = type === 'success' ? 'var(--success)' : 
+                                                 type === 'error' ? 'var(--error)' : 
+                                                 type === 'warning' ? 'var(--warning)' : 'var(--primary)';
+            
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 
+                                       type === 'error' ? 'exclamation-circle' : 
+                                       type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.getElementById('notificationContainer').appendChild(notification);
+            
+            // Supprimer après 4 secondes
+            setTimeout(() => {
+                notification.remove();
+            }, 4000);
+        }
+
+        // ===== TOGGLE MOT DE PASSE =====
+        document.getElementById('passwordToggle').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        });
+
+        // ===== VÉRIFICATION DE SESSION AU CHARGEMENT =====
         document.addEventListener('DOMContentLoaded', function() {
-            if (sessionStorage.getItem('adminLoggedIn') === 'true') {
-                document.getElementById('loginScreen').style.display = 'none';
-                document.getElementById('adminDashboard').style.display = 'block';
+            const savedSession = sessionStorage.getItem('adminSession');
+            
+            if (savedSession) {
+                try {
+                    currentUser = JSON.parse(savedSession);
+                    document.getElementById('currentUser').textContent = currentUser.username;
+                    document.getElementById('loginTime').textContent = 'Session restaurée';
+                    
+                    document.getElementById('loginScreen').style.display = 'none';
+                    document.getElementById('mainInterface').classList.remove('hidden');
+                    
+                    showNotification('Session restaurée', 'info');
+                } catch (e) {
+                    sessionStorage.removeItem('adminSession');
+                }
             }
             
             console.log('🔐 Interface d\'administration chargée');
         });
 
-        // Sécurité : déconnexion automatique après inactivité
+        // ===== SÉCURITÉ : DÉCONNEXION AUTOMATIQUE =====
         let inactivityTimer;
         function resetInactivityTimer() {
             clearTimeout(inactivityTimer);
             inactivityTimer = setTimeout(() => {
-                if (sessionStorage.getItem('adminLoggedIn') === 'true') {
-                    alert('Session expirée par inactivité');
+                if (currentUser) {
+                    showNotification('Session expirée par inactivité', 'warning');
                     logout();
                 }
             }, 30 * 60 * 1000); // 30 minutes
@@ -628,6 +2012,7 @@
 
         document.addEventListener('click', resetInactivityTimer);
         document.addEventListener('keypress', resetInactivityTimer);
+        document.addEventListener('mousemove', resetInactivityTimer);
         resetInactivityTimer();
     </script>
 </body>

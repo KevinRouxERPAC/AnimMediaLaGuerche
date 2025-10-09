@@ -310,3 +310,250 @@ window.browserSupport = {
 };
 
 console.log('🌐 Support navigateur:', window.browserSupport);
+
+// ========================================
+// VALIDATION DU FORMULAIRE DE CONTACT
+// ========================================
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contact-form');
+    if (!contactForm) return;
+
+    // Configuration des messages d'erreur
+    const errorMessages = {
+        name: {
+            required: 'Le nom est obligatoire',
+            minLength: 'Le nom doit contenir au moins 2 caractères',
+            pattern: 'Le nom ne peut contenir que des lettres et espaces'
+        },
+        email: {
+            required: 'L\'email est obligatoire',
+            pattern: 'Veuillez saisir une adresse email valide'
+        },
+        message: {
+            required: 'Le message est obligatoire',
+            minLength: 'Le message doit contenir au moins 10 caractères',
+            maxLength: 'Le message ne peut pas dépasser 1000 caractères'
+        }
+    };
+
+    // Expressions régulières
+    const patterns = {
+        name: /^[a-zA-ZàáâäçéèêëíìîïñóòôöúùûüýÿÀÁÂÄÇÉÈÊËÍÌÎÏÑÓÒÔÖÚÙÛÜÝŸ\s\-']+$/,
+        email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    };
+
+    // Fonction pour créer un message d'erreur
+    function createErrorMessage(message) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.style.cssText = `
+            color: #e74c3c;
+            font-size: 0.9em;
+            margin-top: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        `;
+        errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+        return errorDiv;
+    }
+
+    // Fonction pour créer un message de succès
+    function createSuccessMessage(message) {
+        const successDiv = document.createElement('div');
+        successDiv.className = 'success-message';
+        successDiv.style.cssText = `
+            color: #27ae60;
+            font-size: 0.9em;
+            margin-top: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        `;
+        successDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+        return successDiv;
+    }
+
+    // Fonction pour valider un champ
+    function validateField(field) {
+        const value = field.value.trim();
+        const fieldName = field.name;
+        const fieldGroup = field.closest('.form-group');
+        
+        // Supprimer les anciens messages
+        const existingMessages = fieldGroup.querySelectorAll('.error-message, .success-message');
+        existingMessages.forEach(msg => msg.remove());
+        
+        // Réinitialiser les styles
+        field.style.borderColor = '';
+        field.style.backgroundColor = '';
+        
+        let isValid = true;
+        let errorMessage = '';
+
+        // Validation selon le type de champ
+        switch (fieldName) {
+            case 'name':
+                if (!value) {
+                    errorMessage = errorMessages.name.required;
+                    isValid = false;
+                } else if (value.length < 2) {
+                    errorMessage = errorMessages.name.minLength;
+                    isValid = false;
+                } else if (!patterns.name.test(value)) {
+                    errorMessage = errorMessages.name.pattern;
+                    isValid = false;
+                }
+                break;
+
+            case 'email':
+                if (!value) {
+                    errorMessage = errorMessages.email.required;
+                    isValid = false;
+                } else if (!patterns.email.test(value)) {
+                    errorMessage = errorMessages.email.pattern;
+                    isValid = false;
+                }
+                break;
+
+            case 'message':
+                if (!value) {
+                    errorMessage = errorMessages.message.required;
+                    isValid = false;
+                } else if (value.length < 10) {
+                    errorMessage = errorMessages.message.minLength;
+                    isValid = false;
+                } else if (value.length > 1000) {
+                    errorMessage = errorMessages.message.maxLength;
+                    isValid = false;
+                }
+                break;
+        }
+
+        // Afficher le message d'erreur ou de succès
+        if (!isValid) {
+            field.style.borderColor = '#e74c3c';
+            field.style.backgroundColor = '#fdf2f2';
+            fieldGroup.appendChild(createErrorMessage(errorMessage));
+        } else if (value) {
+            field.style.borderColor = '#27ae60';
+            field.style.backgroundColor = '#f7fdf7';
+            if (fieldName !== 'subject') { // Pas de message de succès pour le select
+                fieldGroup.appendChild(createSuccessMessage('✓'));
+            }
+        }
+
+        return isValid;
+    }
+
+    // Fonction pour afficher une notification
+    function showNotification(message, type = 'success') {
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: ${type === 'success' ? '#27ae60' : '#e74c3c'};
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            max-width: 400px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        `;
+        
+        const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+        notification.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
+        
+        document.body.appendChild(notification);
+        
+        // Animation d'entrée
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 10);
+
+        // Animation de sortie
+        setTimeout(() => {
+            notification.style.transform = 'translateX(100%)';
+            setTimeout(() => notification.remove(), 300);
+        }, 4000);
+    }
+
+    // Validation en temps réel
+    const fields = contactForm.querySelectorAll('input[required], textarea[required]');
+    fields.forEach(field => {
+        // Validation pendant la saisie
+        field.addEventListener('input', function() {
+            if (this.value.trim()) {
+                validateField(this);
+            }
+        });
+
+        // Validation à la perte de focus
+        field.addEventListener('blur', function() {
+            validateField(this);
+        });
+    });
+
+    // Soumission du formulaire
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Valider tous les champs
+        let isFormValid = true;
+        fields.forEach(field => {
+            if (!validateField(field)) {
+                isFormValid = false;
+            }
+        });
+
+        if (!isFormValid) {
+            showNotification('Veuillez corriger les erreurs dans le formulaire', 'error');
+            return;
+        }
+
+        // Simulation d'envoi (en attente d'un backend)
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const originalText = submitButton.innerHTML;
+        
+        // Animation du bouton
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+        submitButton.style.opacity = '0.7';
+
+        // Simuler l'envoi
+        setTimeout(() => {
+            // Réinitialiser le formulaire
+            contactForm.reset();
+            
+            // Supprimer tous les messages
+            const allMessages = contactForm.querySelectorAll('.error-message, .success-message');
+            allMessages.forEach(msg => msg.remove());
+            
+            // Réinitialiser les styles des champs
+            fields.forEach(field => {
+                field.style.borderColor = '';
+                field.style.backgroundColor = '';
+            });
+
+            // Réinitialiser le bouton
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalText;
+            submitButton.style.opacity = '';
+
+            // Afficher le message de succès
+            showNotification('Message envoyé avec succès ! Nous vous recontacterons bientôt.', 'success');
+            
+            console.log('📧 Formulaire de contact soumis avec succès');
+            
+        }, 2000); // Simulation de 2 secondes
+    });
+
+    console.log('✅ Validation du formulaire de contact activée');
+});
