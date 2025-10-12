@@ -5,19 +5,19 @@
 
 /* Variables CSS - Palette Associative */
 :root {
-    --primary: #2E8B57;        /* Vert forêt - nature, créativité */
+    --primary: #1E7A47;        /* Vert forêt plus foncé - meilleur contraste */
     --primary-light: #3CB371;   /* Vert moyen */
-    --primary-dark: #228B22;    /* Vert foncé */
+    --primary-dark: #1A7A37;    /* Vert plus foncé pour meilleur contraste */
     --secondary: #FF7F50;       /* Corail - chaleur, convivialité */
-    --secondary-dark: #E55B3C;  /* Corail foncé pour meilleur contraste */
+    --secondary-dark: #C53E25;  /* Corail encore plus foncé pour ratio 4.5+ */
     --secondary-light: #FFA07A; /* Saumon clair */
     --accent: #9370DB;          /* Violet medium - créativité, art */
     --dark: #2F4F4F;           /* Gris ardoise foncé */
     --gray: #708090;           /* Gris ardoise */
     --light: #F5F5DC;          /* Beige - douceur */
     --white: #ffffff;
-    --success: #32CD32;        /* Vert citron */
-    --warning: #DAA520;        /* Doré */
+    --success: #228B22;        /* Vert foncé - accessible */
+    --warning: #B8860B;        /* Doré foncé - accessible */
     --error: #DC143C;          /* Rouge cramoisi */
     
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -54,6 +54,33 @@ body {
 img {
     max-width: 100%;
     height: auto;
+}
+
+/* Styles de base pour les titres */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1.125rem; }
+
+/* Styles de base pour les liens */
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--primary-dark);
 }
 
 /* Container */
@@ -210,12 +237,12 @@ img {
 }
 
 .btn-primary {
-    background: var(--white);
-    color: var(--light);
+    background: var(--primary);
+    color: var(--white);
 }
 
 .btn-primary:hover {
-    background: var(--light);
+    background: var(--primary-dark);
     transform: translateY(-2px);
     box-shadow: var(--shadow-hover);
 }
@@ -734,8 +761,8 @@ img {
         --accent: #BA68C8;         /* Violet adapté */
         
         /* Couleurs d'état adaptées */
-        --success: #4CAF50;
-        --warning: #FFB74D;
+        --success: #66BB6A;        /* Vert plus clair pour mode sombre */
+        --warning: #FF8F00;        /* Orange plus foncé pour contraste */
         --error: #F06292;
         
         /* Ombres adaptées au mode sombre */
