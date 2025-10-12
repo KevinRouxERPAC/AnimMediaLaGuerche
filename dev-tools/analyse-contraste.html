@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse de Contraste - Anim'Média</title>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+        
+        h1 {
+            color: #2F4F4F;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .color-test {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .test-item {
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            position: relative;
+        }
+        
+        .color-preview {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.25rem;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .ratio {
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+        
+        .pass { color: #27ae60; font-weight: 600; }
+        .fail { color: #e74c3c; font-weight: 600; }
+        
+        .grade {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+        
+        .grade.aaa { background: #27ae60; color: white; }
+        .grade.aa { background: #f39c12; color: white; }
+        .grade.fail { background: #e74c3c; color: white; }
+        
+        .summary {
+            background: #f8f9fa;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .recommendations {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Analyse de Contraste des Couleurs</h1>
+        <p style="text-align: center; color: #708090; margin-bottom: 2rem;">
+            Vérification de l'accessibilité selon les standards WCAG 2.1
+        </p>
+        
+        <div id="colorTests" class="color-test"></div>
+        
+        <div class="summary">
+            <h3>📊 Résumé de l'analyse</h3>
+            <div id="summary"></div>
+        </div>
+        
+        <div class="recommendations">
+            <h3>💡 Recommandations</h3>
+            <div id="recommendations"></div>
+        </div>
+    </div>
+
+    <script>
+        // Palette de couleurs Anim'Média
+        const colors = {
+            // Mode clair
+            light: {
+                primary: '#2E8B57',
+                primaryLight: '#3CB371',
+                primaryDark: '#228B22',
+                secondary: '#FF7F50',
+                secondaryLight: '#FFA07A',
+                accent: '#9370DB',
+                dark: '#2F4F4F',
+                gray: '#708090',
+                light: '#F5F5DC',
+                white: '#ffffff',
+                success: '#32CD32',
+                warning: '#DAA520',
+                error: '#DC143C'
+            },
+            // Mode sombre
+            dark: {
+                primary: '#4CAF50',
+                primaryLight: '#66BB6A',
+                primaryDark: '#388E3C',
+                secondary: '#FF8A65',
+                secondaryLight: '#FFAB91',
+                accent: '#BA68C8',
+                dark: '#f0f0f0',
+                gray: '#b0b0b0',
+                light: '#2a2a2a',
+                white: '#1a1a1a',
+                success: '#4CAF50',
+                warning: '#FFB74D',
+                error: '#F06292'
+            }
+        };
+
+        // Combinaisons de couleurs à tester
+        const combinations = [
+            // Mode clair
+            { name: 'Texte principal sur fond blanc', fg: 'dark', bg: 'white', mode: 'light' },
+            { name: 'Texte secondaire sur fond blanc', fg: 'gray', bg: 'white', mode: 'light' },
+            { name: 'Texte blanc sur bouton primaire', fg: 'white', bg: 'primary', mode: 'light' },
+            { name: 'Texte blanc sur bouton secondaire', fg: 'white', bg: 'secondary', mode: 'light' },
+            { name: 'Texte blanc sur accent', fg: 'white', bg: 'accent', mode: 'light' },
+            { name: 'Texte principal sur fond beige', fg: 'dark', bg: 'light', mode: 'light' },
+            { name: 'Lien primaire sur blanc', fg: 'primary', bg: 'white', mode: 'light' },
+            { name: 'Succès sur blanc', fg: 'success', bg: 'white', mode: 'light' },
+            { name: 'Avertissement sur blanc', fg: 'warning', bg: 'white', mode: 'light' },
+            { name: 'Erreur sur blanc', fg: 'error', bg: 'white', mode: 'light' },
+            
+            // Mode sombre
+            { name: 'Texte clair sur fond sombre', fg: 'dark', bg: 'white', mode: 'dark' },
+            { name: 'Texte gris sur fond sombre', fg: 'gray', bg: 'white', mode: 'dark' },
+            { name: 'Texte sombre sur bouton primaire', fg: 'white', bg: 'primary', mode: 'dark' },
+            { name: 'Texte sombre sur bouton secondaire', fg: 'white', bg: 'secondary', mode: 'dark' },
+            { name: 'Texte sombre sur accent', fg: 'white', bg: 'accent', mode: 'dark' },
+            { name: 'Texte clair sur cartes', fg: 'dark', bg: 'light', mode: 'dark' },
+        ];
+
+        // Fonction pour convertir hex en RGB
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
+
+        // Fonction pour calculer la luminance relative
+        function getLuminance(r, g, b) {
+            const [rs, gs, bs] = [r, g, b].map(c => {
+                c = c / 255;
+                return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+            });
+            return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+        }
+
+        // Fonction pour calculer le ratio de contraste
+        function getContrastRatio(color1, color2) {
+            const rgb1 = hexToRgb(color1);
+            const rgb2 = hexToRgb(color2);
+            
+            const lum1 = getLuminance(rgb1.r, rgb1.g, rgb1.b);
+            const lum2 = getLuminance(rgb2.r, rgb2.g, rgb2.b);
+            
+            const brightest = Math.max(lum1, lum2);
+            const darkest = Math.min(lum1, lum2);
+            
+            return (brightest + 0.05) / (darkest + 0.05);
+        }
+
+        // Fonction pour évaluer le contraste
+        function evaluateContrast(ratio) {
+            if (ratio >= 7) return { grade: 'AAA', class: 'aaa', status: 'pass' };
+            if (ratio >= 4.5) return { grade: 'AA', class: 'aa', status: 'pass' };
+            if (ratio >= 3) return { grade: 'AA Large', class: 'aa', status: 'pass' };
+            return { grade: 'FAIL', class: 'fail', status: 'fail' };
+        }
+
+        // Générer les tests
+        function generateTests() {
+            const container = document.getElementById('colorTests');
+            let passCount = 0;
+            let totalCount = combinations.length;
+            let issues = [];
+
+            combinations.forEach((combo, index) => {
+                const fgColor = colors[combo.mode][combo.fg];
+                const bgColor = colors[combo.mode][combo.bg];
+                const ratio = getContrastRatio(fgColor, bgColor);
+                const evaluation = evaluateContrast(ratio);
+                
+                if (evaluation.status === 'pass') passCount++;
+                else issues.push(combo);
+
+                const testItem = document.createElement('div');
+                testItem.className = 'test-item';
+                testItem.innerHTML = `
+                    <div class="color-preview" style="background-color: ${bgColor}; color: ${fgColor};">
+                        Exemple de texte - ${combo.name}
+                    </div>
+                    <div>
+                        <strong>Mode:</strong> ${combo.mode === 'light' ? '☀️ Clair' : '🌙 Sombre'}<br>
+                        <strong>Avant-plan:</strong> ${fgColor}<br>
+                        <strong>Arrière-plan:</strong> ${bgColor}<br>
+                        <div class="ratio">
+                            <strong>Ratio:</strong> ${ratio.toFixed(2)}:1
+                            <span class="grade ${evaluation.class}">${evaluation.grade}</span>
+                        </div>
+                        <div class="${evaluation.status}">
+                            ${evaluation.status === 'pass' ? '✅ Conforme' : '❌ Non conforme'}
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(testItem);
+            });
+
+            // Résumé
+            const summary = document.getElementById('summary');
+            const percentage = Math.round((passCount / totalCount) * 100);
+            summary.innerHTML = `
+                <p><strong>Conformité globale:</strong> ${passCount}/${totalCount} (${percentage}%)</p>
+                <div class="${percentage >= 90 ? 'pass' : 'fail'}">
+                    ${percentage >= 90 ? '✅ Excellent niveau d\'accessibilité' : '⚠️ Améliorations nécessaires'}
+                </div>
+            `;
+
+            // Recommandations
+            const recommendations = document.getElementById('recommendations');
+            if (issues.length > 0) {
+                recommendations.innerHTML = `
+                    <p><strong>Problèmes détectés:</strong></p>
+                    <ul>
+                        ${issues.map(issue => `<li>${issue.name} (Mode ${issue.mode})</li>`).join('')}
+                    </ul>
+                    <p><strong>Actions recommandées:</strong></p>
+                    <ul>
+                        <li>Utiliser des couleurs plus foncées pour le texte</li>
+                        <li>Utiliser des arrière-plans plus clairs</li>
+                        <li>Augmenter l'épaisseur de police pour les textes de petite taille</li>
+                        <li>Tester avec des outils d'accessibilité automatisés</li>
+                    </ul>
+                `;
+            } else {
+                recommendations.innerHTML = `
+                    <p class="pass">✅ Aucun problème de contraste détecté ! La palette respecte les standards d'accessibilité.</p>
+                `;
+            }
+        }
+
+        // Lancer l'analyse au chargement
+        document.addEventListener('DOMContentLoaded', generateTests);
+    </script>
+</body>
+</html>

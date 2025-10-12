@@ -364,4 +364,61 @@
         transform: translateY(-2px);
         box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
+    
+    /* Adaptations mode sombre pour nouvelles classes d'accessibilité */
+    .admin-subtitle {
+        color: #b0b0b0;
+    }
+    
+    .admin-info-text {
+        color: #b0b0b0;
+    }
+    
+    .admin-back-link {
+        color: #4CAF50;
+    }
+    
+    .admin-back-link:hover {
+        color: #66BB6A;
+    }
+}
+
+/* Classes d'accessibilité pour l'admin - Mode clair par défaut */
+.admin-subtitle {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--gray);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.admin-info-text {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--gray);
+    line-height: 1.5;
+}
+
+.admin-back-link {
+    color: var(--primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    padding: 0.25rem;
+    border-radius: 4px;
+}
+
+.admin-back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+    background-color: rgba(46, 139, 87, 0.05);
+}
+
+.admin-back-link:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    background-color: rgba(46, 139, 87, 0.1);
 }

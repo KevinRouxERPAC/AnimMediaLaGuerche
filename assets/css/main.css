@@ -9,6 +9,7 @@
     --primary-light: #3CB371;   /* Vert moyen */
     --primary-dark: #228B22;    /* Vert foncé */
     --secondary: #FF7F50;       /* Corail - chaleur, convivialité */
+    --secondary-dark: #E55B3C;  /* Corail foncé pour meilleur contraste */
     --secondary-light: #FFA07A; /* Saumon clair */
     --accent: #9370DB;          /* Violet medium - créativité, art */
     --dark: #2F4F4F;           /* Gris ardoise foncé */
@@ -229,6 +230,18 @@ img {
     background: var(--white);
     color: var(--primary);
     transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: var(--secondary-dark);  /* Utilise la couleur foncée pour meilleur contraste */
+    color: var(--white);
+    border: none;
+}
+
+.btn-secondary:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
 }
 
 /* ========================================
@@ -715,6 +728,7 @@ img {
         --primary-dark: #388E3C;   /* Vert foncé adapté */
         
         --secondary: #FF8A65;      /* Corail plus doux */
+        --secondary-dark: #F4511E;  /* Corail foncé adapté pour mode sombre */
         --secondary-light: #FFAB91; /* Saumon adapté */
         
         --accent: #BA68C8;         /* Violet adapté */
