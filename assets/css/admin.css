@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #4ecdc4 0%, #ff6b6b 100%);
+    background: linear-gradient(135deg, #2E8B57 0%, #FF7F50 100%);
     padding: 2rem;
 }
 
@@ -31,19 +31,19 @@
 
 .login-logo i {
     font-size: 3rem;
-    color: #4ecdc4;
+    color: #2E8B57;
     margin-bottom: 1rem;
 }
 
 .login-logo h1 {
-    color: #2c3e50;
+    color: #2F4F4F;
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
     font-weight: 600;
 }
 
 .login-logo p {
-    color: #7f8c8d;
+    color: #708090;
     font-size: 1rem;
     margin: 0;
 }
@@ -68,13 +68,13 @@
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
-    color: #2c3e50;
+    color: #2F4F4F;
 }
 
 .login-container .form-group input {
     width: 100%;
     padding: 0.75rem 1rem;
-    border: 2px solid #ecf0f1;
+    border: 2px solid #F5F5DC;
     border-radius: 0.5rem;
     font-size: 1rem;
     transition: border-color 0.3s ease;
@@ -83,12 +83,12 @@
 
 .login-container .form-group input:focus {
     outline: none;
-    border-color: #4ecdc4;
+    border-color: #2E8B57;
 }
 
 /* === TABLEAU DE BORD === */
 .admin-dashboard {
-    background: #ecf0f1;
+    background: #F5F5DC;
     min-height: 100vh;
 }
 
@@ -112,14 +112,14 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    color: #4ecdc4;
+    color: #2E8B57;
     font-size: 1.5rem;
     font-weight: 700;
     text-decoration: none;
 }
 
 .admin-logo:hover {
-    color: #45b7aa;
+    color: #228B22;
 }
 
 /* === NAVIGATION ADMIN === */
@@ -142,11 +142,11 @@
 .user-details span {
     display: block;
     font-weight: 600;
-    color: #2c3e50;
+    color: #2F4F4F;
 }
 
 .user-details small {
-    color: #7f8c8d;
+    color: #708090;
     font-size: 0.8rem;
 }
 
@@ -215,7 +215,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 1.5rem;
-    background: #4ecdc4;
+    background: #2E8B57;
 }
 
 .admin-card-icon i {
@@ -227,9 +227,9 @@
 .admin-info-box {
     margin-top: 2rem;
     padding: 1rem;
-    background: #d1ecf1;
+    background: #E0F2E0;
     border-radius: 0.5rem;
-    color: #0c5460;
+    color: #1F4F2F;
     font-size: 0.9rem;
 }
 
@@ -257,5 +257,111 @@
     .login-container {
         padding: 2rem;
         margin: 1rem;
+    }
+}
+
+/* ============================================
+   MODE SOMBRE POUR L'ADMINISTRATION
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    /* Écran de connexion en mode sombre */
+    .admin-login {
+        background: linear-gradient(135deg, #1a4a3a 0%, #4a2a1a 100%);
+    }
+    
+    .login-container {
+        background: #2a2a2a;
+        color: #f0f0f0;
+        border: 1px solid #3a3a3a;
+    }
+    
+    .login-logo h1 {
+        color: #f0f0f0;
+    }
+    
+    .login-logo p {
+        color: #b0b0b0;
+    }
+    
+    .login-logo i {
+        color: #4CAF50;
+    }
+    
+    /* Formulaires en mode sombre */
+    .login-container .form-group label {
+        color: #f0f0f0;
+    }
+    
+    .login-container .form-group input {
+        background: #3a3a3a;
+        border-color: #4a4a4a;
+        color: #f0f0f0;
+    }
+    
+    .login-container .form-group input:focus {
+        border-color: #4CAF50;
+        background: #3a3a3a;
+    }
+    
+    /* Tableau de bord en mode sombre */
+    .admin-dashboard {
+        background: #1a1a1a;
+    }
+    
+    .dashboard-header {
+        background: rgba(42, 42, 42, 0.95);
+        border-bottom: 1px solid #3a3a3a;
+    }
+    
+    .admin-logo {
+        color: #4CAF50;
+    }
+    
+    .admin-logo:hover {
+        color: #66BB6A;
+    }
+    
+    .user-details span {
+        color: #f0f0f0;
+    }
+    
+    .user-details small {
+        color: #b0b0b0;
+    }
+    
+    /* Cartes admin en mode sombre */
+    .admin-dashboard .card {
+        background: #2a2a2a;
+        border: 1px solid #3a3a3a;
+        color: #f0f0f0;
+    }
+    
+    .admin-dashboard .card h3 {
+        color: #f0f0f0;
+    }
+    
+    .admin-dashboard .card p {
+        color: #b0b0b0;
+    }
+    
+    .admin-dashboard .card .card-features li {
+        color: #b0b0b0;
+    }
+    
+    /* Boîte d'information en mode sombre */
+    .admin-info-box {
+        background: #2a4a2a;
+        color: #e0f0e0;
+        border: 1px solid #3a5a3a;
+    }
+    
+    /* Boutons en mode sombre */
+    .admin-dashboard .btn {
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .admin-dashboard .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 }

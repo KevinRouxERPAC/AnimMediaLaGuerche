@@ -3,21 +3,21 @@
    Site simple, moderne et fonctionnel
 ======================================== */
 
-/* Variables CSS */
+/* Variables CSS - Palette Associative */
 :root {
-    --primary: #ff6b6b;
-    --primary-light: #ff8e8e;
-    --primary-dark: #e63946;
-    --secondary: #4ecdc4;
-    --secondary-light: #7fdbda;
-    --accent: #ffa726;
-    --dark: #2c3e50;
-    --gray: #7f8c8d;
-    --light: #f8f9fa;
+    --primary: #2E8B57;        /* Vert forêt - nature, créativité */
+    --primary-light: #3CB371;   /* Vert moyen */
+    --primary-dark: #228B22;    /* Vert foncé */
+    --secondary: #FF7F50;       /* Corail - chaleur, convivialité */
+    --secondary-light: #FFA07A; /* Saumon clair */
+    --accent: #9370DB;          /* Violet medium - créativité, art */
+    --dark: #2F4F4F;           /* Gris ardoise foncé */
+    --gray: #708090;           /* Gris ardoise */
+    --light: #F5F5DC;          /* Beige - douceur */
     --white: #ffffff;
-    --success: #27ae60;
-    --warning: #f39c12;
-    --error: #e74c3c;
+    --success: #32CD32;        /* Vert citron */
+    --warning: #DAA520;        /* Doré */
+    --error: #DC143C;          /* Rouge cramoisi */
     
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --shadow: 0 2px 20px rgba(0,0,0,0.08);
@@ -210,7 +210,7 @@ img {
 
 .btn-primary {
     background: var(--white);
-    color: var(--primary);
+    color: var(--light);
 }
 
 .btn-primary:hover {
@@ -253,7 +253,7 @@ img {
     text-align: center;
     font-size: 2.75rem;
     font-weight: 700;
-    color: var(--dark);
+    color: var(--light);
     margin-bottom: 1rem;
 }
 
@@ -345,7 +345,7 @@ img {
 .card h3 {
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--dark);
+    color: var(--light);
     margin-bottom: 1rem;
 }
 
@@ -698,13 +698,76 @@ img {
     outline-offset: 2px;
 }
 
-/* Mode sombre (optionnel) */
+/* Mode sombre adapté à la palette associative */
 @media (prefers-color-scheme: dark) {
     :root {
+        /* Arrière-plans sombres */
         --white: #1a1a1a;
-        --light: #2d3748;
-        --dark: #e2e8f0;
-        --gray: #a0aec0;
+        --light: #2a2a2a;
+        
+        /* Textes clairs pour le contraste */
+        --dark: #f0f0f0;
+        --gray: #b0b0b0;
+        
+        /* Couleurs primaires adaptées au mode sombre */
+        --primary: #4CAF50;        /* Vert plus lumineux */
+        --primary-light: #66BB6A;  /* Vert clair adapté */
+        --primary-dark: #388E3C;   /* Vert foncé adapté */
+        
+        --secondary: #FF8A65;      /* Corail plus doux */
+        --secondary-light: #FFAB91; /* Saumon adapté */
+        
+        --accent: #BA68C8;         /* Violet adapté */
+        
+        /* Couleurs d'état adaptées */
+        --success: #4CAF50;
+        --warning: #FFB74D;
+        --error: #F06292;
+        
+        /* Ombres adaptées au mode sombre */
+        --shadow: 0 2px 20px rgba(0,0,0,0.3);
+        --shadow-hover: 0 8px 30px rgba(0,0,0,0.4);
+    }
+    
+    /* Ajustements spécifiques pour les éléments */
+    .card {
+        background: var(--light);
+        border: 1px solid #3a3a3a;
+    }
+    
+    .btn {
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .btn:hover {
+        background: rgba(255,255,255,0.05);
+    }
+    
+    /* Navigation en mode sombre */
+    .nav {
+        background: rgba(26, 26, 26, 0.95);
+        border-bottom: 1px solid #3a3a3a;
+    }
+    
+    /* Formulaires en mode sombre */
+    input, textarea, select {
+        background: var(--light);
+        border-color: #3a3a3a;
+        color: var(--dark);
+    }
+    
+    input:focus, textarea:focus, select:focus {
+        border-color: var(--primary);
+        background: var(--light);
+    }
+    
+    /* Amélioration du contraste pour les liens */
+    a {
+        color: var(--primary-light);
+    }
+    
+    a:hover {
+        color: var(--primary);
     }
 }
 
