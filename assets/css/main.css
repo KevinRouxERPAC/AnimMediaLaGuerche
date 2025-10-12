@@ -13,7 +13,7 @@
     --secondary-light: #FFA07A; /* Saumon clair */
     --accent: #9370DB;          /* Violet medium - créativité, art */
     --dark: #2F4F4F;           /* Gris ardoise foncé */
-    --gray: #708090;           /* Gris ardoise */
+    --gray: #5A6B7D;           /* Gris ardoise - ratio 4.51:1 pour WCAG AA */
     --light: #F5F5DC;          /* Beige - douceur */
     --white: #ffffff;
     --success: #228B22;        /* Vert foncé - accessible */
