@@ -11,7 +11,7 @@
     <meta name="author" content="Anim'Média La Guerche-sur-l'Aubois">
 
     <!-- Favicon Admin -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%232E8B57'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white'>⚙️</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%233B82F6'/><text x='50' y='65' font-size='40' text-anchor='middle' fill='white'>⚙️</text></svg>">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -161,87 +161,110 @@
                             </div>
 
                             <div class="card">
-                                <div class="card-icon" style="background: #DAA520;">
+                                <div class="card-icon" style="background: #F59E0B;">
                                     <i class="fas fa-calendar-alt"></i>
                                 </div>
-                                <h3>Planification des Activités</h3>
-                                <p>Organisez les ateliers créatifs, formations numériques et événements culturels de l'association.</p>
+                                <h3>Gestion des Événements</h3>
+                                <p>Créez, modifiez et gérez tous les événements de l'association : ateliers, formations, expositions.</p>
                                 <ul class="card-features">
-                                    <li>Ateliers de scrapbooking</li>
-                                    <li>Formations informatique</li>
-                                    <li>Événements culturels</li>
+                                    <li>Créer nouveaux événements</li>
+                                    <li>Modifier événements existants</li>
+                                    <li>Gérer les inscriptions</li>
+                                    <li>Calendrier des événements</li>
                                 </ul>
-                                <button class="btn btn-primary" onclick="showFeature('Planification des Activités')" style="background: #DAA520;">
-                                    <i class="fas fa-plus"></i>
-                                    Planifier une Activité
+                                <button class="btn btn-primary" onclick="showEventManager()" style="background: #F59E0B;">
+                                    <i class="fas fa-calendar-plus"></i>
+                                    Gérer les Événements
                                 </button>
                             </div>
 
                             <div class="card">
-                                <div class="card-icon" style="background: #32CD32;">
+                                <div class="card-icon" style="background: #10B981;">
                                     <i class="fas fa-chart-bar"></i>
                                 </div>
                                 <h3>Rapports et Statistiques</h3>
                                 <p>Consultez les rapports de fréquentation, finances et évolution de l'association.</p>
                                 <ul class="card-features">
-                                    <li>Tableaux de bord financiers</li>
-                                    <li>Statistiques de fréquentation</li>
-                                    <li>Rapports d'activité annuels</li>
+                                    <li>Tableaux de bord en temps réel</li>
+                                    <li>Statistiques de participation</li>
+                                    <li>Rapports financiers</li>
+                                    <li>Analyses d'activité</li>
                                 </ul>
-                                <button class="btn btn-primary" onclick="showFeature('Rapports et Statistiques')" style="background: #32CD32;">
+                                <button class="btn btn-primary" onclick="showStatsManager()" style="background: #10B981;">
                                     <i class="fas fa-chart-line"></i>
-                                    Voir les Rapports
+                                    Voir les Statistiques
                                 </button>
                             </div>
 
                             <div class="card">
-                                <div class="card-icon" style="background: #FF7F50;">
+                                <div class="card-icon" style="background: #8B5CF6;">
                                     <i class="fas fa-images"></i>
                                 </div>
                                 <h3>Galerie et Médias</h3>
-                                <p>Gérez les photos des événements, ateliers créatifs et activités de l'association.</p>
+                                <p>Gérez les photos des événements, créations des ateliers et médias de l'association.</p>
                                 <ul class="card-features">
                                     <li>Galerie des créations</li>
                                     <li>Photos d'événements</li>
                                     <li>Médias pour communication</li>
+                                    <li>Optimisation automatique</li>
                                 </ul>
-                                <button class="btn btn-primary" onclick="showFeature('Gestion de la Galerie')" style="background: #FF7F50;">
+                                <button class="btn btn-primary" onclick="showMediaManager()" style="background: #8B5CF6;">
                                     <i class="fas fa-upload"></i>
                                     Gérer la Galerie
                                 </button>
                             </div>
 
                             <div class="card">
-                                <div class="card-icon" style="background: #9370DB;">
+                                <div class="card-icon" style="background: #EF4444;">
                                     <i class="fas fa-envelope"></i>
                                 </div>
                                 <h3>Communication</h3>
-                                <p>Envoyez des newsletters et gérez la communication avec les adhérents et participants.</p>
+                                <p>Gérez la communication avec les adhérents : newsletters, notifications et messages personnalisés.</p>
                                 <ul class="card-features">
-                                    <li>Newsletters mensuelles</li>
-                                    <li>Notifications d'événements</li>
-                                    <li>Communication ciblée</li>
+                                    <li>Newsletters automatiques</li>
+                                    <li>Notifications push</li>
+                                    <li>Messages personnalisés</li>
+                                    <li>Suivi des campagnes</li>
                                 </ul>
-                                <button class="btn btn-primary" onclick="showFeature('Envoi de Newsletter')" style="background: #9370DB;">
+                                <button class="btn btn-primary" onclick="showCommunicationManager()" style="background: #EF4444;">
                                     <i class="fas fa-paper-plane"></i>
-                                    Envoyer Newsletter
+                                    Gérer Communication
                                 </button>
                             </div>
 
                             <div class="card">
-                                <div class="card-icon" style="background: #708090;">
+                                <div class="card-icon" style="background: #6B7280;">
                                     <i class="fas fa-cog"></i>
                                 </div>
-                                <h3>Configuration</h3>
-                                <p>Paramètres du site web, informations de l'association et gestion des accès administrateurs.</p>
+                                <h3>Configuration Site</h3>
+                                <p>Paramètres du site web, informations de l'association et configuration générale.</p>
                                 <ul class="card-features">
                                     <li>Paramètres généraux</li>
-                                    <li>Gestion des utilisateurs</li>
-                                    <li>Configuration système</li>
+                                    <li>Informations association</li>
+                                    <li>Configuration PWA</li>
+                                    <li>Gestion des accès</li>
                                 </ul>
-                                <button class="btn btn-primary" onclick="showFeature('Configuration du Site')" style="background: #708090;">
+                                <button class="btn btn-primary" onclick="showSiteConfig()" style="background: #6B7280;">
                                     <i class="fas fa-wrench"></i>
-                                    Configurer
+                                    Configurer le Site
+                                </button>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-icon" style="background: #3B82F6;">
+                                    <i class="fas fa-file-export"></i>
+                                </div>
+                                <h3>Sauvegarde & Export</h3>
+                                <p>Sauvegardez vos données, exportez les rapports et gérez les sauvegardes automatiques.</p>
+                                <ul class="card-features">
+                                    <li>Sauvegarde automatique</li>
+                                    <li>Export données Excel</li>
+                                    <li>Restauration rapide</li>
+                                    <li>Historique des versions</li>
+                                </ul>
+                                <button class="btn btn-primary" onclick="showBackupManager()" style="background: #3B82F6;">
+                                    <i class="fas fa-download"></i>
+                                    Gérer Sauvegardes
                                 </button>
                             </div>
                         </div>
@@ -275,8 +298,607 @@
             </div>
         </footer>
     </div>
+
+    <!-- Modal Gestionnaire d'Événements -->
+    <div id="eventManagerModal" class="admin-modal hidden">
+        <div class="modal-overlay">
+            <div class="modal-content large">
+                <div class="modal-header">
+                    <h3><i class="fas fa-calendar-alt"></i> Gestionnaire d'Événements</h3>
+                    <button class="modal-close" onclick="closeModal('eventManagerModal')">&times;</button>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="event-manager-tabs">
+                        <button class="tab-btn active" onclick="switchTab('events-list')">
+                            <i class="fas fa-list"></i>
+                            Liste des Événements  
+                        </button>
+                        <button class="tab-btn" onclick="switchTab('add-event')">
+                            <i class="fas fa-plus"></i>
+                            Nouvel Événement
+                        </button>
+                        <button class="tab-btn" onclick="switchTab('calendar-view')">
+                            <i class="fas fa-calendar"></i>
+                            Vue Calendrier
+                        </button>
+                    </div>
+
+                    <!-- Liste des événements -->
+                    <div id="events-list" class="tab-content active">
+                        <div class="events-toolbar">
+                            <div class="search-box">
+                                <input type="text" id="eventSearch" placeholder="Rechercher un événement...">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <select id="filterType">
+                                <option value="">Tous les types</option>
+                                <option value="atelier">Ateliers</option>
+                                <option value="formation">Formations</option>
+                                <option value="exposition">Expositions</option>
+                                <option value="conference">Conférences</option>
+                            </select>
+                        </div>
+
+                        <div class="events-table-container">
+                            <table class="events-table">
+                                <thead>
+                                    <tr>
+                                        <th>Événement</th>
+                                        <th>Type</th>
+                                        <th>Date</th>
+                                        <th>Participants</th>
+                                        <th>Statut</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="eventsTableBody">
+                                    <!-- Contenu généré dynamiquement -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Formulaire nouvel événement -->
+                    <div id="add-event" class="tab-content">
+                        <form id="eventForm" class="event-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="eventTitle">Titre de l'événement *</label>
+                                    <input type="text" id="eventTitle" name="title" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="eventType">Type d'événement *</label>
+                                    <select id="eventType" name="type" required>
+                                        <option value="">Choisir un type</option>
+                                        <option value="atelier">Atelier</option>
+                                        <option value="formation">Formation</option>
+                                        <option value="exposition">Exposition</option>
+                                        <option value="conference">Conférence</option>
+                                        <option value="sortie">Sortie</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="eventDescription">Description *</label>
+                                <textarea id="eventDescription" name="description" rows="4" required></textarea>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="eventDate">Date *</label>
+                                    <input type="date" id="eventDate" name="date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="eventTime">Heure *</label>
+                                    <input type="time" id="eventTime" name="time" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="eventDuration">Durée (minutes) *</label>
+                                    <input type="number" id="eventDuration" name="duration" min="30" max="480" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="eventLocation">Lieu</label>
+                                    <input type="text" id="eventLocation" name="location" value="Médiathèque de La Guerche-sur-l'Aubois">
+                                </div>
+                                <div class="form-group">
+                                    <label for="eventInstructor">Animateur/Intervenant *</label>
+                                    <input type="text" id="eventInstructor" name="instructor" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="eventMaxParticipants">Places disponibles *</label>
+                                    <input type="number" id="eventMaxParticipants" name="maxParticipants" min="1" max="50" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="eventPrice">Prix (€)</label>
+                                    <input type="number" id="eventPrice" name="price" min="0" step="0.01">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="eventLevel">Niveau</label>
+                                    <select id="eventLevel" name="level">
+                                        <option value="Tout public">Tout public</option>
+                                        <option value="Débutant">Débutant</option>
+                                        <option value="Intermédiaire">Intermédiaire</option>
+                                        <option value="Avancé">Avancé</option>
+                                        <option value="Tous niveaux">Tous niveaux</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="eventMaterials">Matériel nécessaire</label>
+                                    <input type="text" id="eventMaterials" name="materials" placeholder="Ex: Fourni, Apportez votre matériel...">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="eventImage">Image de l'événement</label>
+                                <input type="url" id="eventImage" name="image" placeholder="URL de l'image">
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" onclick="resetEventForm()">
+                                    <i class="fas fa-undo"></i>
+                                    Réinitialiser
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i>
+                                    <span id="submitBtnText">Créer l'Événement</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Vue calendrier -->
+                    <div id="calendar-view" class="tab-content">
+                        <div class="calendar-header">
+                            <button class="btn btn-secondary" id="prevMonth">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <h4 id="calendarTitle">Octobre 2025</h4>
+                            <button class="btn btn-secondary" id="nextMonth">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        
+                        <div id="calendarGrid" class="calendar-grid">
+                            <!-- Calendrier généré dynamiquement -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Statistiques et Rapports -->
+    <div id="statsModal" class="admin-modal hidden">
+        <div class="modal-overlay">
+            <div class="modal-content large">
+                <div class="modal-header" style="background: #10B981;">
+                    <h3><i class="fas fa-chart-bar"></i> Statistiques et Rapports</h3>
+                    <button class="modal-close" onclick="closeModal('statsModal')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="stats-dashboard">
+                        <div class="stats-overview">
+                            <h4>📊 Vue d'ensemble</h4>
+                            <div class="stats-cards">
+                                <div class="stat-card">
+                                    <div class="stat-icon" style="background: #3B82F6;">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <div class="stat-number">156</div>
+                                        <div class="stat-label">Adhérents Actifs</div>
+                                        <div class="stat-change positive">+12 ce mois</div>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon" style="background: #F59E0B;">
+                                        <i class="fas fa-calendar"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <div class="stat-number">24</div>
+                                        <div class="stat-label">Événements ce Mois</div>
+                                        <div class="stat-change positive">+3 vs mois dernier</div>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon" style="background: #10B981;">
+                                        <i class="fas fa-euro-sign"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <div class="stat-number">2,340€</div>
+                                        <div class="stat-label">Revenus Mensuels</div>
+                                        <div class="stat-change positive">+15%</div>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon" style="background: #8B5CF6;">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <div class="stat-number">4.8/5</div>
+                                        <div class="stat-label">Satisfaction</div>
+                                        <div class="stat-change neutral">Stable</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="charts-section">
+                            <h4>📈 Évolution des Inscriptions</h4>
+                            <div class="chart-placeholder">
+                                <div class="chart-bars">
+                                    <div class="bar" style="height: 60%; background: #3B82F6;"></div>
+                                    <div class="bar" style="height: 80%; background: #3B82F6;"></div>
+                                    <div class="bar" style="height: 45%; background: #3B82F6;"></div>
+                                    <div class="bar" style="height: 90%; background: #3B82F6;"></div>
+                                    <div class="bar" style="height: 70%; background: #3B82F6;"></div>
+                                    <div class="bar" style="height: 85%; background: #3B82F6;"></div>
+                                </div>
+                                <div class="chart-labels">
+                                    <span>Jan</span><span>Fév</span><span>Mar</span><span>Avr</span><span>Mai</span><span>Jun</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="export-section">
+                            <h4>📄 Exports et Rapports</h4>
+                            <div class="export-buttons">
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-file-pdf"></i> Rapport Mensuel PDF
+                                </button>
+                                <button class="btn btn-secondary">
+                                    <i class="fas fa-file-excel"></i> Export Excel
+                                </button>
+                                <button class="btn btn-secondary">
+                                    <i class="fas fa-file-csv"></i> Export CSV
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Gestion Médias -->
+    <div id="mediaModal" class="admin-modal hidden">
+        <div class="modal-overlay">
+            <div class="modal-content large">
+                <div class="modal-header" style="background: #8B5CF6;">
+                    <h3><i class="fas fa-images"></i> Gestion des Médias</h3>
+                    <button class="modal-close" onclick="closeModal('mediaModal')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="media-manager">
+                        <div class="media-toolbar">
+                            <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Cliquez pour télécharger des images</p>
+                                <p class="upload-hint">JPG, PNG, GIF jusqu'à 5MB</p>
+                                <input type="file" id="fileInput" multiple accept="image/*" style="display: none;">
+                            </div>
+                            <div class="media-actions">
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-folder-plus"></i> Nouveau Dossier
+                                </button>
+                                <select class="form-control">
+                                    <option>Tous les dossiers</option>
+                                    <option>Événements</option>
+                                    <option>Ateliers</option>
+                                    <option>Communication</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="media-grid">
+                            <div class="media-item" data-type="image">
+                                <div class="media-thumbnail">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIiBmb250LXNpemU9IjE0IiBmaWxsPSIjOTk5Ij5BdGVsaWVyLmpwZzwvdGV4dD48L3N2Zz4=" alt="Atelier">
+                                </div>
+                                <div class="media-info">
+                                    <div class="media-name">atelier-scrap-01.jpg</div>
+                                    <div class="media-size">245 KB</div>
+                                </div>
+                                <div class="media-actions">
+                                    <button class="btn-icon" title="Modifier"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" title="Supprimer"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            
+                            <div class="media-item" data-type="image">
+                                <div class="media-thumbnail">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTBlMGUwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIiBmb250LXNpemU9IjE0IiBmaWxsPSIjOTk5Ij5FdmVudC5qcGc8L3RleHQ+PC9zdmc+" alt="Événement">
+                                </div>
+                                <div class="media-info">
+                                    <div class="media-name">expo-photos-guerche.jpg</div>
+                                    <div class="media-size">1.2 MB</div>
+                                </div>
+                                <div class="media-actions">
+                                    <button class="btn-icon" title="Modifier"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" title="Supprimer"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Communication -->
+    <div id="communicationModal" class="admin-modal hidden">
+        <div class="modal-overlay">
+            <div class="modal-content large">
+                <div class="modal-header" style="background: #EF4444;">
+                    <h3><i class="fas fa-envelope"></i> Gestion de la Communication</h3>
+                    <button class="modal-close" onclick="closeModal('communicationModal')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="communication-tabs">
+                        <button class="tab-btn active" onclick="switchCommTab('newsletter')">
+                            <i class="fas fa-newspaper"></i> Newsletter
+                        </button>
+                        <button class="tab-btn" onclick="switchCommTab('notifications')">
+                            <i class="fas fa-bell"></i> Notifications
+                        </button>
+                        <button class="tab-btn" onclick="switchCommTab('campaigns')">
+                            <i class="fas fa-bullhorn"></i> Campagnes
+                        </button>
+                    </div>
+
+                    <div id="newsletter" class="comm-content active">
+                        <h4>📧 Créer une Newsletter</h4>
+                        <form class="newsletter-form">
+                            <div class="form-group">
+                                <label>Objet de la newsletter</label>
+                                <input type="text" placeholder="Ex: Les nouveautés d'octobre à Anim'Média">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Template</label>
+                                    <select>
+                                        <option>Newsletter mensuelle</option>
+                                        <option>Événement spécial</option>
+                                        <option>Rappel d'inscription</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Destinataires</label>
+                                    <select>
+                                        <option>Tous les adhérents (156)</option>
+                                        <option>Adhérents actifs (134)</option>
+                                        <option>Participants récents (89)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Contenu</label>
+                                <textarea rows="8" placeholder="Rédigez votre newsletter..."></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary">
+                                    <i class="fas fa-eye"></i> Aperçu
+                                </button>
+                                <button type="button" class="btn btn-warning">
+                                    <i class="fas fa-clock"></i> Programmer
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane"></i> Envoyer
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="notifications" class="comm-content">
+                        <h4>🔔 Notifications Push</h4>
+                        <div class="notification-settings">
+                            <div class="setting-item">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                                <div class="setting-info">
+                                    <strong>Nouveaux événements</strong>
+                                    <p>Notifier automatiquement les nouveaux événements</p>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                                <div class="setting-info">
+                                    <strong>Rappels d'inscription</strong>
+                                    <p>Rappels 24h avant la date limite</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="campaigns" class="comm-content">
+                        <h4>📊 Historique des Campagnes</h4>
+                        <div class="campaigns-list">
+                            <div class="campaign-item">
+                                <div class="campaign-info">
+                                    <strong>Newsletter Octobre 2025</strong>
+                                    <p>Envoyée le 15/10/2025 - 156 destinataires</p>
+                                </div>
+                                <div class="campaign-stats">
+                                    <span class="stat">📧 98% délivrés</span>
+                                    <span class="stat">👀 65% ouverts</span>
+                                    <span class="stat">🔗 12% clics</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Configuration Site -->
+    <div id="siteConfigModal" class="admin-modal hidden">
+        <div class="modal-overlay">
+            <div class="modal-content large">
+                <div class="modal-header" style="background: #6B7280;">
+                    <h3><i class="fas fa-cog"></i> Configuration du Site</h3>
+                    <button class="modal-close" onclick="closeModal('siteConfigModal')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="config-sections">
+                        <div class="config-section">
+                            <h4>🏢 Informations de l'Association</h4>
+                            <form class="config-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Nom de l'association</label>
+                                        <input type="text" value="Anim'Média La Guerche-sur-l'Aubois">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Adresse</label>
+                                        <input type="text" value="Maison des Associations, 18150 La Guerche-sur-l'Aubois">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Téléphone</label>
+                                        <input type="tel" value="02 48 80 XX XX">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" value="contact@animmedia-laguerche.fr">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea rows="3">Association culturelle et d'éducation populaire à La Guerche-sur-l'Aubois. Ateliers créatifs, formations numériques, événements culturels.</textarea>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="config-section">
+                            <h4>🎨 Apparence du Site</h4>
+                            <div class="appearance-settings">
+                                <div class="color-picker">
+                                    <label>Couleur principale</label>
+                                    <div class="color-options">
+                                        <div class="color-option active" style="background: #3B82F6;" data-color="#3B82F6"></div>
+                                        <div class="color-option" style="background: #10B981;" data-color="#10B981"></div>
+                                        <div class="color-option" style="background: #F59E0B;" data-color="#F59E0B"></div>
+                                        <div class="color-option" style="background: #EF4444;" data-color="#EF4444"></div>
+                                        <div class="color-option" style="background: #8B5CF6;" data-color="#8B5CF6"></div>
+                                    </div>
+                                </div>
+                                <div class="setting-item">
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <div class="setting-info">
+                                        <strong>Mode sombre automatique</strong>
+                                        <p>Adapte l'interface selon l'heure</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <h4>🔐 Sécurité et Accès</h4>
+                            <div class="security-settings">
+                                <div class="user-list">
+                                    <div class="user-item">
+                                        <div class="user-info">
+                                            <strong>admin</strong>
+                                            <span class="user-role">Administrateur</span>
+                                        </div>
+                                        <button class="btn btn-sm btn-secondary">Modifier</button>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-user-plus"></i> Ajouter un utilisateur
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="config-actions">
+                        <button class="btn btn-secondary">Annuler</button>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-save"></i> Sauvegarder les modifications
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Sauvegarde -->
+    <div id="backupModal" class="admin-modal hidden">
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header" style="background: #3B82F6;">
+                    <h3><i class="fas fa-database"></i> Sauvegarde et Export</h3>
+                    <button class="modal-close" onclick="closeModal('backupModal')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="backup-section">
+                        <h4>💾 Sauvegardes Automatiques</h4>
+                        <div class="backup-status">
+                            <div class="status-item">
+                                <i class="fas fa-check-circle" style="color: #10B981;"></i>
+                                <span>Dernière sauvegarde: 15/10/2025 à 22:30</span>
+                            </div>
+                            <div class="backup-settings">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                                <span>Sauvegarde quotidienne automatique</span>
+                            </div>
+                        </div>
+                        
+                        <h4>📤 Exports Manuels</h4>
+                        <div class="export-options">
+                            <button class="btn btn-primary">
+                                <i class="fas fa-download"></i> Télécharger Sauvegarde Complète
+                            </button>
+                            <button class="btn btn-secondary">
+                                <i class="fas fa-file-export"></i> Exporter les Événements
+                            </button>
+                            <button class="btn btn-secondary">
+                                <i class="fas fa-users"></i> Exporter les Adhérents
+                            </button>
+                        </div>
+
+                        <h4>🔄 Restauration</h4>
+                        <div class="restore-section">
+                            <div class="upload-zone">
+                                <i class="fas fa-upload"></i>
+                                <p>Glissez un fichier de sauvegarde ici</p>
+                                <button class="btn btn-outline">Choisir un fichier</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/admin.js"></script>
+    <script src="../assets/js/admin-events.js"></script>
+    <script src="../assets/js/admin-enhanced.js"></script>
 </body>
 </html>

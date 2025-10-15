@@ -1,0 +1,73 @@
+/* Mode sombre adapté à la palette associative */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Arrière-plans sombres */
+        --white: #1a1a1a;
+        --light: #2a2a2a;
+        
+        /* Textes clairs pour le contraste */
+        --dark: #f0f0f0;
+        --gray: #b0b0b0;
+        
+        /* Couleurs primaires adaptées au mode sombre */
+        --primary: #4CAF50;        /* Vert plus lumineux */
+        --primary-light: #66BB6A;  /* Vert clair adapté */
+        --primary-dark: #388E3C;   /* Vert foncé adapté */
+        
+        --secondary: #FF8A65;      /* Corail plus doux */
+        --secondary-dark: #F4511E;  /* Corail foncé adapté pour mode sombre */
+        --secondary-light: #FFAB91; /* Saumon adapté */
+        
+        --accent: #BA68C8;         /* Violet adapté */
+        
+        /* Couleurs d'état adaptées */
+        --success: #66BB6A;        /* Vert plus clair pour mode sombre */
+        --warning: #FF8F00;        /* Orange plus foncé pour contraste */
+        --error: #F06292;
+        
+        /* Ombres adaptées au mode sombre */
+        --shadow: 0 2px 20px rgba(0,0,0,0.3);
+        --shadow-hover: 0 8px 30px rgba(0,0,0,0.4);
+    }
+    
+    /* Ajustements spécifiques pour les éléments */
+    .card {
+        background: var(--light);
+        border: 1px solid #3a3a3a;
+    }
+    
+    .btn {
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .btn:hover {
+        background: rgba(255,255,255,0.05);
+    }
+    
+    /* Navigation en mode sombre */
+    .nav {
+        background: rgba(26, 26, 26, 0.95);
+        border-bottom: 1px solid #3a3a3a;
+    }
+    
+    /* Formulaires en mode sombre */
+    input, textarea, select {
+        background: var(--light);
+        border-color: #3a3a3a;
+        color: var(--dark);
+    }
+    
+    input:focus, textarea:focus, select:focus {
+        border-color: var(--primary);
+        background: var(--light);
+    }
+    
+    /* Amélioration du contraste pour les liens */
+    a {
+        color: var(--primary-light);
+    }
+    
+    a:hover {
+        color: var(--primary);
+    }
+}

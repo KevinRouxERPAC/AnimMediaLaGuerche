@@ -3,22 +3,22 @@
    Site simple, moderne et fonctionnel
 ======================================== */
 
-/* Variables CSS - Palette Associative */
+/* Variables CSS - Nouvelle Palette Moderne */
 :root {
-    --primary: #1E7A47;        /* Vert forêt plus foncé - meilleur contraste */
-    --primary-light: #3CB371;   /* Vert moyen */
-    --primary-dark: #1A7A37;    /* Vert plus foncé pour meilleur contraste */
-    --secondary: #FF7F50;       /* Corail - chaleur, convivialité */
-    --secondary-dark: #C53E25;  /* Corail encore plus foncé pour ratio 4.5+ */
-    --secondary-light: #FFA07A; /* Saumon clair */
-    --accent: #9370DB;          /* Violet medium - créativité, art */
-    --dark: #2F4F4F;           /* Gris ardoise foncé */
-    --gray: #5A6B7D;           /* Gris ardoise - ratio 4.51:1 pour WCAG AA */
-    --light: #F5F5DC;          /* Beige - douceur */
+    --primary: #3B82F6;        /* Bleu moderne - confiance, professionnalisme */
+    --primary-light: #60A5FA;   /* Bleu plus clair */
+    --primary-dark: #1D4ED8;    /* Bleu plus foncé pour contraste */
+    --secondary: #F59E0B;       /* Orange ambré - énergie, créativité */
+    --secondary-dark: #D97706;  /* Orange plus foncé */
+    --secondary-light: #FCD34D; /* Jaune doré clair */
+    --accent: #8B5CF6;          /* Violet moderne - innovation, art */
+    --dark: #1F2937;           /* Gris anthracite moderne */
+    --gray: #6B7280;           /* Gris neutre équilibré */
+    --light: #F9FAFB;          /* Gris très clair, moderne */
     --white: #ffffff;
-    --success: #228B22;        /* Vert foncé - accessible */
-    --warning: #B8860B;        /* Doré foncé - accessible */
-    --error: #DC143C;          /* Rouge cramoisi */
+    --success: #10B981;        /* Vert émeraude - succès */
+    --warning: #F59E0B;        /* Orange - attention */
+    --error: #EF4444;          /* Rouge moderne - erreur */
     
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --shadow: 0 2px 20px rgba(0,0,0,0.08);
@@ -245,6 +245,7 @@ a:hover {
     background: var(--primary-dark);
     transform: translateY(-2px);
     box-shadow: var(--shadow-hover);
+    color: var(--white)
 }
 
 .btn-outline {
@@ -293,7 +294,6 @@ a:hover {
     text-align: center;
     font-size: 2.75rem;
     font-weight: 700;
-    color: var(--light);
     margin-bottom: 1rem;
 }
 
@@ -421,6 +421,480 @@ a:hover {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+}
+
+/* ========================================
+   ÉVÉNEMENTS
+======================================== */
+.events-section {
+    background: var(--light);
+    position: relative;
+}
+
+.events-filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filter-btn {
+    background: var(--white);
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-btn:hover {
+    background: var(--primary);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: var(--primary);
+    color: var(--white);
+    box-shadow: var(--shadow);
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.event-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.event-image {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    position: relative;
+    overflow: hidden;
+}
+
+.event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.event-type-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.event-date {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--primary);
+    color: var(--white);
+    padding: 0.5rem;
+    border-radius: var(--radius);
+    text-align: center;
+    min-width: 60px;
+}
+
+.event-date-day {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.event-date-month {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.event-content {
+    padding: 1.5rem;
+}
+
+.event-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+}
+
+.event-description {
+    color: var(--gray);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.event-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.event-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+.event-detail i {
+    width: 16px;
+    color: var(--primary);
+}
+
+.event-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.event-price {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.event-price.free {
+    color: var(--success);
+}
+
+.event-participants {
+    font-size: 0.8rem;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.participants-bar {
+    width: 80px;
+    height: 4px;
+    background: #eee;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.participants-fill {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 2px;
+    transition: var(--transition);
+}
+
+.event-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.btn-event {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    border-radius: var(--radius);
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    font-size: 0.9rem;
+}
+
+.btn-register {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.btn-register:hover {
+    background: var(--primary-dark);
+}
+
+.btn-info {
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.btn-info:hover {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.loading-events {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem;
+    color: var(--gray);
+}
+
+.loading-events i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.events-more {
+    text-align: center;
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    padding: 1rem 2rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-outline:hover {
+    background: var(--primary);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.event-card[data-filter-delay="1"] {
+    animation-delay: 0.1s;
+}
+
+.event-card[data-filter-delay="2"] {
+    animation-delay: 0.2s;
+}
+
+.event-card[data-filter-delay="3"] {
+    animation-delay: 0.3s;
+}
+
+/* États des événements */
+.event-card.full .btn-register {
+    background: var(--gray);
+    cursor: not-allowed;
+}
+
+.event-card.full .event-participants {
+    color: var(--error);
+    font-weight: 600;
+}
+
+/* Badge navigation */
+.nav-badge {
+    background: var(--secondary);
+    color: var(--white);
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+}
+
+/* Modal d'événement */
+.event-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background: var(--white);
+    border-radius: var(--radius);
+    max-width: 600px;
+    max-height: 90vh;
+    margin: 1rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+}
+
+.modal-header {
+    padding: 1.5rem;
+    background: var(--primary);
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: var(--white);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.modal-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    max-height: calc(90vh - 200px);
+}
+
+.modal-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+}
+
+.modal-details p {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.btn-secondary {
+    background: var(--gray);
+    color: var(--white);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-secondary:hover {
+    background: var(--dark);
+}
+
+/* Notifications */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--white);
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hover);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 1001;
+    transform: translateX(400px);
+    transition: var(--transition);
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification-success {
+    border-left: 4px solid var(--success);
+    color: var(--success);
+}
+
+.notification-info {
+    border-left: 4px solid var(--primary);
+    color: var(--primary);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { 
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to { 
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 /* ========================================
@@ -736,80 +1210,6 @@ a:hover {
 .btn:focus {
     outline: 3px solid var(--primary);
     outline-offset: 2px;
-}
-
-/* Mode sombre adapté à la palette associative */
-@media (prefers-color-scheme: dark) {
-    :root {
-        /* Arrière-plans sombres */
-        --white: #1a1a1a;
-        --light: #2a2a2a;
-        
-        /* Textes clairs pour le contraste */
-        --dark: #f0f0f0;
-        --gray: #b0b0b0;
-        
-        /* Couleurs primaires adaptées au mode sombre */
-        --primary: #4CAF50;        /* Vert plus lumineux */
-        --primary-light: #66BB6A;  /* Vert clair adapté */
-        --primary-dark: #388E3C;   /* Vert foncé adapté */
-        
-        --secondary: #FF8A65;      /* Corail plus doux */
-        --secondary-dark: #F4511E;  /* Corail foncé adapté pour mode sombre */
-        --secondary-light: #FFAB91; /* Saumon adapté */
-        
-        --accent: #BA68C8;         /* Violet adapté */
-        
-        /* Couleurs d'état adaptées */
-        --success: #66BB6A;        /* Vert plus clair pour mode sombre */
-        --warning: #FF8F00;        /* Orange plus foncé pour contraste */
-        --error: #F06292;
-        
-        /* Ombres adaptées au mode sombre */
-        --shadow: 0 2px 20px rgba(0,0,0,0.3);
-        --shadow-hover: 0 8px 30px rgba(0,0,0,0.4);
-    }
-    
-    /* Ajustements spécifiques pour les éléments */
-    .card {
-        background: var(--light);
-        border: 1px solid #3a3a3a;
-    }
-    
-    .btn {
-        border: 1px solid rgba(255,255,255,0.1);
-    }
-    
-    .btn:hover {
-        background: rgba(255,255,255,0.05);
-    }
-    
-    /* Navigation en mode sombre */
-    .nav {
-        background: rgba(26, 26, 26, 0.95);
-        border-bottom: 1px solid #3a3a3a;
-    }
-    
-    /* Formulaires en mode sombre */
-    input, textarea, select {
-        background: var(--light);
-        border-color: #3a3a3a;
-        color: var(--dark);
-    }
-    
-    input:focus, textarea:focus, select:focus {
-        border-color: var(--primary);
-        background: var(--light);
-    }
-    
-    /* Amélioration du contraste pour les liens */
-    a {
-        color: var(--primary-light);
-    }
-    
-    a:hover {
-        color: var(--primary);
-    }
 }
 
 /* Réduction des animations pour l'accessibilité */

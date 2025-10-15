@@ -75,6 +75,70 @@ const RESOURCE_STRATEGIES = {
 };
 
 // ============================================================================
+// GESTION DES NOTIFICATIONS D'ÉVÉNEMENTS
+async function checkForNewEvents() {
+  try {
+    const response = await fetch('/data/events.json');
+    const data = await response.json();
+    const events = data.events || [];
+    
+    // Vérifier les événements dans les 7 prochains jours
+    const nextWeek = new Date();
+    nextWeek.setDate(nextWeek.getDate() + 7);
+    
+    const upcomingEvents = events.filter(event => {
+      const eventDate = new Date(event.date + 'T' + event.time);
+      const now = new Date();
+      const daysDiff = (eventDate - now) / (1000 * 60 * 60 * 24);
+      return daysDiff >= 0 && daysDiff <= 7;
+    });
+    
+    // Notifier pour les événements proches
+    for (const event of upcomingEvents) {
+      const eventDate = new Date(event.date + 'T' + event.time);
+      const daysDiff = Math.floor((eventDate - new Date()) / (1000 * 60 * 60 * 24));
+      
+      let message = '';
+      if (daysDiff === 0) {
+        message = `🎪 Aujourd'hui: ${event.title} à ${event.time}`;
+      } else if (daysDiff === 1) {
+        message = `📅 Demain: ${event.title} à ${event.time}`;
+      } else {
+        message = `📅 Dans ${daysDiff} jours: ${event.title}`;
+      }
+      
+      await self.registration.showNotification('Anim\'Média - Événement à venir', {
+        body: message,
+        icon: '/assets/images/icons/icon-192x192.svg',
+        badge: '/assets/images/icons/icon-72x72.svg',
+        tag: `event-${event.id}`,
+        requireInteraction: false,
+        actions: [
+          {
+            action: 'view',
+            title: 'Voir détails'
+          },
+          {
+            action: 'register',
+            title: 'S\'inscrire'
+          }
+        ],
+        data: {
+          eventId: event.id,
+          eventTitle: event.title,
+          eventDate: event.date,
+          eventTime: event.time
+        }
+      });
+    }
+  } catch (error) {
+    console.error('Erreur lors de la vérification des événements:', error);
+  }
+}
+
+// Vérifier périodiquement les nouveaux événements
+setInterval(checkForNewEvents, 24 * 60 * 60 * 1000); // Une fois par jour
+
 // ÉVÉNEMENTS DU SERVICE WORKER
 // ============================================================================
 
@@ -515,34 +579,60 @@ self.addEventListener('push', event => {
 self.addEventListener('notificationclick', event => {
   console.log('👆 Service Worker: Notification cliquée');
   
-  event.notification.close();
+  const notification = event.notification;
+  const action = event.action;
+  const data = notification.data || {};
   
-  if (event.action === 'explore') {
-    // Ouvrir l'application
-    event.waitUntil(
-      clients.openWindow('/')
-    );
-  } else if (event.action === 'close') {
+  notification.close();
+  
+  let targetUrl = '/';
+  
+  // Gérer les actions spécifiques aux événements
+  if (data.eventId) {
+    if (action === 'view') {
+      targetUrl = `/#evenements`;
+    } else if (action === 'register') {
+      targetUrl = `/#contact`;
+    } else {
+      // Clic sur la notification sans action spécifique
+      targetUrl = `/#evenements`;
+    }
+  } else if (event.action === 'explore') {
+    targetUrl = '/';
+  }
+  
+  if (event.action === 'close') {
     // Ne rien faire, juste fermer
     console.log('🔕 Service Worker: Notification fermée');
-  } else {
-    // Clic par défaut sur la notification
-    event.waitUntil(
-      clients.matchAll({ type: 'window' }).then(clientList => {
-        // Si une fenêtre est déjà ouverte, la mettre au premier plan
-        for (let client of clientList) {
-          if (client.url === '/' && 'focus' in client) {
-            return client.focus();
-          }
-        }
-        
-        // Sinon, ouvrir une nouvelle fenêtre
-        if (clients.openWindow) {
-          return clients.openWindow('/');
-        }
-      })
-    );
+    return;
   }
+  
+  // Ouvrir ou focaliser la fenêtre de l'app
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clientList => {
+      // Chercher une fenêtre existante
+      for (let client of clientList) {
+        if (client.url.includes(self.location.origin) && 'focus' in client) {
+          return client.focus().then(() => {
+            // Envoyer un message pour naviguer vers la section appropriée
+            if (data.eventId) {
+              client.postMessage({
+                type: 'NOTIFICATION_CLICK',
+                eventId: data.eventId,
+                action: action,
+                targetUrl: targetUrl
+              });
+            }
+          });
+        }
+      }
+      
+      // Aucune fenêtre trouvée, en ouvrir une nouvelle
+      if (clients.openWindow) {
+        return clients.openWindow(targetUrl);
+      }
+    })
+  );
 });
 
 // ============================================================================

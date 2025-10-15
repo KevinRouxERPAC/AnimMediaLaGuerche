@@ -1,0 +1,152 @@
+{
+  "events": [
+    {
+      "id": "evt_001",
+      "title": "Atelier Scrapbooking Débutant",
+      "type": "atelier",
+      "description": "Découvrez l'art du scrapbooking ! Créez vos premiers albums photos personnalisés avec des techniques simples et créatives.",
+      "date": "2025-10-22",
+      "time": "14:00",
+      "duration": 120,
+      "location": "Médiathèque de La Guerche-sur-l'Aubois",
+      "address": "Maison des Associations, 18150 La Guerche-sur-l'Aubois",
+      "instructor": "Marie Dubois",
+      "maxParticipants": 8,
+      "currentParticipants": 3,
+      "price": 15,
+      "materials": "Fournis",
+      "level": "Débutant",
+      "image": "assets/images/events/scrapbooking-001.jpg",
+      "tags": ["créatif", "scrapbooking", "débutant"],
+      "status": "open",
+      "createdAt": "2025-10-01T10:00:00Z",
+      "updatedAt": "2025-10-15T14:30:00Z"
+    },
+    {
+      "id": "evt_002", 
+      "title": "Formation Informatique : Tablette Android",
+      "type": "formation",
+      "description": "Apprenez à utiliser votre tablette Android : applications essentielles, navigation internet, photos et vidéos.",
+      "date": "2025-10-25",
+      "time": "10:00",
+      "duration": 180,
+      "location": "Médiathèque de La Guerche-sur-l'Aubois",
+      "address": "Maison des Associations, 18150 La Guerche-sur-l'Aubois",
+      "instructor": "Jean-Pierre Martin",
+      "maxParticipants": 6,
+      "currentParticipants": 4,
+      "price": 20,
+      "materials": "Apportez votre tablette",
+      "level": "Tous niveaux",
+      "image": "assets/images/events/formation-tablette.jpg",
+      "tags": ["numérique", "tablette", "android"],
+      "status": "open",
+      "createdAt": "2025-10-05T09:00:00Z",
+      "updatedAt": "2025-10-15T11:00:00Z"
+    },
+    {
+      "id": "evt_003",
+      "title": "Exposition Photos : La Guerre à travers l'objectif", 
+      "type": "exposition",
+      "description": "Découvrez une collection unique de photographies historiques de La Guerche-sur-l'Aubois et ses environs.",
+      "date": "2025-11-05",
+      "time": "18:00",
+      "duration": 120,
+      "location": "Médiathèque de La Guerche-sur-l'Aubois",
+      "address": "Maison des Associations, 18150 La Guerche-sur-l'Aubois",
+      "instructor": "Association Photos du Cher",
+      "maxParticipants": 50,
+      "currentParticipants": 12,
+      "price": 0,
+      "materials": "Aucun",
+      "level": "Tout public",
+      "image": "assets/images/events/expo-photos.jpg",
+      "tags": ["exposition", "histoire", "photographie"],
+      "status": "open",
+      "createdAt": "2025-09-20T16:00:00Z",
+      "updatedAt": "2025-10-10T13:45:00Z"
+    },
+    {
+      "id": "evt_004",
+      "title": "Atelier Cuisine : Biscuits de Noël",
+      "type": "atelier",
+      "description": "Préparez les fêtes en apprenant à faire de délicieux biscuits de Noël traditionnels et modernes.",
+      "date": "2025-12-10",
+      "time": "14:30",
+      "duration": 150,
+      "location": "Médiathèque de La Guerche-sur-l'Aubois",
+      "address": "Maison des Associations, 18150 La Guerche-sur-l'Aubois",
+      "instructor": "Sophie Lemoine",
+      "maxParticipants": 10,
+      "currentParticipants": 0,
+      "price": 12,
+      "materials": "Ingrédients fournis",
+      "level": "Tous niveaux",
+      "image": "assets/images/events/cuisine-noel.jpg",
+      "tags": ["cuisine", "noël", "traditionnel"],
+      "status": "open",
+      "createdAt": "2025-10-15T12:00:00Z",
+      "updatedAt": "2025-10-15T12:00:00Z"
+    },
+    {
+      "id": "evt_005",
+      "title": "Conférence : L'Histoire de La Guerche",
+      "type": "conference",
+      "description": "Plongez dans l'histoire fascinante de notre commune avec l'historien local Pierre Moreau.",
+      "date": "2025-11-18",
+      "time": "16:00",
+      "duration": 90,
+      "location": "Médiathèque de La Guerche-sur-l'Aubois",
+      "address": "Maison des Associations, 18150 La Guerche-sur-l'Aubois",
+      "instructor": "Pierre Moreau, Historien",
+      "maxParticipants": 40,
+      "currentParticipants": 8,
+      "price": 5,
+      "materials": "Aucun",
+      "level": "Tout public",
+      "image": "assets/images/events/conference-histoire.jpg",
+      "tags": ["histoire", "conférence", "patrimoine"],
+      "status": "open",
+      "createdAt": "2025-10-08T14:20:00Z",
+      "updatedAt": "2025-10-15T10:15:00Z"
+    }
+  ],
+  "eventTypes": [
+    {
+      "id": "atelier",
+      "name": "Atelier",
+      "color": "#3B82F6",
+      "icon": "fas fa-hands-helping"
+    },
+    {
+      "id": "formation",
+      "name": "Formation",
+      "color": "#F59E0B", 
+      "icon": "fas fa-graduation-cap"
+    },
+    {
+      "id": "exposition",
+      "name": "Exposition",
+      "color": "#8B5CF6",
+      "icon": "fas fa-image"
+    },
+    {
+      "id": "conference",
+      "name": "Conférence",
+      "color": "#10B981",
+      "icon": "fas fa-microphone"
+    },
+    {
+      "id": "sortie",
+      "name": "Sortie",
+      "color": "#EF4444",
+      "icon": "fas fa-map-marked-alt"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdate": "2025-10-15T15:00:00Z",
+    "totalEvents": 5,
+    "upcomingEvents": 5
+  }
+}

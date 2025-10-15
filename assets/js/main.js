@@ -6,6 +6,40 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🎨 Anim\'Média - Site chargé avec succès !');
     
+    // Écouter les messages du service worker
+    navigator.serviceWorker?.addEventListener('message', event => {
+        if (event.data?.type === 'NOTIFICATION_CLICK') {
+            const { eventId, action, targetUrl } = event.data;
+            console.log('📱 Message du SW - Navigation événement:', eventId, action);
+            
+            // Naviguer vers la section appropriée
+            if (targetUrl.includes('#')) {
+                const hash = targetUrl.split('#')[1];
+                const target = document.getElementById(hash);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Si c'est pour s'inscrire, pré-remplir le formulaire
+                    if (action === 'register' && hash === 'contact') {
+                        setTimeout(() => {
+                            const subjectSelect = document.getElementById('subject');
+                            const messageTextarea = document.getElementById('message');
+                            
+                            if (subjectSelect) {
+                                subjectSelect.value = 'inscription';
+                            }
+                            
+                            if (messageTextarea && eventId) {
+                                messageTextarea.value = `Bonjour,\n\nJe souhaite m'inscrire à l'événement suite à votre notification.\n\nCordialement,`;
+                                messageTextarea.focus();
+                            }
+                        }, 500);
+                    }
+                }
+            }
+        }
+    });
+    
     // ========================================
     // NAVIGATION ACTIVE ET SMOOTH SCROLL
     // ========================================
