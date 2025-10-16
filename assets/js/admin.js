@@ -1,28 +1,24 @@
 /* ============================================
-   LOGIQUE ADMINISTRATION
+   LOGIQUE ADMINISTRATION SÉCURISÉE
    Anim'Média La Guerche-sur-l'Aubois
    ============================================ */
 
-// Configuration des utilisateurs pour la démo
-const ADMIN_USERS = {
-    'admin': {
-        password: 'animmedia2024',
-        role: 'administrateur',
-        name: 'Administrateur Principal'
-    }
-};
-
-// Classe de gestion de l'administration
+// Classe de gestion de l'administration avec API sécurisée
 class AdminInterface {
     constructor() {
         this.currentUser = null;
+        this.eventsData = [];
+        this.registrationsData = [];
+        this.membersData = [];
+        this.statsData = {};
+        
         this.init();
     }
 
-    init() {
+    async init() {
         this.bindEvents();
-        this.checkSession();
-        console.log('🔐 Interface d\'administration initialisée');
+        await this.checkAuthenticationStatus();
+        console.log('🔐 Interface d\'administration sécurisée initialisée');
     }
 
     bindEvents() {
@@ -41,9 +37,32 @@ class AdminInterface {
                 this.logout();
             }
         });
+
+        // Boutons de déconnexion
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('logout-btn')) {
+                this.logout();
+            }
+        });
     }
 
-    handleLogin() {
+    /**
+     * Vérification du statut d'authentification au chargement
+     */
+    async checkAuthenticationStatus() {
+        if (window.authService && window.authService.isAuthenticated()) {
+            this.currentUser = window.authService.getUser();
+            this.showAdminInterface();
+            await this.loadDashboardData();
+        } else {
+            this.showLoginScreen();
+        }
+    }
+
+    /**
+     * Gestion de la connexion
+     */
+    async handleLogin() {
         const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value;
 
@@ -52,28 +71,30 @@ class AdminInterface {
             return;
         }
 
-        if (ADMIN_USERS[username] && ADMIN_USERS[username].password === password) {
-            const user = ADMIN_USERS[username];
-            
-            // Sauvegarder la session
-            const session = {
-                username: username,
-                role: user.role,
-                name: user.name,
-                loginTime: new Date().toISOString()
-            };
+        // Affichage du loader pendant la connexion
+        this.showLoginLoader(true);
 
-            sessionStorage.setItem('adminSession', JSON.stringify(session));
-            this.currentUser = session;
-
-            // Afficher le tableau de bord
-            this.showDashboard();
+        try {
+            const result = await window.authService.login(username, password);
             
-            console.log('✅ Connexion réussie pour:', username);
-            this.showMessage('✅ Connexion réussie ! Bienvenue dans l\'interface d\'administration.', 'success');
-        } else {
-            this.showMessage('❌ Identifiants incorrects. Utilisez : admin / animmedia2024', 'error');
-            document.getElementById('password').value = '';
+            if (result.success) {
+                this.currentUser = result.user;
+                console.log('✅ Connexion réussie pour:', result.user.name);
+                
+                // Affichage du tableau de bord
+                this.showAdminInterface();
+                await this.loadDashboardData();
+                
+                this.showMessage('✅ Connexion réussie ! Bienvenue dans l\'interface d\'administration.', 'success');
+            } else {
+                this.showMessage(`❌ ${result.error}`, 'error');
+                document.getElementById('password').value = '';
+            }
+        } catch (error) {
+            console.error('Erreur lors de la connexion:', error);
+            this.showMessage('❌ Erreur de connexion au serveur.', 'error');
+        } finally {
+            this.showLoginLoader(false);
         }
     }
 

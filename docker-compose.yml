@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  animmedia-app:
+    build: .
+    container_name: animmedia-web
+    ports:
+      - "8000:8000"
+    environment:
+      - FLASK_ENV=production
+      - SECRET_KEY=${SECRET_KEY:-your-production-secret-key}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-your-production-jwt-secret}
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./backups:/app/backups
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/events"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Service de sauvegarde automatique (optionnel)
+  backup:
+    image: alpine:latest
+    container_name: animmedia-backup
+    volumes:
+      - ./data:/data:ro
+      - ./backups:/backups
+    command: >
+      sh -c "
+        while true; do
+          echo 'Backup started at $(date)'
+          tar -czf /backups/backup-$(date +%Y%m%d-%H%M%S).tar.gz -C /data .
+          # Garder seulement les 30 dernières sauvegardes
+          ls -t /backups/backup-*.tar.gz | tail -n +31 | xargs -r rm
+          echo 'Backup completed'
+          sleep 86400  # 24 heures
+        done
+      "
+    restart: unless-stopped
+
+networks:
+  default:
+    name: animmedia-network

@@ -1,19 +1,47 @@
-# 🎨 Anim'Média - Site de l'Association Culturelle
+# 🎨 Anim'Média - Application Web Sécurisée
 
-Site web de l'association culturelle Anim'Média à La Guerche-sur-l'Aubois.
+Application web sécurisée pour l'association culturelle Anim'Média à La Guerche-sur-l'Aubois.
 
-## 🚀 Comment tester le site
+## 🚀 Démarrage Rapide
 
-### Méthode 1: Ouverture directe (mode local)
-1. Double-cliquez sur `index.html`
-2. Le site s'ouvre avec des données d'exemple
-3. ✅ Les événements se chargent automatiquement en mode local
+### Méthode 1: Production (Recommandé)
+```bash
+# Démarrage automatique avec configuration sécurisée
+python start-production.py
+```
 
-### Méthode 2: Serveur HTTP local (recommandé)
-1. **Windows**: Double-cliquez sur `start-server.bat`
-2. **Linux/Mac**: `python3 server.py`
-3. Le navigateur s'ouvre automatiquement sur `http://localhost:8000`
-4. ✅ Toutes les fonctionnalités sont disponibles (JSON, PWA, etc.)
+### Méthode 2: Développement
+```bash
+# Installation des dépendances
+pip install -r requirements.txt
+
+# Démarrage en mode développement
+python app.py
+```
+
+### Méthode 3: Docker
+```bash
+# Construction et démarrage
+docker-compose up -d
+
+# Accès à l'application
+curl http://localhost:8000
+```
+
+## 🔐 Nouvelle Architecture Sécurisée
+
+### API REST Flask
+- **Authentification JWT** avec refresh tokens
+- **Validation des données** avec Marshmallow  
+- **Rate limiting** pour éviter les abus
+- **Headers de sécurité** renforcés
+- **Sauvegarde automatique** des données
+
+### Endpoints API
+- `GET /api/events` - Liste des événements (public)
+- `POST /api/auth/login` - Connexion admin
+- `POST /api/events` - Créer un événement (admin)
+- `POST /api/registrations` - Inscription (public)
 
 ## 📱 Fonctionnalités
 

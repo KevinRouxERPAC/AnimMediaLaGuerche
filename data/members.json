@@ -1,0 +1,85 @@
+{
+  "members": [
+    {
+      "id": "mbr_001",
+      "firstName": "Marie",
+      "lastName": "Dupont",
+      "email": "marie.dupont@email.com",
+      "phone": "06 12 34 56 78",
+      "address": "15 Rue de la Paix, 18150 La Guerche-sur-l'Aubois",
+      "birthDate": "1975-03-15",
+      "membershipType": "annuelle",
+      "membershipStart": "2025-01-01",
+      "membershipEnd": "2025-12-31",
+      "status": "active",
+      "preferences": ["atelier", "formation"],
+      "participatedEvents": ["evt_001"],
+      "createdAt": "2025-01-01T00:00:00Z",
+      "updatedAt": "2025-10-15T14:30:00Z"
+    },
+    {
+      "id": "mbr_002",
+      "firstName": "Jean",
+      "lastName": "Martin",
+      "email": "jean.martin@email.com",
+      "phone": "06 98 76 54 32",
+      "address": "42 Avenue des Roses, 18150 La Guerche-sur-l'Aubois",
+      "birthDate": "1962-08-22",
+      "membershipType": "annuelle",
+      "membershipStart": "2024-09-01",
+      "membershipEnd": "2025-08-31",
+      "status": "active",
+      "preferences": ["formation", "conference"],
+      "participatedEvents": ["evt_002", "evt_005"],
+      "createdAt": "2024-09-01T00:00:00Z",
+      "updatedAt": "2025-10-10T11:20:00Z"
+    },
+    {
+      "id": "mbr_003",
+      "firstName": "Sophie",
+      "lastName": "Dubois",
+      "email": "sophie.dubois@email.com",
+      "phone": "06 45 67 89 12",
+      "address": "8 Place du Marché, 18150 La Guerche-sur-l'Aubois",
+      "birthDate": "1988-11-03",
+      "membershipType": "mensuelle",
+      "membershipStart": "2025-10-01",
+      "membershipEnd": "2025-10-31",
+      "status": "active",
+      "preferences": ["atelier", "exposition"],
+      "participatedEvents": ["evt_001", "evt_003"],
+      "createdAt": "2025-10-01T00:00:00Z",
+      "updatedAt": "2025-10-15T16:45:00Z"
+    }
+  ],
+  "membershipTypes": [
+    {
+      "id": "annuelle",
+      "name": "Adhésion Annuelle",
+      "price": 25,
+      "duration": 365,
+      "benefits": ["Accès à tous les ateliers", "Réductions sur les formations", "Newsletter mensuelle"]
+    },
+    {
+      "id": "mensuelle", 
+      "name": "Adhésion Mensuelle",
+      "price": 3,
+      "duration": 30,
+      "benefits": ["Accès aux ateliers du mois", "Newsletter mensuelle"]
+    },
+    {
+      "id": "ponctuelle",
+      "name": "Participation Ponctuelle",
+      "price": 0,
+      "duration": 1,
+      "benefits": ["Accès à un événement spécifique"]
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdate": "2025-10-16T10:00:00Z",
+    "totalMembers": 3,
+    "activeMembers": 3,
+    "totalRevenue": 53
+  }
+}

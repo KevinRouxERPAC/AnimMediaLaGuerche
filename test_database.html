@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Base de Données - Anim'Média</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-result { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 3px; overflow-x: auto; }
+        button { padding: 10px 20px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test de Fonctionnement - Base de Données Anim'Média</h1>
+    
+    <div id="results"></div>
+    
+    <button onclick="runAllTests()">🚀 Lancer tous les tests</button>
+    <button onclick="testEvents()">📅 Test Événements</button>
+    <button onclick="testMembers()">👥 Test Membres</button>
+    <button onclick="testRegistrations()">📝 Test Inscriptions</button>
+    <button onclick="clearResults()">🗑️ Effacer</button>
+
+    <script>
+        const results = document.getElementById('results');
+
+        function addResult(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.innerHTML = message;
+            results.appendChild(div);
+        }
+
+        function clearResults() {
+            results.innerHTML = '';
+        }
+
+        async function testEvents() {
+            addResult('🔄 Test du chargement des événements...', 'info');
+            
+            try {
+                const response = await fetch('data/events.json');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                if (!data.events || !Array.isArray(data.events)) {
+                    throw new Error('Format de données invalide');
+                }
+                
+                const upcomingEvents = data.events.filter(event => {
+                    const eventDate = new Date(event.date + 'T' + event.time);
+                    return eventDate >= new Date();
+                });
+                
+                addResult(`
+                    ✅ <strong>Événements chargés avec succès</strong><br>
+                    📊 Total événements: ${data.events.length}<br>
+                    📅 Événements à venir: ${upcomingEvents.length}<br>
+                    🎯 Types d'événements: ${data.eventTypes ? data.eventTypes.length : 'Non défini'}<br>
+                    <details>
+                        <summary>Détails des événements à venir</summary>
+                        <pre>${JSON.stringify(upcomingEvents.map(e => ({
+                            titre: e.title,
+                            date: e.date,
+                            type: e.type,
+                            participants: `${e.currentParticipants}/${e.maxParticipants}`
+                        })), null, 2)}</pre>
+                    </details>
+                `, 'success');
+                
+            } catch (error) {
+                addResult(`❌ <strong>Erreur lors du chargement des événements</strong><br>
+                          ${error.message}`, 'error');
+            }
+        }
+
+        async function testMembers() {
+            addResult('🔄 Test du chargement des membres...', 'info');
+            
+            try {
+                const response = await fetch('data/members.json');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                if (!data.members || !Array.isArray(data.members)) {
+                    throw new Error('Format de données invalide');
+                }
+                
+                const activeMembers = data.members.filter(member => member.status === 'active');
+                const membershipTypes = data.membershipTypes || [];
+                
+                addResult(`
+                    ✅ <strong>Membres chargés avec succès</strong><br>
+                    👥 Total membres: ${data.members.length}<br>
+                    ✅ Membres actifs: ${activeMembers.length}<br>
+                    💳 Types d'adhésion: ${membershipTypes.length}<br>
+                    <details>
+                        <summary>Répartition par type d'adhésion</summary>
+                        <pre>${JSON.stringify(
+                            data.members.reduce((acc, member) => {
+                                acc[member.membershipType] = (acc[member.membershipType] || 0) + 1;
+                                return acc;
+                            }, {}), null, 2
+                        )}</pre>
+                    </details>
+                `, 'success');
+                
+            } catch (error) {
+                addResult(`❌ <strong>Erreur lors du chargement des membres</strong><br>
+                          ${error.message}`, 'error');
+            }
+        }
+
+        async function testRegistrations() {
+            addResult('🔄 Test du chargement des inscriptions...', 'info');
+            
+            try {
+                const response = await fetch('data/registrations.json');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                if (!data.registrations || !Array.isArray(data.registrations)) {
+                    throw new Error('Format de données invalide');
+                }
+                
+                const confirmedRegistrations = data.registrations.filter(reg => reg.status === 'confirmed');
+                const totalRevenue = data.registrations
+                    .filter(reg => reg.paymentStatus === 'paid')
+                    .reduce((sum, reg) => sum + (reg.amount || 0), 0);
+                
+                addResult(`
+                    ✅ <strong>Inscriptions chargées avec succès</strong><br>
+                    📝 Total inscriptions: ${data.registrations.length}<br>
+                    ✅ Inscriptions confirmées: ${confirmedRegistrations.length}<br>
+                    💰 Revenus total: ${totalRevenue}€<br>
+                    📊 Liste d'attente: ${data.waitingList ? data.waitingList.length : 0}<br>
+                    <details>
+                        <summary>Répartition par statut</summary>
+                        <pre>${JSON.stringify(
+                            data.registrations.reduce((acc, reg) => {
+                                acc[reg.status] = (acc[reg.status] || 0) + 1;
+                                return acc;
+                            }, {}), null, 2
+                        )}</pre>
+                    </details>
+                `, 'success');
+                
+            } catch (error) {
+                addResult(`❌ <strong>Erreur lors du chargement des inscriptions</strong><br>
+                          ${error.message}`, 'error');
+            }
+        }
+
+        async function testCrossReferences() {
+            addResult('🔄 Test de cohérence des données croisées...', 'info');
+            
+            try {
+                // Charger toutes les données
+                const [eventsResponse, membersResponse, registrationsResponse] = await Promise.all([
+                    fetch('data/events.json'),
+                    fetch('data/members.json'),
+                    fetch('data/registrations.json')
+                ]);
+                
+                const eventsData = await eventsResponse.json();
+                const membersData = await membersResponse.json();
+                const registrationsData = await registrationsResponse.json();
+                
+                const events = eventsData.events || [];
+                const members = membersData.members || [];
+                const registrations = registrationsData.registrations || [];
+                
+                // Vérifier les références croisées
+                let issues = [];
+                let stats = {
+                    eventsWithRegistrations: 0,
+                    membersWithRegistrations: 0,
+                    orphanedRegistrations: 0
+                };
+                
+                // Statistiques par événement
+                const eventStats = events.map(event => {
+                    const eventRegistrations = registrations.filter(reg => reg.eventId === event.id);
+                    const confirmedCount = eventRegistrations.filter(reg => reg.status === 'confirmed').length;
+                    
+                    if (eventRegistrations.length > 0) {
+                        stats.eventsWithRegistrations++;
+                    }
+                    
+                    return {
+                        eventId: event.id,
+                        title: event.title,
+                        maxParticipants: event.maxParticipants,
+                        currentParticipants: event.currentParticipants,
+                        actualRegistrations: confirmedCount,
+                        discrepancy: event.currentParticipants !== confirmedCount
+                    };
+                });
+                
+                // Vérifier la cohérence des compteurs
+                const discrepancies = eventStats.filter(stat => stat.discrepancy);
+                
+                if (discrepancies.length > 0) {
+                    issues.push(`⚠️ ${discrepancies.length} événement(s) avec incohérence de comptage`);
+                }
+                
+                addResult(`
+                    ${issues.length === 0 ? '✅' : '⚠️'} <strong>Test de cohérence terminé</strong><br>
+                    🎯 Événements avec inscriptions: ${stats.eventsWithRegistrations}/${events.length}<br>
+                    👥 Membres avec inscriptions: ${new Set(registrations.map(r => r.memberId)).size}/${members.length}<br>
+                    ${issues.length > 0 ? '<br><strong>Problèmes détectés:</strong><br>' + issues.join('<br>') : ''}<br>
+                    <details>
+                        <summary>Détails par événement</summary>
+                        <pre>${JSON.stringify(eventStats, null, 2)}</pre>
+                    </details>
+                `, issues.length === 0 ? 'success' : 'error');
+                
+            } catch (error) {
+                addResult(`❌ <strong>Erreur lors du test de cohérence</strong><br>
+                          ${error.message}`, 'error');
+            }
+        }
+
+        async function runAllTests() {
+            clearResults();
+            addResult('🚀 <strong>Lancement de tous les tests...</strong>', 'info');
+            
+            await testEvents();
+            await testMembers();
+            await testRegistrations();
+            await testCrossReferences();
+            
+            addResult('🏁 <strong>Tests terminés!</strong>', 'info');
+        }
+
+        // Lancer un test rapide au chargement
+        window.addEventListener('load', () => {
+            addResult('🌐 <strong>Page de test chargée</strong><br>Prêt pour les tests de la base de données JSON', 'info');
+        });
+    </script>
+</body>
+</html>

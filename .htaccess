@@ -1,0 +1,129 @@
+# Configuration Apache pour Anim'Média
+# Sécurité renforcée et optimisation pour la production
+
+# ========================================
+# SÉCURITÉ
+# ========================================
+
+# Cacher la version d'Apache
+ServerTokens Prod
+
+# Headers de sécurité
+<IfModule mod_headers.c>
+    # Protection XSS
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Prévention du détournement de type MIME
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # Protection contre le clickjacking
+    Header always set X-Frame-Options "DENY"
+    
+    # Politique de référent stricte
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Content Security Policy
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self';"
+    
+    # HTTPS strict transport security (si HTTPS activé)
+    # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# Protection des fichiers sensibles
+<FilesMatch "\.(env|log|bak|sql|json|py|pyc)$">
+    Require all denied
+</FilesMatch>
+
+# Protection des dossiers système
+<DirectoryMatch "^(.*/)?(__pycache__|\.git|\.env|logs|backups)/">
+    Require all denied
+</DirectoryMatch>
+
+# ========================================
+# RÉÉCRITURE D'URL
+# ========================================
+
+RewriteEngine On
+
+# Redirection vers HTTPS (à décommenter en production)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# API Routes - redirection vers l'application Flask
+RewriteCond %{REQUEST_URI} ^/api/
+RewriteRule ^(.*)$ /app.py [L,QSA]
+
+# SPA - toutes les autres routes vers index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/api/
+RewriteRule ^(.*)$ /index.html [L]
+
+# ========================================
+# OPTIMISATION DES PERFORMANCES
+# ========================================
+
+# Compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Cache des fichiers statiques
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Images
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    
+    # CSS et JS
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType text/javascript "access plus 1 week"
+    
+    # Fonts
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    
+    # Documents
+    ExpiresByType application/pdf "access plus 1 month"
+    
+    # Manifeste PWA
+    ExpiresByType application/manifest+json "access plus 1 week"
+</IfModule>
+
+# ========================================
+# CONFIGURATION MIME
+# ========================================
+
+# Types MIME pour PWA
+AddType application/manifest+json .webmanifest
+AddType application/manifest+json .json
+
+# ========================================
+# SÉCURITÉ AVANCÉE
+# ========================================
+
+# Désactiver la signature du serveur
+ServerSignature Off
+
+# Désactiver l'accès aux fichiers de sauvegarde
+<FilesMatch "~$">
+    Require all denied
+</FilesMatch>
+
+# Limiter la taille des uploads
+LimitRequestBody 16777216
+
+# Timeout de sécurité
+Timeout 60
+
+# Désactiver les méthodes HTTP dangereuses
+<LimitExcept GET POST HEAD>
+    Require all denied
+</LimitExcept>

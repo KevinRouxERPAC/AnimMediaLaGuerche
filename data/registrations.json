@@ -1,0 +1,82 @@
+{
+  "registrations": [
+    {
+      "id": "reg_001",
+      "eventId": "evt_001",
+      "memberId": "mbr_001",
+      "registrationDate": "2025-10-02T14:30:00Z",
+      "status": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "cash",
+      "amount": 15,
+      "notes": "Première fois en scrapbooking",
+      "createdAt": "2025-10-02T14:30:00Z"
+    },
+    {
+      "id": "reg_002",
+      "eventId": "evt_001",
+      "memberId": "mbr_003",
+      "registrationDate": "2025-10-05T10:15:00Z",
+      "status": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "card",
+      "amount": 15,
+      "notes": "",
+      "createdAt": "2025-10-05T10:15:00Z"
+    },
+    {
+      "id": "reg_003",
+      "eventId": "evt_002",
+      "memberId": "mbr_002",
+      "registrationDate": "2025-10-08T16:45:00Z",
+      "status": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "transfer",
+      "amount": 20,
+      "notes": "Apporte sa propre tablette Samsung",
+      "createdAt": "2025-10-08T16:45:00Z"
+    },
+    {
+      "id": "reg_004",
+      "eventId": "evt_005",
+      "memberId": "mbr_002",
+      "registrationDate": "2025-10-10T11:20:00Z",
+      "status": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "cash",
+      "amount": 5,
+      "notes": "Passionné d'histoire locale",
+      "createdAt": "2025-10-10T11:20:00Z"
+    },
+    {
+      "id": "reg_005",
+      "eventId": "evt_003",
+      "memberId": "mbr_003",
+      "registrationDate": "2025-10-12T13:00:00Z",
+      "status": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "free",
+      "amount": 0,
+      "notes": "Exposition gratuite",
+      "createdAt": "2025-10-12T13:00:00Z"
+    }
+  ],
+  "waitingList": [
+    {
+      "id": "wait_001",
+      "eventId": "evt_002",
+      "memberId": "mbr_003",
+      "addedDate": "2025-10-14T09:30:00Z",
+      "position": 1,
+      "status": "waiting",
+      "notified": false
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdate": "2025-10-16T10:00:00Z",
+    "totalRegistrations": 5,
+    "confirmedRegistrations": 5,
+    "totalRevenue": 57
+  }
+}
